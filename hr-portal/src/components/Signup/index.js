@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import Button from 'antd/lib/button';
-import { Form, Icon, Input, Checkbox } from 'antd';
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import  Validator from 'validator';
+
+import { Form, Input, Button } from 'antd';
+import InlineError from '../messages/InlineError';
 import { signupUser } from "../../redux/actions";
-const FormItem = Form.Item;
 
 
 
@@ -28,6 +31,7 @@ class Signup extends Component {
     onSubmit = e => {
         const errors = this.validate(this.state.data);
         this.setState({errors});
+        console.log(this.state.data);
         if(Object.keys(errors).length===0){
             // this.props.submit(this.state.data);
             console.log(this.state.data);
@@ -42,54 +46,87 @@ class Signup extends Component {
             // this.props.history.push("/login");
         }
     };
+
+
+    validate = data => {
+        const errors = {};
+        if(!Validator.isEmail(data.email)) errors.email = "Invalid Email";
+        if(!data.password) errors.password = "Can't be empty";
+        if(!data.firstName) errors.firstName = "Can't be empty";
+        if(!data.lastName) errors.lastName = "Can't be empty";
+        return errors;
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        console.log("History props ", this.nextProps.history);
+        console.log("next user Object", nextProps.userObject);
+      }
+
     
     render() { 
         const { data, errors } = this.state
         return (
-            <Form onSubmit={this.onSubmit}> 
+            <Form > 
                 <h3>Signup</h3>
-                <Form.Item>
-                    <Input 
-                    id="firstName" 
-                    type="text" 
-                    value= {data.firstName} 
-                    onChange={this.onChange}
-                    placeholder="firstName" 
-                    />
+                <Form.Item error={!!errors.firstName}>
+                        <Input 
+                        id="firstName" 
+                        type="firstName" 
+                        name="firstName"
+                        value= {data.firstName} 
+                        onChange={this.onChange}
+                        placeholder="First Name" 
+                        />
+                    {errors.firstName && <InlineError text= {errors.firstName}/>}
                 </Form.Item>
-                <Form.Item>
-                    <Input 
-                    id="lastName" 
-                    type="text" 
-                    value= {data.lastName} 
-                    onChange={this.onChange}
-                    placeholder="lastName" 
-                    />
+                <Form.Item error={!!errors.lastName}>
+                        <Input 
+                        id="lastName" 
+                        type="lastName" 
+                        name="lastName" 
+                        value= {data.lastName} 
+                        onChange={this.onChange}
+                        placeholder="Last Name" 
+                        />
+                    {errors.lastName && <InlineError text= {errors.lastName}/>}
                 </Form.Item>
-                <Form.Item>
-                    <Input 
-                    id="email" 
-                    type="email" 
-                    value= {data.email}
-                    onChange={this.onChange}
-                    placeholder="Email" 
-                    />
+                <Form.Item error={!!errors.email}>
+                        <Input 
+                        id="email" 
+                        type="email" 
+                        name="email" 
+                        value= {data.email}
+                        onChange={this.onChange}
+                        placeholder="example@example.com" 
+                        />
+                    {errors.email && <InlineError text= {errors.email}/>}
                 </Form.Item>
-                <Form.Item>
-                    <Input 
-                    id="password" 
-                    type="password" 
-                    value= {data.password}
-                    onChange={this.onChange} 
-                    placeholder="Password" 
-                    />
+                <Form.Item error={!!errors.password}>
+                        <Input 
+                        id="password" 
+                        type="password" 
+                        name="password" 
+                        value= {data.password}
+                        onChange={this.onChange} 
+                        placeholder="Make it Secure" 
+                        />
+                    {errors.password && <InlineError text= {errors.password}/>}
                 </Form.Item>
-                <Form.Item>
-                    <Button type="primary">Submit</Button>
-                </Form.Item>
+                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
             </Form> 
          );
     }
 }
  
-export default Signup;
+
+Signup.propTypes = {
+    submit: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => {
+    return {
+      userObject: state.Auth.userObject
+    };
+};
+
+export default connect(mapStateToProps)(Signup);

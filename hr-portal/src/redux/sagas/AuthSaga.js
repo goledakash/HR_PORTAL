@@ -20,7 +20,7 @@ export function* fetchLoginUser(action) {
     formBody.password = action.password;
     
     try{
-      yield put({type: Types.SIGNUP_USER_SERVER_RESPONSE_SUCCESS, formBody});
+      yield put({type: Types.LOGIN_USER_SERVER_RESPONSE_SUCCESS, formBody});
     }catch(error){
     yield put({type:Types.SERVER_CALL_FAILED, error: error.message  });
     }
