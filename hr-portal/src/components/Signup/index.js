@@ -43,7 +43,7 @@ class Signup extends Component {
                   this.state.data.password
                 )
               );
-            // this.props.history.push("/login");
+             this.props.history.push("/login");
         }
     };
 
