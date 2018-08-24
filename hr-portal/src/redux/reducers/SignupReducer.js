@@ -13,11 +13,11 @@ const handleSignupServerResponseSuccess = (state, action) => {
   let newState = {};
   newState = Object.assign({}, state, {
     signupuser: true,
-    userSignupObject: action.formBody,
-    firstName: action.formBody.firstName,
-    lastName: action.formBody.lastName,
-    email: action.formBody.email,
-    password: action.formBody.password
+    userSignupObject: action.response,
+    firstName: action.response.firstName,
+    lastName: action.response.lastName,
+    email: action.response.email,
+    password: action.response.password
   });
   return {
     ...newState

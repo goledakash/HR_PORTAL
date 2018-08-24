@@ -23,6 +23,12 @@ class Login extends Component {
       }
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.isUserLoggedIn) {
+          props.history.push("/home");
+        }
+      }
+
     
     onChange = e => this.setState({
         data: { ...this.state.data, [e.target.name]: e.target.value}

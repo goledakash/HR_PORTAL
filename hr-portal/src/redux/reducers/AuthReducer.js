@@ -12,15 +12,25 @@ const handleLoginServerResponseSuccess = (state, action) => {
     let newState = {};
     newState = Object.assign({}, state, {
       isUserLoggedIn: true,
-      userObject: action.formBody,
-      email: action.formBody.email,
-      password: action.formBody.password
+      userObject: action.response,
+      email: action.response.email,
+      password: action.response.password
     });
     return {
       ...newState
     };
   };
 
+const  handleLogoutServerResponseSuccess = (state, action) => {
+  let newState = {};
+  newState = Object.assign({}, state, {
+    isUserLoggedIn: false,
+    userObject: action.response,
+  });
+  return {
+    ...newState
+  };
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -30,6 +40,12 @@ export default (state = initialState, action) => {
       return handleLoginServerResponseSuccess(state, action);
     case Type.LOGIN_USER_SERVER_RESPONSE_ERROR:
       return { ...state };
+    case Type.LOGOUT_USER :
+      return {...state};
+    case Type.LOGOUT_USER_SERVER_RESPONSE_SUCCESS :
+      return handleLogoutServerResponseSuccess(state, action);
+    case Type.LOGOUT_USER_SERVER_REPONSE_ERROR :
+      return {...state};
     default:
       return { ...state };
   }

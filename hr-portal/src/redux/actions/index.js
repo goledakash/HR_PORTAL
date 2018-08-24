@@ -17,3 +17,10 @@ export const signupUser = (firstName, lastName, email, password) => {
     password
   };
 };
+
+export const logoutUser = (userId) => {
+  return {
+    type: Type.LOGOUT_USER,
+    userId
+  };
+};
