@@ -1,3 +1,5 @@
+/*
+
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -35,3 +37,5 @@ const config = process.env.NODE_ENV === 'production'
     auth,
     db
   };
+
+  */

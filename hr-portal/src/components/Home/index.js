@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, Collapse, Tabs, Input, InputNumber, Select, Upload, Icon } from 'antd';
 
 import { logoutUser } from "../../redux/actions/Auth";
+import Header from "../Header";
 
 
 const TabPane = Tabs.TabPane;
@@ -32,6 +33,8 @@ class Home extends Component {
             );
     };
 
+
+
     
     render() { 
         const { modeHor } = 'top'; 
@@ -41,12 +44,15 @@ class Home extends Component {
             <div>
                 <h3>HOME COMPONENT</h3>
                     <Collapse accordion>
+                        <Header />
                         <Panel header="LCA Documents and Application for Certification" key="1">
                                 <Tabs
                                 defaultActiveKey="1"
                                 tabPosition={modeHor}
                                 style={{ height: 220 }}
                                 >
+                                <Button type="primary" onClick={this.onPost}>Post</Button> 
+
                                     <TabPane tab="STEP 1" key="1">
                                         Enter Information
                                             <br/>

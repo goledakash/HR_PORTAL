@@ -3,11 +3,16 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import  Validator from 'validator';
 
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Radio } from 'antd';
 import InlineError from '../messages/InlineError';
 import { signupUser } from "../../redux/actions";
 
+const RadioGroup = Radio.Group;
 
+const options = [
+    { label: 'user', value: 'user' },
+    { label: 'admin', value: 'admin' },
+  ];
 
 class Signup extends Component {
     constructor(props) {
@@ -17,7 +22,8 @@ class Signup extends Component {
                 firstName: '',
                 lastName: '',
                 email: '',
-                password: ''
+                password: '',
+                userType: ''
             },
             loading: false,
             errors: {}
@@ -40,12 +46,15 @@ class Signup extends Component {
                   this.state.data.firstName,
                   this.state.data.lastName,
                   this.state.data.email,
-                  this.state.data.password
+                  this.state.data.password,
+                  this.state.data.userType,
                 )
               );
              this.props.history.push("/login");
         }
     };
+
+    
 
 
     validate = data => {
@@ -54,6 +63,7 @@ class Signup extends Component {
         if(!data.password) errors.password = "Can't be empty";
         if(!data.firstName) errors.firstName = "Can't be empty";
         if(!data.lastName) errors.lastName = "Can't be empty";
+        if(!data.userType) errors.userType = "Please Select";
         return errors;
     }
 
@@ -112,12 +122,23 @@ class Signup extends Component {
                         />
                     {errors.password && <InlineError text= {errors.password}/>}
                 </Form.Item>
+                {/* <Form.Item error={!!errors.userType}>
+                    <RadioGroup id="userType" type="userType" name="userType" onChange={this.onChangeRadio}>
+                        <Radio value={data.userType}>User</Radio>
+                        <Radio value={data.userType}>Admin</Radio>
+                    </RadioGroup>
+                {errors.userType && <InlineError text= {errors.userType}/>}
+                </Form.Item> */}
+
+                <RadioGroup name="userType" options={options} onChange={this.onChange} value={data.userType} />
+                <br />
+                <br />
                     <Button type="primary" onClick={this.onSubmit}>Submit</Button>
             </Form> 
          );
     }
 }
- 
+
 
 Signup.propTypes = {
     submit: PropTypes.func.isRequired

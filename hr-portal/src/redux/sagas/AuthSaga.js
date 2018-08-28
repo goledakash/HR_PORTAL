@@ -2,7 +2,7 @@ import { put, call } from "redux-saga/effects";
 import * as Types from "../actions/ActionTypes";
 import {loginUserSuccess, loginUserFailure} from '../actions/Auth';
 import {signupUserSuccess, signupUserFailure} from '../actions/Auth';
-// import {logoutUserSuccess, logoutUserFailure} from '../actions/Auth';
+import {logoutUserSuccess, logoutUserFailure} from '../actions/Auth';
 
 import firebase from '../../firebase';
 
@@ -90,19 +90,30 @@ export function* storeUser(action) {
 
     export function* fetchLogoutUser(action){
 
+      // const LogoutUserServiceCall  = (userId) => {
+      //   return firebase.auth().signOut(userId);
+      // }
+
+      // try {
+      //   const response = yield call(LogoutUserServiceCall, action.userId);
+      //   const result = yield response.json();
+      //   if (result.error) {
+      //     yield put({ type: Types.LOGOUT_USER_SERVER_REPONSE_ERROR, error: result.error });
+      //   } else {
+      //     yield put({ type: Types.LOGOUT_USER_SERVER_RESPONSE_SUCCESS, result });
+      //   }
+      // } catch (error) {
+      //   yield put({ type: Types.SERVER_CALL_FAILED, error: error.message });
+      // }
+
       const LogoutUserServiceCall  = (userId) => {
         return firebase.auth().signOut(userId);
       }
-
+  
       try {
         const response = yield call(LogoutUserServiceCall, action.userId);
-        const result = yield response.json();
-        if (result.error) {
-          yield put({ type: Types.LOGOUT_USER_SERVER_REPONSE_ERROR, error: result.error });
-        } else {
-          yield put({ type: Types.LOGOUT_USER_SERVER_RESPONSE_SUCCESS, result });
-        }
+        yield put(logoutUserSuccess(response));
       } catch (error) {
-        yield put({ type: Types.SERVER_CALL_FAILED, error: error.message });
+        yield put(logoutUserFailure(error))
       }
     }
