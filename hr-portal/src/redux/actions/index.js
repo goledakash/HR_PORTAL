@@ -8,13 +8,14 @@ export const loginUser = (email, password) => {
   };
 };
 
-export const signupUser = (firstName, lastName, email, password) => {
+export const signupUser = (firstName, lastName, email, password, userType) => {
   return {
     type: Type.SIGNUP_USER,
     firstName,
     lastName,
     email,
-    password
+    password,
+    userType
   };
 };
 

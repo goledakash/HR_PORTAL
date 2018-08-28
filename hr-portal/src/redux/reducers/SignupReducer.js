@@ -6,6 +6,7 @@ const initialState = {
   lastName: "",
   email: "",
   password: "",
+  userType: "",
   userSignupObject: ""
 };
 
@@ -17,7 +18,8 @@ const handleSignupServerResponseSuccess = (state, action) => {
     firstName: action.response.firstName,
     lastName: action.response.lastName,
     email: action.response.email,
-    password: action.response.password
+    password: action.response.password,
+    userType: action.response.userType
   });
   return {
     ...newState
