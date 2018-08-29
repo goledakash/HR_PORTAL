@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Button, Collapse, Tabs, Input, InputNumber, Select, Upload, Icon } from 'antd';
+import { Link } from "react-router-dom";
 
 import { logoutUser } from "../../redux/actions/Auth";
 // import Header from "../Header";
@@ -43,6 +44,9 @@ class Home extends Component {
         return ( 
             <div>
                 <h3>HOME COMPONENT</h3>
+                    <Button type="primary">
+                        <Link to={{pathname: "/main"}}>Back to Main</Link>
+                    </Button>
                     <Collapse accordion>
                         {/* <Header /> */}
                         <Panel header="LCA Documents and Application for Certification" key="1">

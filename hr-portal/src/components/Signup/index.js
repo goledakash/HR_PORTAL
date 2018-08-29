@@ -6,6 +6,7 @@ import  Validator from 'validator';
 import { Form, Input, Button, Radio } from 'antd';
 import InlineError from '../messages/InlineError';
 import { signupUser } from "../../redux/actions";
+import { signupSaveToFirebaseDatabase } from "../../redux/actions/Auth/"
 
 const RadioGroup = Radio.Group;
 
@@ -43,6 +44,15 @@ class Signup extends Component {
             console.log(this.state.data);
             this.props.dispatch(
                 signupUser(
+                  this.state.data.firstName,
+                  this.state.data.lastName,
+                  this.state.data.email,
+                  this.state.data.password,
+                  this.state.data.userType,
+                )
+              );
+              this.props.dispatch(
+                signupSaveToFirebaseDatabase(
                   this.state.data.firstName,
                   this.state.data.lastName,
                   this.state.data.email,

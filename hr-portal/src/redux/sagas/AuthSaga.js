@@ -6,6 +6,9 @@ import {logoutUserSuccess, logoutUserFailure} from '../actions/Auth';
 
 import firebase from '../../firebase';
 
+const LoginUserServiceCall  = (email, password) => {
+  return firebase.auth().signInWithEmailAndPassword(email, password);
+}
 export function* fetchLoginUser(action) {
 
     // try{
@@ -28,11 +31,6 @@ export function* fetchLoginUser(action) {
     // }catch(error){
     // yield put({type:Types.SERVER_CALL_FAILED, error: error.message  });
     // }
-
-    const LoginUserServiceCall  = (email, password) => {
-      return firebase.auth().signInWithEmailAndPassword(email, password);
-    }
-
     try {
       const response = yield call(LoginUserServiceCall, action.email, action.password);
       yield put(loginUserSuccess(response));
@@ -47,6 +45,10 @@ export function* fetchLoginUser(action) {
 // function CallOutsideAPI (firstName, lastName, email, password) {
 
 // };
+
+const SignupUserServiceCall  = (email, password) => {
+  return firebase.auth().createUserWithEmailAndPassword(email, password);
+}
 
 export function* storeUser(action) {
     
@@ -72,11 +74,6 @@ export function* storeUser(action) {
     // }catch(error){
     // yield put({type:Types.SERVER_CALL_FAILED, error: error.message  });
     // }
-
-    const SignupUserServiceCall  = (email, password) => {
-      return firebase.auth().createUserWithEmailAndPassword(email, password);
-    }
-
     try {
       const response = yield call(SignupUserServiceCall, action.email, action.password);
       yield put(signupUserSuccess(response));

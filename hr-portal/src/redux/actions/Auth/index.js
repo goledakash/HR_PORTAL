@@ -11,6 +11,17 @@ export const loginUser = (userName, password) => ({
   password
 })
 
+export const signupSaveToFirebaseDatabase = (firstName, lastName, email, password, userType) => {
+  return {
+    type: Types.SIGNUP_SAVE_DATABASE,
+    firstName,
+    lastName,
+    email,
+    password,
+    userType
+  };
+};
+
 export const loginUserSuccess = (response) => ({
   type:Types.LOGIN_USER_SERVER_RESPONSE_SUCCESS,
   response
@@ -26,7 +37,7 @@ export const signupUserSuccess = (response) => ({
     response
   })
   
-  export const signupUserFailure = (response) => ({
+export const signupUserFailure = (response) => ({
     type:Types.SIGNUP_USER_SERVER_RESPONSE_ERROR,
     response
   })
@@ -49,6 +60,15 @@ export const isUserLoggedIn = () => ({
   type: Types.IS_USER_LOGGED_IN
 })
 
+export const signupSaveSuccessCreateAction = (response) => ({
+  type: Types.SIGNUP_SAVE_DATABASE_SERVER_RESPONSE_SUCCESS,
+  response
+})
+
+export const signupSaveErrorCreateAction = (response) => ({
+  type: Types.SIGNUP_SAVE_DATABASE_SERVER_RESPONSE_SUCCESS,
+  response
+})
 
 /*
 function* fetchLoginUser(action){

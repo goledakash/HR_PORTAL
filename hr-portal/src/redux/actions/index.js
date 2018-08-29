@@ -19,6 +19,8 @@ export const signupUser = (firstName, lastName, email, password, userType) => {
   };
 };
 
+
+
 export const logoutUser = (userId) => {
   return {
     type: Type.LOGOUT_USER,
