@@ -18,7 +18,7 @@ render() {
                 <Link
                 to={{
                   pathname: "/employeeRegister"
-                }}>New Employee
+                }}>Create or Edit Employee
                 </Link>
             </Button>
         </div>
