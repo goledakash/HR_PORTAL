@@ -22,9 +22,10 @@ export const signupSaveToFirebaseDatabase = (firstName, lastName, email, passwor
   };
 };
 
-export const loginUserSuccess = (response) => ({
+export const loginUserSuccess = (response, UIAction) => ({
   type:Types.LOGIN_USER_SERVER_RESPONSE_SUCCESS,
-  response
+  response,
+  UIAction
 })
 
 export const loginUserFailure = (response) => ({
@@ -32,9 +33,10 @@ export const loginUserFailure = (response) => ({
   response
 })
 
-export const signupUserSuccess = (response) => ({
+export const signupUserSuccess = (response, UIAction) => ({
     type:Types.SIGNUP_USER_SERVER_RESPONSE_SUCCESS,
-    response
+    response,
+    UIAction
   })
   
 export const signupUserFailure = (response) => ({

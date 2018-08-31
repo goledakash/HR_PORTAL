@@ -13,8 +13,8 @@ const handleLoginServerResponseSuccess = (state, action) => {
     newState = Object.assign({}, state, {
       isUserLoggedIn: true,
       userObject: action.response,
-      email: action.response.email,
-      password: action.response.password
+      email: action.UIAction.email,
+      password: action.UIAction.password
     });
     return {
       ...newState

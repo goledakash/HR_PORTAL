@@ -33,7 +33,8 @@ export function* fetchLoginUser(action) {
     // }
     try {
       const response = yield call(LoginUserServiceCall, action.email, action.password);
-      yield put(loginUserSuccess(response));
+      console.log(response);
+      yield put(loginUserSuccess(response, action));
     } catch (error) {
       yield put(loginUserFailure(error))
     }
@@ -76,7 +77,8 @@ export function* storeUser(action) {
     // }
     try {
       const response = yield call(SignupUserServiceCall, action.email, action.password);
-      yield put(signupUserSuccess(response));
+      console.log(response);
+      yield put(signupUserSuccess(response, action));
     } catch (error) {
       yield put(signupUserFailure(error))
     }
