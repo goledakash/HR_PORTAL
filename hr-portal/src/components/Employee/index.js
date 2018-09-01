@@ -6,6 +6,8 @@ import InlineError from '../messages/InlineError';
 import {Form, Button, Input, DatePicker, Row, Col, TimePicker, Select, Cascader, InputNumber, Radio} from 'antd';
 import { Link } from "react-router-dom";
 import { employeeSaveToFirebaseDatabase } from "../../redux/actions/Employee"
+//import { isMoment } from '../../../node_modules/moment';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -32,13 +34,14 @@ const letterStatus = [
 class Employee extends Component {
     constructor(props) {
         super(props);
+        var dateMom = moment();
         this.state = { 
             employeeDetails: {
                 firstName: '',
                 lastName: '',
                 email: '',
                 phoneNo: '',
-               placementDate: '',
+               placementDate: dateMom,
                 vendorAgreement: '',
                projectStartDate: '',
                 urgentSituation: '',
@@ -260,10 +263,8 @@ class Employee extends Component {
                     <Row>
                         <Col span={8}>
                             <Form.Item error={!!errors.placementDate}>
-                                <DatePicker 
-                                  
+                                <DatePicker                                   
                                     onChange={this.onPlacementDateChange} 
-                                    value={employeeDetails.placementDate}
                                     placeholder= "Placement Date"
                                 />
                                 {errors.placementDate && <InlineError text= {errors.placementDate}/>}
@@ -284,7 +285,6 @@ class Employee extends Component {
                             <Form.Item error={!!errors.projectStartDate}>
                                 <DatePicker 
                                     onChange={this.onProjectStartDate} 
-                                    value={employeeDetails.projectStartDate}
                                     placeholder= "Project Start Date"
                                 />
                                 {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}

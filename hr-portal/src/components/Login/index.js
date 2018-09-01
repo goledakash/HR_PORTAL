@@ -15,8 +15,8 @@ class Login extends Component {
         // defining the state to the component
         this.state = {
             data: {
-                email: '',
-                password: ''
+                email: 'abc@abc.com',
+                password: 'abcabc'
             },
             loading: false,
             errors: {}
