@@ -72,16 +72,51 @@ class Employee extends Component {
         }
       }
 
-    onDateChange = (e, date,dateString) => {
-        console.log( date);
-        console.log('akash!!\n')
-        console.log(dateString)
-        // console.log(e);
-        console.log(e._d);
+    // onDateChange = (e, date,dateString) => {
+    //     console.log( date);
+    //     console.log('akash!!\n');
+    //     console.log(dateString);
+    //     // console.log(e);
+    //     console.log(e._d);
+    //     this.setState({
+    //         employeeDetails: {...this.state.employeeDetails, [e.target.name]: e.target._d}
+    //     });
+    //   }
+
+    onPlacementDateChange = (e, date) => {
         this.setState({
-            employeeDetails: {...this.state.employeeDetails, [e.target.name]: e.target._d}
+            ...this.state.employeeDetails, placementDate: date,
         });
-      }
+    }
+
+
+    onProjectStartDate = (e, date) => {
+        this.setState({
+            projectStartDate: date
+        });
+    }
+
+
+    onDocsCollectingStartDate = (e, date) => {
+        this.setState({
+            docsCollectingStartDate: date
+        });
+    }
+
+
+    onAppliedDateLCA = (e, date) => {
+        this.setState({
+            appliedDateLCA: date
+        });
+    }
+
+
+    onApprovedDateLCA = (e, date) => {
+        this.setState({
+            approvedDateLCA: date
+        });
+    }
+
 
     onSubmit = () => { 
 
@@ -227,7 +262,7 @@ class Employee extends Component {
                             <Form.Item error={!!errors.placementDate}>
                                 <DatePicker 
                                   
-                                    onChange={this.onDateChange} 
+                                    onChange={this.onPlacementDateChange} 
                                     value={employeeDetails.placementDate}
                                     placeholder= "Placement Date"
                                 />
@@ -248,7 +283,7 @@ class Employee extends Component {
                         <Col span={8}>
                             <Form.Item error={!!errors.projectStartDate}>
                                 <DatePicker 
-                                    onChange={this.onDateChange} 
+                                    onChange={this.onProjectStartDate} 
                                     value={employeeDetails.projectStartDate}
                                     placeholder= "Project Start Date"
                                 />
@@ -384,7 +419,7 @@ class Employee extends Component {
                         <Col span={8}>
                             <Form.Item error={!!errors.docsCollectingStartDate}>
                                 <DatePicker 
-                                    onChange={this.onDateChange} 
+                                    onChange={this.onDocsCollectingStartDate} 
                                     value={employeeDetails.docsCollectingStartDate}
                                     placeholder= "Collection Start"
                                 />
@@ -398,7 +433,7 @@ class Employee extends Component {
                         <Col span={8}>
                             <Form.Item error={!!errors.appliedDateLCA}>
                                 <DatePicker 
-                                    onChange={this.onDateChange} 
+                                    onChange={this.onAppliedDateLCA} 
                                     value={employeeDetails.appliedDateLCA}
                                     placeholder= "Applied LCA Date"
                                 />
@@ -412,7 +447,7 @@ class Employee extends Component {
                             <Form.Item error={!!errors.approvedDateLCA}>
                                 <DatePicker 
 
-                                    onChange={this.onDateChange} 
+                                    onChange={this.onApprovedDateLCA} 
                                     value={employeeDetails.approvedDateLCA}
                                     placeholder= "Approved LCA Date"
                                 />
