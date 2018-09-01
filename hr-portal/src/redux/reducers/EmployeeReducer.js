@@ -3,6 +3,20 @@ import * as Type from "../actions/ActionTypes";
 const initialState = {
     firstName: "",
     lastName: "",
+    email: "", 
+    phoneNo: "",         
+    vendorAgreement: "", 
+    urgentSituation: "", 
+    signedOfferLetter: "",
+    workLocationOne: "",
+    workLocationTwo: "",
+    clientName: "",
+    vendorName: "",
+    vendorContact: "",
+    applicationType: "",
+    vendorLetterStatus: "",
+    clientLetterStatus: "",
+    employerRelationDocuments: "",
 }
 
 const handleEmployeeServerResponseSuccess= (state, action) => {
@@ -10,6 +24,20 @@ const handleEmployeeServerResponseSuccess= (state, action) => {
     newState = Object.assign({}, state, {
         firstName: action.UIAction.firstName,
         lastName: action.UIAction.lastName,
+        email: action.UIAction.email,
+        phoneNo: action.UIAction.phoneNo,
+        vendorAgreement: action.UIAction.vendorAgreement, 
+        urgentSituation: action.UIAction.urgentSituation, 
+        signedOfferLetter: action.UIAction.signedOfferLetter,
+        workLocationOne: action.UIAction.workLocationOne,
+        workLocationTwo: action.UIAction.workLocationTwo,
+        clientName: action.UIAction.clientName,
+        vendorName: action.UIAction.vendorName,
+        vendorContact: action.UIAction.vendorContact,
+        applicationType: action.UIAction.applicationType,
+        vendorLetterStatus: action.UIAction.vendorLetterStatus,
+        clientLetterStatus: action.UIAction.clientLetterStatus,
+        employerRelationDocuments: action.UIAction.employerRelationDocuments,
     });
     return {
         ...newState

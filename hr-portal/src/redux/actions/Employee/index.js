@@ -1,10 +1,41 @@
 import * as Types from '../ActionTypes';
 
-export const employeeSaveToFirebaseDatabase = (firstName, lastName) => {
+export const employeeSaveToFirebaseDatabase = 
+    (firstName, 
+    lastName, 
+    email, 
+    phoneNo, 
+    vendorAgreement, 
+    urgentSituation, 
+    signedOfferLetter,
+    workLocationOne,
+    workLocationTwo,
+    clientName,
+    vendorName,
+    vendorContact,
+    applicationType,
+    vendorLetterStatus,
+    clientLetterStatus,
+    employerRelationDocuments,
+) => {
     return {
         type: Types.EMPLOYEE_SAVE_DATABASE,
         firstName,
         lastName,
+        email,
+        phoneNo,
+        vendorAgreement, 
+        urgentSituation, 
+        signedOfferLetter,
+        workLocationOne,
+        workLocationTwo,
+        clientName,
+        vendorName,
+        vendorContact,
+        applicationType,
+        vendorLetterStatus,
+        clientLetterStatus,
+        employerRelationDocuments,
     };
 };
 

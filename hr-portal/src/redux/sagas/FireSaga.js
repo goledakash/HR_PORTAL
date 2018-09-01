@@ -30,11 +30,43 @@ export function* storeUserSignupData(action) {
     }
 }
 
-const insertEmployeeRegistrationData= (firstName, lastName) => {
+const insertEmployeeRegistrationData = 
+(
+    firstName, 
+    lastName, 
+    email, 
+    phoneNo,         
+    vendorAgreement, 
+    urgentSituation, 
+    signedOfferLetter,
+    workLocationOne,
+    workLocationTwo,
+    clientName,
+    vendorName,
+    vendorContact,
+    applicationType,
+    vendorLetterStatus,
+    clientLetterStatus,
+    employerRelationDocuments,
+) => {
     const newEmployeeRef = database.ref('employee').push();
     return newEmployeeRef.set({
         firstName: firstName,
         lastName: lastName,
+        email: email,
+        phoneNo: phoneNo,
+        vendorAgreement: vendorAgreement, 
+        urgentSituation: urgentSituation, 
+        signedOfferLetter: signedOfferLetter,
+        workLocationOne: workLocationOne,
+        workLocationTwo: workLocationTwo,
+        clientName: clientName,
+        vendorName: vendorName,
+        vendorContact: vendorContact,
+        applicationType: applicationType,
+        vendorLetterStatus: vendorLetterStatus,
+        clientLetterStatus: clientLetterStatus,
+        employerRelationDocuments: employerRelationDocuments,
     });
 
 }
@@ -42,7 +74,24 @@ const insertEmployeeRegistrationData= (firstName, lastName) => {
 // To Save Employee Registration Information
 export function*  storeEmployeeRegistrationData(action) {
     try{
-        const response = yield call(insertEmployeeRegistrationData, action.firstName, action.lastName);
+        const response = yield call(
+            insertEmployeeRegistrationData, 
+            action.firstName, 
+            action.lastName, 
+            action.email, 
+            action.phoneNo,    
+            action.vendorAgreement, 
+            action.urgentSituation, 
+            action.signedOfferLetter,
+            action.workLocationOne,
+            action.workLocationTwo,
+            action.clientName,
+            action.vendorName,
+            action.vendorContact,
+            action.applicationType,
+            action.vendorLetterStatus,
+            action.clientLetterStatus,
+            action.employerRelationDocuments,);
         console.log(response);
         yield put(employeeSaveSuccessCreateAction(response, action));
     } catch (error){
