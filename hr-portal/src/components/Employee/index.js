@@ -5,8 +5,7 @@ import  Validator from 'validator';
 import InlineError from '../messages/InlineError';
 import {Form, Button, Input, DatePicker, Row, Col, TimePicker, Select, Cascader, InputNumber, Radio} from 'antd';
 import { Link } from "react-router-dom";
-import { employeeSaveToFirebaseDatabase } from "../../redux/actions/Employee"
-//import { isMoment } from '../../../node_modules/moment';
+import { employeeSaveToFirebaseDatabase } from "../../redux/actions/Employee";
 import moment from 'moment';
 
 const FormItem = Form.Item;
@@ -34,14 +33,13 @@ const letterStatus = [
 class Employee extends Component {
     constructor(props) {
         super(props);
-        var dateMom = moment();
         this.state = { 
             employeeDetails: {
                 firstName: '',
                 lastName: '',
                 email: '',
                 phoneNo: '',
-               placementDate: dateMom,
+               placementDate: '',
                 vendorAgreement: '',
                projectStartDate: '',
                 urgentSituation: '',

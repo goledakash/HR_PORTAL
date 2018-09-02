@@ -27,6 +27,7 @@ class Login extends Component {
         if (props.isUserLoggedIn) {
           props.history.push("/main");
         }
+        return null;
       }
 
     
@@ -91,7 +92,6 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-    submit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {

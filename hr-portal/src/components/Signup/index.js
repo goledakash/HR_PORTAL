@@ -151,7 +151,7 @@ class Signup extends Component {
 
 
 Signup.propTypes = {
-    submit: PropTypes.func.isRequired
+   
 }
 
 const mapStateToProps = state => {
