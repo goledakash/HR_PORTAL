@@ -20,9 +20,9 @@ class Home extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (!props.isUserLoggedIn) {
-            props.history.push("/signup");
-        }
+        // if (!props.isUserLoggedIn) {
+        //     props.history.push("/signup");
+        // }
         return null;
     }
 

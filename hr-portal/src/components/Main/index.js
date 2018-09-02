@@ -17,18 +17,18 @@ const data = [
 class Main extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { taskList:[] }
     }
+    
+    componentDidUpdate(prevProps) {
+        
+    }
+    componentDidMount(){
+        this.props.dispatch(getEmployeeListFromFirebase()); 
+    }    
+    static getDerivedStateFromProps(props, state) {  
 
-    static getDerivedStateFromProps(props, state) {
-        if(props.isEmployeeRegitered){
-            props.dispatch(
-                getEmployeeListFromFirebase()
-            );
-            console.log("In Main Derived State Props");
-            console.log(state.employeeListToDisplay);
-        }
-
+        return state;
       }
 
     onTaskClick = (props) => {
@@ -36,18 +36,17 @@ class Main extends Component {
     };
     
     render() { 
+        const { taskList } = this.props;
         return ( 
             <div>
-
-
                 <h2>Main Component</h2>
                     <Header />
                     <Tabs defaultActiveKey="1" >
                     <TabPane tab="Pending" key="1">
                             <List
                             bordered
-                            dataSource={data}
-                            renderItem={item => (<List.Item onClick={this.onTaskClick}>{item}</List.Item>)}
+                            dataSource={taskList}
+                            renderItem={item => (<List.Item onClick={this.onTaskClick}>{item.firstName} {item.lastName}</List.Item>)}
                         />
                     </TabPane>
                     <TabPane tab="Completed" key="2">
@@ -72,7 +71,7 @@ const mapStateToProps = state => {
         userObject: state.Auth.userObject,
         isEmployeeRegitered: state.Employee.isEmployeeRegitered,
         error: state.Employee.error,
-        employeeListToDisplay: state.EmpData.employeeData,
+        taskList: state.EmpData.employeeData,
     };
 };
 
