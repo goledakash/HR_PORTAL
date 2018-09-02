@@ -1,7 +1,7 @@
 import * as Types from '../ActionTypes';
 
 export const employeeSaveToFirebaseDatabase = 
-    (   firstName,
+    ( empId, firstName,
         lastName,
         email,
         phoneNo,
@@ -25,7 +25,7 @@ export const employeeSaveToFirebaseDatabase =
 ) => {
     return {
         type: Types.EMPLOYEE_SAVE_DATABASE,
-        firstName,
+        empId,firstName,
         lastName,
         email,
         phoneNo,
@@ -53,9 +53,14 @@ export const employeeSaveSuccessCreateAction = (response, UIAction) => ({
     type: Types.EMPLOYEE_SAVE_DATABASE_SERVER_RESPONSE_SUCCESS,
     response,
     UIAction
-  })
+  });
   
   export const employeeSaveErrorCreateAction = (response) => ({
     type: Types.EMPLOYEE_SAVE_DATABASE_SERVER_RESPONSE_SUCCESS,
     response
-  })
+  });
+export const getTaskByEmpId =(empId) =>({
+    type: Types.GET_TASK_BY_EMPID,
+    empId
+});
+

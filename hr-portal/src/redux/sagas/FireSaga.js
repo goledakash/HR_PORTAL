@@ -34,6 +34,7 @@ export function* storeUserSignupData(action) {
 
 const insertEmployeeRegistrationData = 
 (
+    empId,
     firstName,
     lastName,
     email,
@@ -58,6 +59,7 @@ const insertEmployeeRegistrationData =
 ) => {
     const newEmployeeRef = database.ref('employee').push();
     return newEmployeeRef.set({
+        empId:empId,
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -88,6 +90,7 @@ export function*  storeEmployeeRegistrationData(action) {
     try{
         const response = yield call(
             insertEmployeeRegistrationData, 
+            action.empId, 
             action.firstName, 
             action.lastName, 
             action.email, 
@@ -108,8 +111,7 @@ export function*  storeEmployeeRegistrationData(action) {
             action.approvedDateLCA,
             action.vendorLetterStatus,
             action.clientLetterStatus,
-            action.employerRelationDocuments,);
-        console.log(response);
+            action.employerRelationDocuments,);        
         yield put(employeeSaveSuccessCreateAction(response, action));
     } catch (error){
         yield put (employeeSaveErrorCreateAction(error));
@@ -138,3 +140,5 @@ export  function* getEmployeeList(){
         yield put(getEmployeeListSuccessResponse(employeeList));
     }
 }
+
+//https://stackoverflow.com/questions/42824688/firebase-get-data-by-key-or-chid-values-javascript

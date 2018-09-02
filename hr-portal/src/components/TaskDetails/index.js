@@ -4,46 +4,51 @@ import PropTypes from 'prop-types';
 import { Button, Collapse, Tabs, Input, InputNumber, Select, Upload, Icon } from 'antd';
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/Auth";
+import { Row, Col, Card } from 'antd';
 import { getTaskByEmpId } from "../../redux/actions/Employee";
-
 
 
 const TabPane = Tabs.TabPane;
 const Panel = Collapse.Panel;
 const { TextArea } = Input;
 const Option = Select.Option;
+const RadioGroup = Radio.Group;
 
-class Home extends Component {
+class TaskDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            empVerifiedWrkLocation: true,
+            rectrSentPlacDet:true,
+            rectrSentVenAgreeSignedCopy:true,
+            empVerifiedWrkLocation:true,
+            empSignedOfferLetter:true
+        }
+    };
+    onRadioButtonChange=(e)=>{
+        this.setState({
+            empVerifiedWrkLocation: e.target.value,
+        });
     }
-    componentDidUpdate(prevProps) {    
-        console.log(this.props);    
-    }
-    componentDidMount(){
+    componentDidUpdate(prevProps) {
+    };
+    componentDidMount() {
         this.props.dispatch(getTaskByEmpId(this.props.match.params.id));
-    }    
-
+    };
     static getDerivedStateFromProps(props, state) {
-        // if (!props.isUserLoggedIn) {
-        //     props.history.push("/signup");
-        // }
         return null;
-    }
-
-
+    };
     onSubmit = () => {
         this.props.dispatch(logoutUser(this.props.userObject.user.uid));
     };
-
-
-
-
     render() {
         const { modeHor } = 'top';
         const { modeVer } = 'left';
-
+        const radioStyle = {
+            display: 'block',
+            height: '30px',
+            lineHeight: '30px',
+        };
         return (
             <div>
                 <h3>HOME COMPONENT</h3>
@@ -51,16 +56,57 @@ class Home extends Component {
                     <Link to={{ pathname: "/main" }}>Back to Main</Link>
                 </Button>
                 <Collapse accordion>
-                    {/* <Header /> */}
-                    <Panel header="LCA Documents and Application for Certification" key="1">
-                    <Button type="primary" onClick={this.onPost}>Post</Button>
+                    <Panel header="From Employee" key="1">
+                        <Row>
+                            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+                                <Card>
+                                    <Input placeholder="Work Site Address" />
+                                </Card>
+                            </Col>
+                            <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+                                <Card>
+                                    <Input placeholder="Work Site Address" />
+                                </Card>
+                            </Col>
+                            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+                                <Card>
+                                    <Input placeholder="Work Site Address" />
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Panel>
+                    <Panel header="From Recruiter" key="2">
+                        <Row>
+                            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+                                <Card>
+                                
+                                <RadioGroup name="empVerifiedWrkLocation" onChange={this.onChange} value={this.state.empVerifiedWrkLocation}>                                    
+                                    <Radio style={radioStyle} value={true}>Yes</Radio>
+                                    <Radio style={radioStyle} value={false}>No</Radio>        
+                                </RadioGroup>                                
+                                </Card>
+                            </Col>
+                            <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+                                <Card>
+                                    <Input placeholder="Work Site Address" />
+                                </Card>
+                            </Col>
+                            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+                                <Card>
+                                    <Input placeholder="Work Site Address" />
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Panel>
+                    <Panel header="LCA Documents and Application for Certification" key="3">
+                        <Button type="primary" onClick={this.onPost}>Post</Button>
 
                         <Tabs
                             defaultActiveKey="1"
                             tabPosition={modeHor}
                             style={{ height: 220 }}
                         >
-                          
+
                             <TabPane tab="STEP 1" key="1">
                                 Enter Information
                                             <br />
@@ -94,7 +140,7 @@ class Home extends Component {
                             <TabPane tab="STEP 5" key="5">File for Certification</TabPane>
                         </Tabs>
                     </Panel>
-                    <Panel header="Upload your H1B Documents" key="2">
+                    <Panel header="Upload your H1B Documents" key="4">
                         <Tabs
                             defaultActiveKey="1"
                             tabPosition={modeHor}
@@ -172,22 +218,22 @@ class Home extends Component {
                             <TabPane tab="STEP 3" key="3">Upload H4 EAD</TabPane>
                         </Tabs>
                     </Panel>
-                    <Panel header="Submitted Documents Review by HR" key="3">
+                    <Panel header="Submitted Documents Review by HR" key="5">
 
                     </Panel>
-                    <Panel header="Send Reviewed Documents to Attorney" key="4">
+                    <Panel header="Send Reviewed Documents to Attorney" key="6">
 
                     </Panel>
-                    <Panel header="Documents Reviewed by Attorney" key="5">
+                    <Panel header="Documents Reviewed by Attorney" key="7">
 
                     </Panel>
-                    <Panel header="Documents accepted by Attorney" key="6">
+                    <Panel header="Documents accepted by Attorney" key="8">
 
                     </Panel>
-                    <Panel header="Attorney files the petition with USCIS and shares the FEDEX Number" key="7">
+                    <Panel header="Attorney files the petition with USCIS and shares the FEDEX Number" key="9">
 
                     </Panel>
-                    <Panel header="User receives the FEDEX number for the petition filed" key="8">
+                    <Panel header="User receives the FEDEX number for the petition filed" key="10">
 
                     </Panel>
                 </Collapse>
@@ -197,7 +243,7 @@ class Home extends Component {
     }
 }
 
-Home.propTypes = {
+TaskDetails.propTypes = {
 
 }
 
@@ -210,4 +256,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(TaskDetails);

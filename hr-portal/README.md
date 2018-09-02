@@ -1,3 +1,12 @@
+// Task Priority Colors
+{
+  "1":"",
+  "2":"",
+  "3":"",
+  "4":"",
+  "5":"",
+}
+
 
 // On Employee register we have to create employee Task details object, Employee status object
 // Maintain different JSON for Employee status, Employee Work Details, Employee Personal Details.
@@ -16,30 +25,46 @@
       "state":"",
       "zipCode":""
     },
+    "taskCompleted":"",
+    "taskPrioirty":"1",
+    "applicationType":"",
+    "taskCreatedDate":"",    
     "workInfo":{
       "jobStatus":{
-        placementDate: moment('11/08/2017'),
-        projectStartDate: moment('11/08/2017'),
-        urgentSituation: 'bhjbbhjkjn',
-        signedOfferLetter: 'no',
+        "placementDate: moment('11/08/2017'),
+        "projectStartDate: moment('11/08/2017'),
+        "urgentSituation: 'bhjbbhjkjn',
+        "signedOfferLetter: 'no',
+        "vendorLetterStatus": 'approved',
+        "clientLetterStatus": 'waiting',
+        applicationType:'type1',
       },
-        "workLocation":{
+      "workLocation":{
+        "address1":"",
+        "address2":"",
+        "city":"",
+        "state":"",
+        "zipCode":""
+      }
+    },
+    "clientInfo":{
+      "clientName": "hvgjvuygvy",
+      "managerName":"",
+      "clientAddress":{
           "address1":"",
           "address2":"",
           "city":"",
           "state":"",
           "zipCode":""
-        }
+        },
     },
-    "clientInfo":{},
     "vendorInfo":{
-      vendorAgreement: 'yes',
-      vendorName: 'vggjvjvjv',
-      vendorContact: '223334444',
-      ven
-
-      },
-
+      "vendorAgreement": "yes",
+      "vendorName": "vggjvjvjv",
+      "vendorContact": "223334444",
+      "venContName":"",
+      "venContPhone":"",
+    },
   }
 }
     firstName: 'akash',
@@ -67,20 +92,96 @@
 /*  Employee Object */
 //
 {
-  "cur_status_msg":"",
-  "cur_target_cmp_date":"",
-  "next_step_msg":"",  
-  "exp_tar_cmp_date":"",
-  "tot_cmp_date":"",
-  "exp_cmp_date":"",
-  "to_send_email":[]
-  "task_priority":""
+  "curStatusMsg":"",
+  "curTargetCmpDate":"",
+  "nextStepMsg":"",  
+  "expTarCmpDate":"",
+  "toCmpDate":"",
+  "expCmpDate":"",
+  "toSendEmail":[]
+  "taskPriority":"",
+  "isHighPriority":""
+}
+
+// below info required from Emp
+  {
+    "empVerifiedWrkLocation":""
+    "workLocation":{      
+      "address1":"",
+      "address2":"",
+      "city":"",
+      "state":"",
+      "zipCode":""
+    },
+    "":""
+  }
+// Recruiter
+{
+"rectrSentPlacDet":"",
+"rectrSentVenAgreeSignedCopy":"",
+
 }
 
 /*Task Details Objects*/
 {
   "emp_details":{
     "id":"",
+    "name":"",
+    "rectrSentPlacDet":"",
+    "rectrSentVenAgree":"",
+    "projctStartDate":"",
+    "isImmActionReqFrmEmp":"",// shows the top list of items
+    "highPrirityTaskFrmEmp":"",// shows the top list of items
+---------------------------
+// employee has to submit the followign docuemnts.
+  "empVerfiedWrkLocation":""
+  "empSubmittedAllDocs":"",
+
+----------------------------
+
+
+    --------------------------------
+  "empSignedOfferLetter":"",
+  "applicationType":"",
+  "docsSubmissionDate":"",
+
+  "workInfo":{
+      "jobStatus":{
+        "placementDate: moment('11/08/2017'),
+        "projectStartDate: moment('11/08/2017'),
+        "urgentSituation: 'bhjbbhjkjn',
+        "signedOfferLetter: 'no',
+        "vendorLetterStatus": 'approved',
+        "clientLetterStatus": 'waiting',
+        applicationType:'type1',
+      },
+      "workLocation":{
+        "address1":"",
+        "address2":"",
+        "city":"",
+        "state":"",
+        "zipCode":""
+      }
+    },
+     "clientInfo":{
+      "clientName": "hvgjvuygvy",
+      "managerName":"",
+      "clientAddress":{
+          "address1":"",
+          "address2":"",
+          "city":"",
+          "state":"",
+          "zipCode":""
+        },
+    },
+    "vendorInfo":{
+      "vendorAgreement": "yes",
+      "vendorName": "vggjvjvjv",
+      "vendorContact": "223334444",
+      "venContName":"",
+      "venContPhone":"",
+    },
+    ---------
     "cur_state":"",
     "due_date":"",
     "is_pending_on":"",

@@ -35,6 +35,7 @@ class Employee extends Component {
         super(props);
         this.state = { 
             employeeDetails: {
+                empId:moment().valueOf(),
                 firstName: 'akash',
                 lastName: 'goled',
                 email: 'abc@abc.com',
@@ -132,7 +133,7 @@ class Employee extends Component {
             console.log(this.state.employeeDetails);
             this.props.dispatch(
                 employeeSaveToFirebaseDatabase(
-                    // this.state.employeeDetails.
+                this.state.employeeDetails.empId,
                   this.state.employeeDetails.firstName,
                   this.state.employeeDetails.lastName,
                   this.state.employeeDetails.email,
