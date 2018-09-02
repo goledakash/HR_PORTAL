@@ -35,27 +35,27 @@ class Employee extends Component {
         super(props);
         this.state = { 
             employeeDetails: {
-                firstName: '',
-                lastName: '',
-                email: '',
-                phoneNo: '',
-               placementDate: '',
-                vendorAgreement: '',
-               projectStartDate: '',
-                urgentSituation: '',
-                signedOfferLetter: '',
-                workLocationOne: '',
-                workLocationTwo: '',
-                clientName: '',
-                vendorName: '',
-                vendorContact: '',
-                applicationType:'',
-                docsCollectingStartDate:'',
-                appliedDateLCA: '',
-                approvedDateLCA: '',
-                vendorLetterStatus: '',
-                clientLetterStatus: '',
-                employerRelationDocuments: '',
+                firstName: 'akash',
+                lastName: 'goled',
+                email: 'abc@abc.com',
+                phoneNo: '1112223333',
+                placementDate: moment('11/08/2017'),
+                vendorAgreement: 'yes',
+                projectStartDate: moment('11/08/2017'),
+                urgentSituation: 'bhjbbhjkjn',
+                signedOfferLetter: 'no',
+                workLocationOne: 'hjbbhjbjh',
+                workLocationTwo: 'bhkbhkbhjk',
+                clientName: 'hvgjvuygvy',
+                vendorName: 'vggjvjvjv',
+                vendorContact: '223334444',
+                applicationType:'type1',
+                docsCollectingStartDate: moment('12/08/2017'),
+                appliedDateLCA: moment('11/08/2017'),
+                approvedDateLCA: moment('11/08/2017'),
+                vendorLetterStatus: 'approved',
+                clientLetterStatus: 'waiting',
+                employerRelationDocuments: 'yes',
             },
             errors: {}
          }
@@ -71,6 +71,10 @@ class Employee extends Component {
           // props.history.push("/login");
           console.log("User not logged in");
         }
+        if(props.isEmployeeRegitered){
+            props.history.push("/main");
+        }
+
       }
 
     // onDateChange = (e, date,dateString) => {
@@ -93,28 +97,28 @@ class Employee extends Component {
 
     onProjectStartDate = (e, date) => {
         this.setState({
-            projectStartDate: date
+            ...this.state.employeeDetails, projectStartDate: date
         });
     }
 
 
     onDocsCollectingStartDate = (e, date) => {
         this.setState({
-            docsCollectingStartDate: date
+            ...this.state.employeeDetails, docsCollectingStartDate: date
         });
     }
 
 
     onAppliedDateLCA = (e, date) => {
         this.setState({
-            appliedDateLCA: date
+            ...this.state.employeeDetails,appliedDateLCA: date
         });
     }
 
 
     onApprovedDateLCA = (e, date) => {
         this.setState({
-            approvedDateLCA: date
+            ...this.state.employeeDetails, approvedDateLCA: date
         });
     }
 
@@ -133,9 +137,9 @@ class Employee extends Component {
                   this.state.employeeDetails.lastName,
                   this.state.employeeDetails.email,
                   this.state.employeeDetails.phoneNo,
-                  this.state.employeeDetails.placementDate,
+                  this.state.employeeDetails.placementDate.format("MM/DD/YYYY"),
                   this.state.employeeDetails.vendorAgreement,
-                  this.state.employeeDetails.projectStartDate,
+                  this.state.employeeDetails.projectStartDate.format("MM/DD/YYYY"),
                   this.state.employeeDetails.urgentSituation,
                   this.state.employeeDetails.signedOfferLetter,
                   this.state.employeeDetails.workLocationOne,
@@ -144,9 +148,9 @@ class Employee extends Component {
                   this.state.employeeDetails.vendorName,
                   this.state.employeeDetails.vendorContact,
                   this.state.employeeDetails.applicationType,
-                  this.state.employeeDetails.docsCollectingStartDate,
-                  this.state.employeeDetails.appliedDateLCA,
-                  this.state.employeeDetails.approvedDateLCA,
+                  this.state.employeeDetails.docsCollectingStartDate.format("MM/DD/YYYY"),
+                  this.state.employeeDetails.appliedDateLCA.format("MM/DD/YYYY"),
+                  this.state.employeeDetails.approvedDateLCA.format("MM/DD/YYYY"),
                   this.state.employeeDetails.vendorLetterStatus,
                   this.state.employeeDetails.clientLetterStatus,
                   this.state.employeeDetails.employerRelationDocuments,
@@ -160,11 +164,11 @@ class Employee extends Component {
         if(!employeeDetails.firstName) errors.firstName = "Can't be empty";
         if(!employeeDetails.lastName) errors.lastName = "Can't be empty";
         if(!Validator.isEmail(employeeDetails.email)) errors.email = "Invalid Email";
-       if(!Validator.isISO8601(employeeDetails.placementDate)) errors.placementDate = "Select a Date";
+       // if(!Validator.isISO8601(employeeDetails.placementDate)) errors.placementDate = "Select a Date";
         if(!employeeDetails.vendorAgreement) errors.vendorAgreement = "Please Select";
         if(!Validator.isNumeric(employeeDetails.phoneNo)) errors.phoneNo = "Enter Phone Number";
        // employerRelationDocuments
-       if(!Validator.isISO8601(employeeDetails.projectStartDate)) errors.projectStartDate = "Select a Date";
+      // if(!Validator.isISO8601(employeeDetails.projectStartDate)) errors.projectStartDate = "Select a Date";
         if(!employeeDetails.urgentSituation) errors.urgentSituation = "Enter N/A if no such thing";
         if(!employeeDetails.signedOfferLetter) errors.signedOfferLetter = "Please Select";
         if(!employeeDetails.workLocationOne) errors.workLocationOne = "Can't be empty";
@@ -173,9 +177,9 @@ class Employee extends Component {
         if(!employeeDetails.vendorName) errors.vendorName = "Can't be empty";
         if(!employeeDetails.vendorContact) errors.vendorContact = "Can't be empty";
         if(!employeeDetails.applicationType) errors.applicationType = "Please Select";
-        if(!Validator.isISO8601(employeeDetails.docsCollectingStartDate)) errors.docsCollectingStartDate = "Select a Date";
-        if(!Validator.isISO8601(employeeDetails.appliedDateLCA)) errors.appliedDateLCA = "Select a Date";
-        if(!Validator.isISO8601(employeeDetails.approvedDateLCA)) errors.approvedDateLCA = "Select a Date";
+        // if(!Validator.isISO8601(employeeDetails.docsCollectingStartDate)) errors.docsCollectingStartDate = "Select a Date";
+        // if(!Validator.isISO8601(employeeDetails.appliedDateLCA)) errors.appliedDateLCA = "Select a Date";
+        // if(!Validator.isISO8601(employeeDetails.approvedDateLCA)) errors.approvedDateLCA = "Select a Date";
         if(!employeeDetails.vendorLetterStatus) errors.vendorLetterStatus = "Please Select";
         if(!employeeDetails.clientLetterStatus) errors.clientLetterStatus = "Please Select";
         if(!employeeDetails.employerRelationDocuments) errors.employerRelationDocuments = "Please Select";
@@ -264,6 +268,7 @@ class Employee extends Component {
                                 <DatePicker                                   
                                     onChange={this.onPlacementDateChange} 
                                     placeholder= "Placement Date"
+                                    defaultValue={employeeDetails.placementDate}
                                 />
                                 {errors.placementDate && <InlineError text= {errors.placementDate}/>}
                             </Form.Item>
@@ -284,6 +289,7 @@ class Employee extends Component {
                                 <DatePicker 
                                     onChange={this.onProjectStartDate} 
                                     placeholder= "Project Start Date"
+                                    defaultValue ={employeeDetails.projectStartDate}
                                 />
                                 {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
                             </Form.Item>
@@ -418,8 +424,8 @@ class Employee extends Component {
                             <Form.Item error={!!errors.docsCollectingStartDate}>
                                 <DatePicker 
                                     onChange={this.onDocsCollectingStartDate} 
-                                    value={employeeDetails.docsCollectingStartDate}
                                     placeholder= "Collection Start"
+                                    defaultValue ={employeeDetails.docsCollectingStartDate}
                                 />
                                 {errors.docsCollectingStartDate && <InlineError text= {errors.docsCollectingStartDate}/>}
                             </Form.Item>
@@ -432,8 +438,8 @@ class Employee extends Component {
                             <Form.Item error={!!errors.appliedDateLCA}>
                                 <DatePicker 
                                     onChange={this.onAppliedDateLCA} 
-                                    value={employeeDetails.appliedDateLCA}
                                     placeholder= "Applied LCA Date"
+                                    defaultValue ={employeeDetails.appliedDateLCA}
                                 />
                                 {errors.appliedDateLCA && <InlineError text= {errors.appliedDateLCA}/>}
                             </Form.Item>
@@ -444,10 +450,9 @@ class Employee extends Component {
                         <Col span={8}>
                             <Form.Item error={!!errors.approvedDateLCA}>
                                 <DatePicker 
-
                                     onChange={this.onApprovedDateLCA} 
-                                    value={employeeDetails.approvedDateLCA}
                                     placeholder= "Approved LCA Date"
+                                    defaultValue ={employeeDetails.approvedDateLCA}
                                 />
                                 {errors.approvedDateLCA && <InlineError text= {errors.approvedDateLCA}/>}
                             </Form.Item>
@@ -504,7 +509,9 @@ class Employee extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.Auth.isUserLoggedIn,
-        userObject: state.Auth.userObject
+        userObject: state.Auth.userObject,
+        isEmployeeRegitered: state.Employee.isEmployeeRegitered,
+        error: state.Employee.error
     };
 };
  

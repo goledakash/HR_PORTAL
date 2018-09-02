@@ -1,9 +1,11 @@
-import { put, call } from "redux-saga/effects";
+import { put, call, take } from "redux-saga/effects";
 import * as Types from "../actions/ActionTypes";
 
 import firebase from '../../firebase';
+import { eventChannel } from 'redux-saga';
 import {signupSaveSuccessCreateAction, signupSaveErrorCreateAction} from '../actions/Auth';
 import {employeeSaveSuccessCreateAction, employeeSaveErrorCreateAction} from '../actions/Employee';
+import {getEmployeeListSuccessResponse} from '../actions/Main';
 
 const database = firebase.database();
 
@@ -111,5 +113,28 @@ export function*  storeEmployeeRegistrationData(action) {
         yield put(employeeSaveSuccessCreateAction(response, action));
     } catch (error){
         yield put (employeeSaveErrorCreateAction(error));
+    }
+}
+
+
+
+
+function createEventChannelToGetData(){
+    const listener = eventChannel(
+        emit => {
+            database.ref('employee')
+            .on('value', data => emit(data.val()));
+                return () => database.ref('employee').off(listener);
+        }
+    );
+    return listener;
+  }
+  
+  // To retrieve data from /employee location in firebase and display in the tabs in Main component
+export  function* getEmployeeList(){
+    const getDataChannel = createEventChannelToGetData();
+    while(true) {
+        const employeeList = yield take(getDataChannel);
+        yield put(getEmployeeListSuccessResponse(employeeList));
     }
 }
