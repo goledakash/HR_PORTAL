@@ -369,3 +369,12 @@
       },
   }
 }
+
+// GIT Commands
+
+git diff
+git pull
+
+git stash
+git pull
+git stash pop

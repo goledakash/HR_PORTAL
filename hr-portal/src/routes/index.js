@@ -6,6 +6,7 @@ import Signup from "./../components/Signup";
 import Home from "./../components/Home";
 import Employee from "./../components/Employee";
 import Main from "./../components/Main";
+import CreateTask from "./../components/CreateTask";
 
 export default () => {
   return (
@@ -16,6 +17,7 @@ export default () => {
         <Route exact path="/signup" render={props => <Signup {...props} />} />
         <Route exact path="/employeeRegister" render={props => <Employee {...props} />} />
         <Route exact path="/main" render={props => <Main {...props} />} />
+        <Route exact path="/createTask" render={props => <CreateTask {...props} />} />
         <Redirect to="/login" />
       </Switch>
     </BrowserRouter>

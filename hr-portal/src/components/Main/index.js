@@ -8,11 +8,11 @@ import { getEmployeeListFromFirebase } from "../../redux/actions/Main";
 
 const TabPane = Tabs.TabPane;
 
-const data = [
-    'TASK 1',
-    'TASK 2',
-    'TASK 3',
-  ];
+// const data = [
+//     'TASK 1',
+//     'TASK 2',
+//     'TASK 3',
+//   ];
 
 class Main extends Component {
     constructor(props) {
@@ -34,6 +34,7 @@ class Main extends Component {
     onTaskClick = (props) => {
         this.props.history.push("/home");
     };
+
     
     render() { 
         const { taskList } = this.props;
@@ -52,13 +53,11 @@ class Main extends Component {
                     <TabPane tab="Completed" key="2">
                             <List
                             bordered
-                            dataSource={data}
+                            dataSource={this.state.dataEmployeeArray}
                             renderItem={item => (<List.Item onClick={this.onTaskClick}>{item}</List.Item>)}
                         />
                     </TabPane>
                 </Tabs>
-
-
 
             </div>
          );
