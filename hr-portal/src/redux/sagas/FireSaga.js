@@ -5,6 +5,7 @@ import firebase from '../../firebase';
 import { eventChannel } from 'redux-saga';
 import {signupSaveSuccessCreateAction, signupSaveErrorCreateAction} from '../actions/Auth';
 import {employeeSaveSuccessCreateAction, employeeSaveErrorCreateAction} from '../actions/Employee';
+import {employeeInfoSaveSuccessCreateAction, employeeInfoSaveErrorCreateAction} from '../actions/CreateTask';
 import {getEmployeeListSuccessResponse} from '../actions/Main';
 
 const database = firebase.database();
@@ -136,5 +137,29 @@ export  function* getEmployeeList(){
     while(true) {
         const employeeList = yield take(getDataChannel);
         yield put(getEmployeeListSuccessResponse(employeeList));
+    }
+}
+
+
+
+
+const insertEmployeeInfoRegistrationData = 
+(empDetails) => {
+    const newEmployeeRef = database.ref('employee').push();
+    return newEmployeeRef.set({
+        empDetails: empDetails,
+    });
+}
+
+// To Save Employee Registration Information
+export function*  storeEmployeeInfoRegistrationData(action) {
+    try{
+        const response = yield call(
+            insertEmployeeInfoRegistrationData, 
+            action.empDetails,);
+        console.log(response);
+        yield put(employeeInfoSaveSuccessCreateAction(response, action));
+    } catch (error){
+        yield put (employeeInfoSaveErrorCreateAction(error));
     }
 }

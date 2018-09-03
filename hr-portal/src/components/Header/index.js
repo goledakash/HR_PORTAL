@@ -17,7 +17,7 @@ render() {
             <Button type="primary">
                 <Link
                 to={{
-                  pathname: "/employeeRegister"
+                  pathname: "/createTask"
                 }}>Create or Edit Employee
                 </Link>
             </Button>

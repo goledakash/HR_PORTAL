@@ -1,31 +1,11 @@
 import * as Types from '../ActionTypes';
 
 export const employeeInfoSaveToFirebaseDatabase = 
-    (   firstName,
-        lastName,
-        emailId01,
-        emailId02,
-        phoneNo,
-        address1,
-        address2,
-        city,
-        state,
-        zipCode
-
+    (   empDetails
 ) => {
     return {
         type: Types.EMPLOYEE_INFO_SAVE_DATABASE,
-        firstName,
-        lastName,
-        emailId01,
-        emailId02,
-        phoneNo,
-        address1,
-        address2,
-        city,
-        state,
-        zipCode
-
+        empDetails
     };
 };
 

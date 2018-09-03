@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import  Validator from 'validator';
 import InlineError from '../messages/InlineError';
 import { Collapse, Form, Input, Row, Col, Button} from 'antd';
+import { Link } from "react-router-dom";
+import moment from 'moment';
 
 import { employeeInfoSaveToFirebaseDatabase } from "../../redux/actions/CreateTask";
 
@@ -30,6 +32,21 @@ class CreateTask extends Component {
                   zipCode:''
                 }
          },
+         workInfo:{
+            jobStatus:{
+              placementDate: moment('11/08/2017'),
+              projectStartDate: moment('11/08/2017'),
+              urgentSituation: 'bhjbbhjkjn',
+              signedOfferLetter: 'no',
+            },
+              workLocation:{
+                address1: '',
+                address2: '',
+                city: '',
+                state: '',
+                zipCode: ''
+              }
+          },
          errors: {}
     }
 
@@ -38,6 +55,12 @@ class CreateTask extends Component {
     onChange = e => this.setState({
         empDetails: { ...this.state.empDetails, [e.target.name]: e.target.value}
     });
+
+    onContactChange = (e) => {
+        let empDetails = Object.assign({}, this.state.empDetails);
+        empDetails.contDetails[e.target.name] = e.target.value;        
+        return this.setState({empDetails});
+    };
 
     static getDerivedStateFromProps(props, state) {
         return null;
@@ -53,16 +76,8 @@ class CreateTask extends Component {
             this.props.dispatch(
                 employeeInfoSaveToFirebaseDatabase(
                     // this.state.employeeDetails.
-                  this.state.empDetails.firstName,
-                  this.state.empDetails.lastName,
-                  this.state.empDetails.emailId01,
-                  this.state.empDetails.emailId02,
-                  this.state.empDetails.phoneNo,
-                  this.state.empDetails.contDetails.address1,
-                  this.state.empDetails.contDetails.address2,
-                  this.state.empDetails.contDetails.city,
-                  this.state.empDetails.contDetails.state,
-                  this.state.empDetails.contDetails.zipcode,
+                  this.state.empDetails,
+
                 )
               );
         }
@@ -87,8 +102,12 @@ class CreateTask extends Component {
         const { empDetails, errors } = this.state;
         return ( 
             <div>
-                <h3>CREATE TASK COMPONENT</h3>
+                <h2>CREATE TASKs HERE</h2>
+                <Button type="primary">
+                        <Link to={{pathname: "/main"}}>Back to Main</Link>
+                </Button>
                 <Collapse accordion>
+{/* Employee Registration */}
                     <Panel header="Employee Registration" key="1">
                         <Form>
                         <Row>
@@ -177,7 +196,7 @@ class CreateTask extends Component {
                                             type="address1" 
                                             name="address1"
                                             value= {empDetails.contDetails.address1} 
-                                            onChange={this.onChange}
+                                            onChange={this.onContactChange}
                                             placeholder="Address 1" 
                                             />
                                         
@@ -192,7 +211,7 @@ class CreateTask extends Component {
                                         type="address2" 
                                         name="address2"
                                         value= {empDetails.contDetails.address2} 
-                                        onChange={this.onChange}
+                                        onChange={this.onContactChange}
                                         placeholder="Address 2" 
                                         />
                                     
@@ -210,7 +229,7 @@ class CreateTask extends Component {
                                             type="city" 
                                             name="city"
                                             value= {empDetails.contDetails.city} 
-                                            onChange={this.onChange}
+                                            onChange={this.onContactChange}
                                             placeholder="City" 
                                             />
                                         
@@ -225,7 +244,7 @@ class CreateTask extends Component {
                                             type="state" 
                                             name="state" 
                                             value= {empDetails.contDetails.state} 
-                                            onChange={this.onChange}
+                                            onChange={this.onContactChange}
                                             placeholder="State" 
                                             />
                                         {errors.state && <InlineError text= {errors.state}/>}
@@ -241,7 +260,7 @@ class CreateTask extends Component {
                                                 type="zipCode" 
                                                 name="zipCode" 
                                                 value={empDetails.contDetails.zipCode}
-                                                onChange={this.onChange} 
+                                                onChange={this.onContactChange} 
                                                 placeholder= "Enter Your Zipcode"
                                                 />
                                                 {errors.zipCode && <InlineError text= {errors.zipCode}/>}
@@ -255,19 +274,29 @@ class CreateTask extends Component {
                     </Panel>
 
 
+{/* WorkInfo */}
 
 
-
-                    <Panel header="This is panel header 2" key="2">
+                    <Panel header="Work Related Information" key="2">
                         <Form>
                             
                         </Form>
                     </Panel>
-                    <Panel header="This is panel header 3" key="3">
+
+{/* ClientInfo */}
+
+                    <Panel header="Client Related Information" key="3">
                         <Form>
                             
                         </Form>
                     </Panel>
+{/* VendorInfo */}
+                    <Panel header="Vendor Related Information" key="4">
+                        <Form>
+                            
+                        </Form>
+                    </Panel>
+
                 </Collapse>
             </div>
          );
