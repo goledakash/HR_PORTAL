@@ -5,6 +5,7 @@ const initialState = {
   isEmpDataReceived:false,
   employeeData:[],
   error: '',
+  taskSelected:{}
 }
 
 const handleEmployeeListServerResponseSuccess = (state, action) => {
@@ -21,10 +22,18 @@ const handleEmployeeListServerResponseError = (state, action) => {
   };
 }
 
+const getTaskByEmpId = (state, action) => {
+  let newState = {};
+  newState = Object.assign({}, state, { taskSel : state.employeeData.find(item => +item.empId === +action.empId) });
+  return {...newState};
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
       case Type.GET_EMPLOYEE_LIST :
            return { ...state};
+      case Type.GET_TASK_BY_EMPID :
+           return getTaskByEmpId(state, action);
       case Type.GET_EMPLOYEE_LIST_SUCCESS_RESPONSE :
            return handleEmployeeListServerResponseSuccess(state, action);
       case Type.GET_EMPLOYEE_LIST_ERROR_RESPONSE :

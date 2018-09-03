@@ -27,12 +27,11 @@ class Main extends Component {
         this.props.dispatch(getEmployeeListFromFirebase()); 
     }    
     static getDerivedStateFromProps(props, state) {  
-
         return state;
       }
 
-    onTaskClick = (props) => {
-        this.props.history.push("/home");
+    onTaskClick = (empId) => {
+        this.props.history.push("/home"+"/"+empId);
     };
 
     
@@ -47,14 +46,14 @@ class Main extends Component {
                             <List
                             bordered
                             dataSource={taskList}
-                            renderItem={item => (<List.Item onClick={this.onTaskClick}>{item.firstName} {item.lastName}</List.Item>)}
+                            renderItem={item => (<List.Item onClick={() => this.onTaskClick(item.empId)}>{item.firstName} {item.lastName}</List.Item>)}
                         />
                     </TabPane>
                     <TabPane tab="Completed" key="2">
                             <List
                             bordered
                             dataSource={this.state.dataEmployeeArray}
-                            renderItem={item => (<List.Item onClick={this.onTaskClick}>{item}</List.Item>)}
+                            renderItem={item => (<List.Item onClick={() => this.onTaskClick(item.empId)}>{item.firstName} {item.lastName}</List.Item>)}
                         />
                     </TabPane>
                 </Tabs>
