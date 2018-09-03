@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, Collapse, Tabs, Input, InputNumber, Select, Upload, Icon } from 'antd';
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/Auth";
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Radio } from 'antd';
 import { getTaskByEmpId } from "../../redux/actions/Employee";
 
 
@@ -58,17 +58,17 @@ class TaskDetails extends Component {
                 <Collapse accordion>
                     <Panel header="From Employee" key="1">
                         <Row>
-                            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-                                <Card>
+                            <Col xs={4} sm={4} md={4} lg={4} xl={4}>
+                                <Card title="Card title">
                                     <Input placeholder="Work Site Address" />
                                 </Card>
                             </Col>
-                            <Col xs={20} sm={16} md={12} lg={8} xl={4}>
-                                <Card>
-                                    <Input placeholder="Work Site Address" />
+                            <Col xs={4} sm={4} md={4} lg={4} xl={4}>
+                                <Card title="Card title">
+                                  <span>work location:</span>  <Input placeholder="Work Site Address" />
                                 </Card>
                             </Col>
-                            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+                            <Col xs={4} sm={4} md={4} lg={4} xl={4}>
                                 <Card>
                                     <Input placeholder="Work Site Address" />
                                 </Card>
@@ -79,11 +79,11 @@ class TaskDetails extends Component {
                         <Row>
                             <Col xs={2} sm={4} md={6} lg={8} xl={10}>
                                 <Card>
-                                
-                                <RadioGroup name="empVerifiedWrkLocation" onChange={this.onChange} value={this.state.empVerifiedWrkLocation}>                                    
-                                    <Radio style={radioStyle} value={true}>Yes</Radio>
-                                    <Radio style={radioStyle} value={false}>No</Radio>        
-                                </RadioGroup>                                
+                                    <span>Employee Verified Work Location </span>
+                                    <RadioGroup onChange={this.onChange} value={this.state.empVerifiedWrkLocation}>                                    
+                                        <Radio style={radioStyle} value={true}>Yes</Radio>
+                                        <Radio style={radioStyle} value={false}>No</Radio>        
+                                    </RadioGroup>                                
                                 </Card>
                             </Col>
                             <Col xs={20} sm={16} md={12} lg={8} xl={4}>
@@ -219,7 +219,13 @@ class TaskDetails extends Component {
                         </Tabs>
                     </Panel>
                     <Panel header="Submitted Documents Review by HR" key="5">
-
+                        <Card title="Card title">
+                            <span>Documents Reviewed: </span>
+                            <RadioGroup name="empVerifiedWrkLocation" onChange={this.onChange} value={this.state.empVerifiedWrkLocation}>                                    
+                                <Radio style={radioStyle} value={true}>Yes</Radio>
+                                <Radio style={radioStyle} value={false}>No</Radio>        
+                            </RadioGroup> 
+                        </Card>
                     </Panel>
                     <Panel header="Send Reviewed Documents to Attorney" key="6">
 
