@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import  Validator from 'validator';
 import InlineError from '../messages/InlineError';
-import { Collapse, Form, Input, Row, Col, Button} from 'antd';
+import { Collapse, Form, Input, Row, Col, Button, DatePicker} from 'antd';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
@@ -279,7 +279,18 @@ class CreateTask extends Component {
 
                     <Panel header="Work Related Information" key="2">
                         <Form>
-                            
+                        <Row>
+                            <Col span={8}>
+                                <Form.Item error={!!errors.placementDate}>
+                                    <DatePicker                                   
+                                        onChange={this.onPlacementDateChange} 
+                                        placeholder= "Placement Date"
+                                        defaultValue={empDetails.placementDate}
+                                    />
+                                    {errors.placementDate && <InlineError text= {errors.placementDate}/>}
+                                </Form.Item>
+                            </Col>
+                        </Row>
                         </Form>
                     </Panel>
 
