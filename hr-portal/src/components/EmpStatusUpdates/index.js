@@ -4,16 +4,16 @@ import moment from 'moment';
 
 const Step = Steps.Step;
 
-const steps = [{
-    title: 'First',
-    content: 'First-content',
-  }, {
-    title: 'Second',
-    content: 'Second-content',
-  }, {
-    title: 'Last',
-    content: 'Last-content',
-  }];
+// const steps = [{
+//     title: 'First',
+//     content: 'First-content',
+//   }, {
+//     title: 'Second',
+//     content: 'Second-content',
+//   }, {
+//     title: 'Last',
+//     content: 'Last-content',
+//   }];
 
 class EmpStatusUpdates extends Component {
     constructor(props) {
@@ -23,28 +23,28 @@ class EmpStatusUpdates extends Component {
             taskName:"LCA",
             taskActive:"true",
             actionAssignedTo:"Akash",
-            dependencies:"",
+            dependencies:"yes",
             rolesRespSubmittedByEmp:true,
-            tmStRolesRespSubmittedByEmp:"",
-            tmEdRolesRespSubmittedByEmp:"",
+            tmStRolesRespSubmittedByEmp:"yes",
+            tmEdRolesRespSubmittedByEmp:"yes",
             rolesRespVerified:true,
-            tmStRolesRespVerified:"",
-            tmEdRolesRespVerified:"",
+            tmStRolesRespVerified:"yes",
+            tmEdRolesRespVerified:"yes",
             infoUptdToPortalByBiz:true,
-            tmStInfoUptdToPortalByBiz:"",
-            tmEdInfoUptdToPortalByBiz:"",
+            tmStInfoUptdToPortalByBiz:"yes",
+            tmEdInfoUptdToPortalByBiz:"yes",
             reviewUnCertLCA:false,
-            tmStReviewUnCertLCA:"",
-            tmEdReviewUnCertLCA:"",
-            lcaFiledForCert:"",
-            tmStLcaFiledForCert:"",
-            tmEdLcaFiledForCert:"",
+            tmStReviewUnCertLCA:"yes",
+            tmEdReviewUnCertLCA:"yes",
+            lcaFiledForCert: false,
+            tmStLcaFiledForCert:"yes",
+            tmEdLcaFiledForCert:"yes",
             appliedDateLCA: moment('11/08/2017'),
             approvedDateLCA: moment('11/08/2017'),
-            expectedApprovalDate:"",
-            taskCompletedTotalTime:"",
-            taskStartedTotalTime:"",
-            lcaSentToEmployee:true
+            expectedApprovalDate:moment('11/08/2017'),
+            taskCompletedTotalTime:moment().valueOf('11/08/2017'),
+            taskStartedTotalTime:moment().valueOf('11/08/2017'),
+            lcaSentToEmployee:true,
          }
     }
 
@@ -59,17 +59,38 @@ class EmpStatusUpdates extends Component {
       }
 
     render() { 
-        const { current } = this.state;
+        const { current, 
+                rolesRespSubmittedByEmp, 
+                rolesRespVerified, 
+                infoUptdToPortalByBiz, 
+                reviewUnCertLCA, 
+                lcaFiledForCert, 
+                lcaSentToEmployee,
+            } = this.state;
+
+        const steps = [{
+            title: 'First',
+            content: 'First-content',
+          }, {
+            title: 'Second',
+            content: 'Second-content',
+          },];
+          
         return ( 
             <div>
                         <h2>EmpStatusUpdates</h2>
                         <Steps current={current}>
                             {steps.map(item => <Step key={item.title} title={item.title} />)}
                         </Steps>
-                        <div className="steps-content">
+                        <div className="steps-content"> 
+                            {/* {steps[current].content} */}
                             <Timeline>
-                                <Timeline.Item>{steps[current].content}</Timeline.Item>
-                                <Timeline.Item>{steps[current].content}</Timeline.Item>
+                                <Timeline.Item>Roles Responsibilities Submitted by Employee: <b>{rolesRespSubmittedByEmp ? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                <Timeline.Item>Roles Responsibilities Verified: <b>{rolesRespVerified? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                <Timeline.Item>Info Updated to portal by Business:<b> {infoUptdToPortalByBiz? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                <Timeline.Item>Review of Uncertified LCA: <b>{reviewUnCertLCA? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                <Timeline.Item>LCA Filed for Certification:<b> {lcaFiledForCert? 'COMPLETED': 'NOT COMPLETED'}</b></Timeline.Item>
+                                <Timeline.Item>LCA Sent to Employee: <b>{lcaSentToEmployee? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
                             </Timeline>
                         </div>
                         
