@@ -11,7 +11,6 @@
 // On Employee register we have to create employee Task details object, Employee status object
 // Maintain different JSON for Employee status, Employee Work Details, Employee Personal Details.
 {
-  empDetails:{
     "empId":"",
     "firstName": "akash",
     "lastName": "goled",
@@ -25,27 +24,20 @@
       "state":"",
       "zipCode":""
     },
-    "taskCompleted":"",
-    "taskPrioirty":"1",
-    "applicationType":"",
-    "taskCreatedDate":"",    
+    taskInfo:{
+      "taskCompleted":"",
+      "taskPrioirty":"1",
+      "applicationType":"",
+      "taskCreatedDate":"",  
+    },  
     "workInfo":{
-      "jobStatus":{
-        "placementDate: moment('11/08/2017'),
-        "projectStartDate: moment('11/08/2017'),
-        "urgentSituation: 'bhjbbhjkjn',
-        "signedOfferLetter: 'no',
-        "vendorLetterStatus": 'approved',
-        "clientLetterStatus": 'waiting',
-        applicationType:'type1',
-      },
       "workLocation":{
         "address1":"",
         "address2":"",
         "city":"",
         "state":"",
         "zipCode":""
-      }
+      },
     },
     "clientInfo":{
       "clientName": "hvgjvuygvy",
@@ -65,29 +57,194 @@
       "venContName":"",
       "venContPhone":"",
     },
+    recruiter:{
+      projectStartDate:"",
+        empSignedOfferLetter:"",
+        placementDate:"",
+        urgentSituation:"",
+        applicationType:"type1",
+        docsCollectingStartDate:"",
+        employerRelationDocuments: "yes",
+        vendorLetterStatus: "approved",
+        clientLetterStatus: "waiting",
+        empVerifiedWrkLocation:"",
+        rectrSentPlacDet:"",
+        rectrSentVenAgreeSignedCopy:"",
+    },
+    empStatus:{
+      "curStatusMsg":"",
+      "curTargetCmpDate":"",
+      "nextStepMsg":"",  
+      "expTarCmpDate":"",
+      "toCmpDate":"",
+      "expCmpDate":"",
+      "toSendEmail":[]
+      "taskPriority":"",
+      "isHighPriority":"",
+      "taskStage":""
+    },
+    business:{
+      step1:{
+        taskName:"Employee",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+      },
+      step2:{
+        taskName:"Recruiter",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+        projectStartDate:"",
+        empSignedOfferLetter:"",
+        placementDate:"",
+        urgentSituation:"",
+        applicationType:"type1",
+        docsCollectingStartDate:"",
+        employerRelationDocuments: "yes",
+        vendorLetterStatus: "approved",
+        clientLetterStatus: "waiting",
+        empVerifiedWrkLocation:"",
+        rectrSentPlacDet:"",
+        rectrSentVenAgreeSignedCopy:"",
+      },
+      step3:{
+        taskName:"LCA",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+        dependencies:"",
+        empVerWorkLocation:"",
+        tmStEmpVerWorkLocation:"",
+        tmEdEmpVerWorkLocation:"",
+        rolesRespSubmittedByEmp:true,
+        tmStRolesRespSubmittedByEmp:"",
+        tmEdRolesRespSubmittedByEmp:"",
+        rolesRespVerified:true,
+        tmStRolesRespVerified:"",
+        tmEdRolesRespVerified:"",
+        infoUptdToPortalByBiz:true,
+        tmStInfoUptdToPortalByBiz:"",
+        tmEdInfoUptdToPortalByBiz:"",
+        reviewUnCertLCA:false,
+        tmStReviewUnCertLCA:"",
+        tmEdReviewUnCertLCA:"",
+        lcaFiledForCert:"",
+        tmStLcaFiledForCert:"",
+        tmEdLcaFiledForCert:"",
+        appliedDateLCA: moment('11/08/2017'),
+        approvedDateLCA: moment('11/08/2017'),
+        expectedApprovalDate:"", 
+        taskCompletedTotalTime:"",
+        taskStartedTotalTime:"",
+        lcaSentToEmployee:true    
+      },
+      step4:{
+        taskName:"H1bDocumentsPrep",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+        dependencies:"",
+        recvdVendorLtrFrmEmp:"",  
+        tmStRecvdVendorLtrFrmEmp:"",  
+        tmEdRecvdVendorLtrFrmEmp:"",        
+        recvdClntLtrFrmEmp:"",
+        tmStRecvdClntLtrFrmEmp:"",
+        tmEdRecvdClntLtrFrmEmp:"",
+        otherPendngDocs:"",
+        tmStOtherPendngDocs:"",
+        tmEdOtherPendngDocs:"",        
+        jobTitleIsCorrect:"",
+        empHasDependents:"",
+        recvdAllH4DocsFrmEmp:"",
+        tmStRecvdAllH4DocsFrmEmp:"",
+        tmEdRecvdAllH4DocsFrmEmp:"",
+        recvdAllH4DepDocsFrmEmp:"",
+        tmStRecvdAllH4DepDocsFrmEmp:"",
+        tmEdRecvdAllH4DepDocsFrmEmp:"",  
+        recvdAllH1bDocsFrmEmp:"",
+        tmStRecvdAllH1bDocsFrmEmp:"",
+        tmEdRecvdAllH1bDocsFrmEmp:"",        
+      },
+      step5:{
+        taskName:"H1bDocumentsHRReview",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+        dependencies:"",
+        hrRecvdAllDocsAndReviewdFromEmp:"",
+        tmStHrRecvdAllDocsAndReviewdFromEmp:"",
+        tmEdHrRecvdAllDocsAndReviewdFromEmp:"",
+      },
+      step6:{
+        taskName:"AttorneyReceivedDocs",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+        dependencies:"",
+        attroneyReceivedAllDocsFromBusiness:"",
+        tmStAttroneyReceivedAllDocsFromBusiness:"",
+        tmEdAttroneyReceivedAllDocsFromBusiness:"",
+      },
+      step7:{
+        taskName:"AttorneyReviewedDocs",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+        dependencies:"",
+        attroneyReviewedAllDocsFromBusiness:"",
+        tmStAttroneyReceivedAllDocsFromBusiness:"",
+        tmEdAttroneyReceivedAllDocsFromBusiness:"",
+      },
+      step8:{
+        taskName:"AttorneyFilesPetiton",
+        taskActive:"true",
+        actionAssignedTo:"Akash",
+        dependencies:"",
+        attroneyFilesPetiton:"",
+        tmStAttroneyFilesPetiton:"",
+        tmEdAttroneyFilesPetiton:"",
+        attroneyUpdatedFedexNumber:"",
+        tmStAttroneyUpdatedFedexNumber:"",
+        tmEdAttroneyUpdatedFedexNumber:"",
+      },
+    }
+}
+    
+{
+  timeLine:{
+    step3:{
+      items:["rolesRespSubmittedByEmp","rolesRespVerified","infoUptdToPortalByBiz","reviewUnCertLCA","lcaFiledForCert","lcaSentToEmployee"]
+    },
+    step4:{
+      items:[{
+          key:"recvdVendorLtrFrmEmp",
+          value:"recvdVendorLtrFrmEmp"
+        },
+        {
+          key:"recvdClntLtrFrmEmp",
+          value:"recvdClntLtrFrmEmp"
+        },
+        {
+          key:"otherPendngDocs",
+          value:"otherPendngDocs"
+        },
+        {
+          key:"jobTitleIsCorrect",
+          value:"jobTitleIsCorrect"
+        },
+        {
+          key:"empHasDependents",
+          value:"empHasDependents"
+        },
+        {
+          key:"recvdAllH4DocsFrmEmp",
+          value:"recvdAllH4DocsFrmEmp"
+        },
+        {
+          key:"recvdAllH4DepDocsFrmEmp",
+          value:"recvdAllH4DepDocsFrmEmp"
+        },
+        {
+          key:"recvdAllH1bDocsFrmEmp",
+          value:"recvdAllH1bDocsFrmEmp"
+        }]
+    },
   }
 }
-    firstName: 'akash',
-    lastName: 'goled',
-    email: 'abc@abc.com',
-    phoneNo: '1112223333',
-    placementDate: moment('11/08/2017'),
-    
-    projectStartDate: moment('11/08/2017'),
-    urgentSituation: 'bhjbbhjkjn',
-    signedOfferLetter: 'no',
-    workLocationOne: 'hjbbhjbjh',
-    workLocationTwo: 'bhkbhkbhjk',
-    clientName: 'hvgjvuygvy',
-    
-    applicationType:'type1',
-    docsCollectingStartDate: moment('12/08/2017'),
-    appliedDateLCA: moment('11/08/2017'),
-    approvedDateLCA: moment('11/08/2017'),
-    vendorLetterStatus: 'approved',
-    clientLetterStatus: 'waiting',
-    employerRelationDocuments: 'yes',
-
 
 /*  Employee Object */
 //
