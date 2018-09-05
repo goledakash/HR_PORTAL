@@ -80,19 +80,19 @@ class CreateTask extends Component {
                     venContName:'',
                     venContPhone:'',
                   },
-                
+                //moment('11/08/2017')
                 recruiter:{
-                      projectStartDate: moment('11/08/2017'),
+                      projectStartDate: '',
                       empSignedOfferLetter:'',
-                      placementDate: moment('11/08/2017'),
+                      placementDate: '',
                       urgentSituation:'',
                       applicationType:'',
-                      docsCollectingStartDate: moment('11/08/2017'),
+                      docsCollectingStartDate: '',
                       employerRelationDocuments: '',
                       vendorLetterStatus: '',
                       clientLetterStatus: '',
                       empVerifiedWrkLocation:'',
-                      rectrSentPlacDet: moment('11/08/2017'),
+                      rectrSentPlacDet: '',
                       rectrSentVenAgreeSignedCopy:'',
                   }
 
@@ -194,18 +194,21 @@ class CreateTask extends Component {
         if(!Validator.isEmail(empDetails.emailId01)) errors.emailId01 = "Invalid Email";
         if(!Validator.isEmail(empDetails.emailId02)) errors.emailId02 = "Invalid Email";
         if(!Validator.isNumeric(empDetails.phoneNo)) errors.phoneNo = "Enter Phone Number";
+        
         //ContDetails
         if(!empDetails.contDetails.address1) errors.address1 = "Can't be empty";
         if(!empDetails.contDetails.address2) errors.address2 = "Can't be empty";
         if(!empDetails.contDetails.city) errors.city = "Can't be empty";
         if(!empDetails.contDetails.state) errors.state = "Can't be empty";
         if(!Validator.isNumeric(empDetails.contDetails.zipCode)) errors.zipCode = "Enter Zipcode";
+        
         //WorkInfo
         if(!empDetails.workInfo.workLocation.address1) errors.address1 = "Can't be empty";
         if(!empDetails.workInfo.workLocation.address2) errors.address2 = "Can't be empty";
         if(!empDetails.workInfo.workLocation.city) errors.city = "Can't be empty";
         if(!empDetails.workInfo.workLocation.state) errors.state = "Can't be empty";
         if(!Validator.isNumeric(empDetails.workInfo.workLocation.zipCode)) errors.zipCode = "Enter Zipcode";
+        
         //ClientInfo
         if(!empDetails.clientInfo.clientName) errors.clientName = "Can't be empty";
         if(!empDetails.clientInfo.managerName) errors.managerName = "Can't be empty";
@@ -215,6 +218,7 @@ class CreateTask extends Component {
         if(!empDetails.clientInfo.clientAddress.city) errors.city = "Can't be empty";
         if(!empDetails.clientInfo.clientAddress.state) errors.state = "Can't be empty";
         if(!Validator.isNumeric(empDetails.clientInfo.clientAddress.zipCode)) errors.zipCode = "Enter Zipcode";
+        
         //VendorInfo
         if(!empDetails.vendorInfo.vendorAgreement) errors.vendorAgreement = "Please Select";
         if(!empDetails.vendorInfo.vendorName) errors.vendorName = "Can't be empty";
