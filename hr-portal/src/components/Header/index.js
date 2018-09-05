@@ -14,6 +14,7 @@ class Header extends Component{
 render() {
     return ( 
         <div>
+            <div>
             <Button type="primary">
                 <Link
                 to={{
@@ -21,6 +22,16 @@ render() {
                 }}>Create or Edit Employee
                 </Link>
             </Button>
+            </div>
+            <div>
+            <Button type="primary">
+                <Link
+                to={{
+                  pathname: "/createTask"
+                }}>Create Task
+                </Link>
+            </Button>
+            </div>
         </div>
      );
     }

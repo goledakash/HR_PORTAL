@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import  Validator from 'validator';
 
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Card, Checkbox } from 'antd';
 import InlineError from '../messages/InlineError';
 import { loginUser } from "../../redux/actions";
 
@@ -16,7 +16,8 @@ class Login extends Component {
         this.state = {
             data: {
                 email: 'abc@abc.com',
-                password: 'abcabc'
+                password: 'abcabc',
+                isBusiness:true
             },
             loading: false,
             errors: {}
@@ -24,9 +25,13 @@ class Login extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (props.isUserLoggedIn) {
-          props.history.push("/main");
-        }
+        if (props.isUserLoggedIn) {            
+            if(state.data.isBusiness){
+                props.history.push("/main");
+            } else{
+                props.history.push("/empStatusUpdates");
+            }
+        } 
         return null;
       }
 
@@ -37,16 +42,9 @@ class Login extends Component {
     
     onSubmit = () => {
         const errors = this.validate(this.state.data);
-        this.setState({errors});
-        console.log(this.state.data);
+        this.setState({errors});        
         if(Object.keys(errors).length===0){
-            console.log(this.state.data);
-            this.props.dispatch(
-                loginUser(
-                    this.state.data.email, 
-                    this.state.data.password
-                )
-            );
+            this.props.dispatch(loginUser(this.state.data.email, this.state.data.password));
         }
     };
 
@@ -61,6 +59,8 @@ class Login extends Component {
     render() { 
         const { data, errors } = this.state
         return ( 
+            <div>
+                <Card title="Login">
             <Form>
                 <Form.Item error={!!errors.email}>
                         <Input 
@@ -84,9 +84,10 @@ class Login extends Component {
                         />
                     {errors.password && <InlineError text= {errors.password}/>}
                 </Form.Item>
-                    
+                <Checkbox name="isBusiness" checked={data.isBusiness} onChange={this.onChange}>Business</Checkbox>,
                 <Button type="primary" onClick={this.onSubmit}>Submit</Button>   
-            </Form>
+            </Form></Card>
+            </div>
          );
     }
 }

@@ -82,16 +82,24 @@ class EmpStatusUpdates extends Component {
                         <Steps current={current}>
                             {steps.map(item => <Step key={item.title} title={item.title} />)}
                         </Steps>
-                        <div className="steps-content"> 
-                            {/* {steps[current].content} */}
-                            <Timeline>
-                                <Timeline.Item>Roles Responsibilities Submitted by Employee: <b>{rolesRespSubmittedByEmp ? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
-                                <Timeline.Item>Roles Responsibilities Verified: <b>{rolesRespVerified? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
-                                <Timeline.Item>Info Updated to portal by Business:<b> {infoUptdToPortalByBiz? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
-                                <Timeline.Item>Review of Uncertified LCA: <b>{reviewUnCertLCA? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
-                                <Timeline.Item>LCA Filed for Certification:<b> {lcaFiledForCert? 'COMPLETED': 'NOT COMPLETED'}</b></Timeline.Item>
-                                <Timeline.Item>LCA Sent to Employee: <b>{lcaSentToEmployee? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
-                            </Timeline>
+                        <div className="steps-content">                             
+                            {(current === 0) &&(<Timeline>
+                                    <Timeline.Item>Roles Responsibilities Submitted by Employee: <b>{rolesRespSubmittedByEmp ? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>Roles Responsibilities Verified: <b>{rolesRespVerified? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>Info Updated to portal by Business:<b> {infoUptdToPortalByBiz? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>Review of Uncertified LCA: <b>{reviewUnCertLCA? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>LCA Filed for Certification:<b> {lcaFiledForCert? 'COMPLETED': 'NOT COMPLETED'}</b></Timeline.Item>
+                                    <Timeline.Item>LCA Sent to Employee: <b>{lcaSentToEmployee? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                </Timeline>)}
+                            {(current === 1) &&(<Timeline>
+                                    <Timeline.Item>Roles Responsibilities Submitted by Employee: <b>{rolesRespSubmittedByEmp ? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>Roles Responsibilities Verified: <b>{rolesRespVerified? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>Info Updated to portal by Business:<b> {infoUptdToPortalByBiz? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>Review of Uncertified LCA: <b>{reviewUnCertLCA? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                    <Timeline.Item>LCA Filed for Certification:<b> {lcaFiledForCert? 'COMPLETED': 'NOT COMPLETED'}</b></Timeline.Item>
+                                    <Timeline.Item>LCA Sent to Employee: <b>{lcaSentToEmployee? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
+                                </Timeline>)}
+
                         </div>
                         
                         <div className="steps-action">
