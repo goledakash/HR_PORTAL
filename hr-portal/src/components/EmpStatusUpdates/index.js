@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Steps, Timeline , Button, message} from 'antd';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const Step = Steps.Step;
 
@@ -79,6 +80,11 @@ class EmpStatusUpdates extends Component {
         return ( 
             <div>
                         <h2>EmpStatusUpdates</h2>
+
+                        <Button type="primary">
+                            <Link to={{pathname: "/main"}}>Back to Main</Link>
+                        </Button>
+
                         <Steps current={current}>
                             {steps.map(item => <Step key={item.title} title={item.title} />)}
                         </Steps>

@@ -19,15 +19,6 @@ render() {
                 <Link
                 to={{
                   pathname: "/createTask"
-                }}>Create or Edit Employee
-                </Link>
-            </Button>
-            </div>
-            <div>
-            <Button type="primary">
-                <Link
-                to={{
-                  pathname: "/createTask"
                 }}>Create Task
                 </Link>
             </Button>

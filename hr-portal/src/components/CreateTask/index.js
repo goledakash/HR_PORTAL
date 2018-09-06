@@ -146,6 +146,9 @@ class CreateTask extends Component {
         this.setState({
             ...this.state.empDetails.recruiter, projectStartDate: date,
         });
+        // let empDetails = Object.assign({}, this.state.empDetails);
+        // empDetails.recruiter[e.target.name] = [e.target.value];
+        // return this.setState({empDetails});
     };
 
     onPlacementDateChange = (e, date) => {
