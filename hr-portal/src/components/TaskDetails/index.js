@@ -18,6 +18,7 @@ class TaskDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            taskSelected:{},
             empVerifiedWrkLocation: true,
             rectrSentPlacDet:true,
             rectrSentVenAgreeSignedCopy:true,
@@ -42,7 +43,10 @@ class TaskDetails extends Component {
     componentDidMount() {
         this.props.dispatch(getTaskByEmpId(this.props.match.params.id));
     };
-    static getDerivedStateFromProps(props, state) {
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(Object.keys(nextProps.taskSelected).length > 0){
+            return { taskSelected :  nextProps.taskSelected };
+        }        
         return null;
     };
     onSubmit = () => {

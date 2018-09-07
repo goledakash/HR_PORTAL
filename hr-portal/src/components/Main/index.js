@@ -39,7 +39,10 @@ class Main extends Component {
       }
 
     onTaskClick = (empId) => {
-        this.props.history.push("/home"+"/"+empId);
+        if(empId){
+            this.props.history.push("/home"+"/"+empId);    
+        }
+        
     };
 
     toggleCollapsed = () => {

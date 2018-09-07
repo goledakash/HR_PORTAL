@@ -36,7 +36,7 @@ class CreateTask extends Component {
         super(props);
         this.state = { 
             empDetails:{
-                empId: '',
+                empId: moment().valueOf(),
                 firstName: 'Akash',
                 lastName: 'Goled',
                 emailId01: 'akash@goled.com',

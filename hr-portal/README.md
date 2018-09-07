@@ -636,3 +636,134 @@ git pull
 git stash
 git pull
 git stash pop
+
+/*
+//Source Of Supply
+[{
+  "sourceOfSupply":"Warehouse",
+  "sourceOfSupplyId":"1111",
+},
+{
+  "sourceOfSupply":"Cross-Dock",
+  "sourceOfSupplyId":"1112",
+},
+{
+  "sourceOfSupply":"DSD",
+  "sourceOfSupplyId":"1113",
+}]
+//Item Status
+[{
+  "itemStatus":"Active Item",
+  "itemStatusId":"PI_ITM_STUS_CD",
+},
+{
+  "itemStatus":"Discontinued Item",
+  "itemStatusId":"PI_ITM_STUS_DI"
+}]
+
+*/
+// Search By Code
+
+ {
+  "results":[{
+    "sourceOfSupply":"Warehouse",
+    "sourceOfSupplyId":"1111",
+    "itemStatus":"Active Item",
+    "itemStatusId":"PI_ITM_STUS_CD",
+    "itemType":"Regular Case",
+    "itemTypeId":"CI_SHIP_PALLET_CD",
+    "itemSettingsId":"SI_PURCH_FL",
+    "itemSettings":"Purchase Flag",
+    "itemCode":"SuperValu Item",
+    "itemType":"super",
+    "categoryType":"retail",
+    "category":"Bakery",
+    "categoryCode":"1234567890",
+    "itemName":"Bread",
+    "itemId":"321123"
+  },
+  {
+    "sourceOfSupply":"Warehouse",
+    "sourceOfSupplyId":"1111",
+    "itemStatus":"Active Item",
+    "itemStatusId":"PI_ITM_STUS_CD",
+    "itemType":"Regular Case",
+    "itemTypeId":"CI_SHIP_PALLET_CD",
+    "itemSettingsId":"SI_PURCH_FL",
+    "itemSettings":"Purchase Flag",
+    "itemCode":"SuperValu Item",
+    "itemType":"super",
+    "categoryType":"retail",
+    "category":"Bakery",
+    "categoryCode":"1234567890",
+    "itemName":"Cookies",
+    "itemId":"321456"
+  },
+  {
+    "sourceOfSupply":"Warehouse",
+    "sourceOfSupplyId":"1111",
+    "itemStatus":"Active Item",
+    "itemStatusId":"PI_ITM_STUS_CD",
+    "itemType":"Regular Case",
+    "itemTypeId":"CI_SHIP_PALLET_CD",
+    "itemSettingsId":"SI_PURCH_FL",
+    "itemSettings":"Purchase Flag",
+    "itemCode":"SuperValu Item",
+    "itemType":"super",
+    "categoryType":"retail",
+    "category":"Bakery",
+    "categoryCode":"1234567890",
+    "itemName":"Soda",
+    "itemId":"321345"
+  },
+  {
+    "sourceOfSupply":"Cross-Dock",
+    "sourceOfSupplyId":"1112",
+    "itemStatus":"Active Item",
+    "itemStatusId":"PI_ITM_STUS_CD",
+    "itemType":"Regular Case",
+    "itemTypeId":"CI_SHIP_PALLET_CD",
+    "itemSettingsId":"SI_PURCH_FL",
+    "itemSettings":"Purchase Flag",
+    "itemCode":"SuperValu Item",
+    "itemType":"super",
+    "categoryType":"retail",
+    "category":"Bakery",
+    "categoryCode":"1234567890",
+    "itemName":"Soda",
+    "itemId":"321345"
+  },{
+    "sourceOfSupply":"DSD",
+    "sourceOfSupplyId":"1113",
+    "itemStatus":"Active Item",
+    "itemStatusId":"PI_ITM_STUS_CD",
+    "itemType":"Regular Case",
+    "itemTypeId":"CI_SHIP_PALLET_CD",
+    "itemSettingsId":"SI_PURCH_FL",
+    "itemSettings":"Purchase Flag",
+    "itemCode":"SuperValu Item",
+    "itemType":"super",
+    "categoryType":"retail",
+    "category":"Bakery",
+    "categoryCode":"1234567890",
+    "itemName":"Soda",
+    "itemId":"321345"
+  },
+  {
+    "sourceOfSupply":"DSD",
+    "sourceOfSupplyId":"1113",
+    "itemStatus":"Discontinued Item",
+    "itemStatusId":"PI_ITM_STUS_DI",
+    "itemType":"Regular Case",
+    "itemTypeId":"CI_SHIP_PALLET_CD",
+    "itemSettingsId":"SI_PURCH_FL",
+    "itemSettings":"Purchase Flag",
+    "itemCode":"SuperValu Item",
+    "itemType":"super",
+    "categoryType":"retail",
+    "category":"Bakery",
+    "categoryCode":"1234567890",
+    "itemName":"Soda",
+    "itemId":"321345"
+  }]
+}
