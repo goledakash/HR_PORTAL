@@ -18,19 +18,7 @@ class TaskDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            taskSelected:{},
-            empVerifiedWrkLocation: true,
-            rectrSentPlacDet:true,
-            rectrSentVenAgreeSignedCopy:true,
-            empVerifiedWrkLocation:true,
-            empSignedOfferLetter:true,
-            workLocation:{
-                address1:"",
-                address2:"",
-                city:"",
-                state:"",
-                zipCode:""
-              }
+            taskSelected:{}            
         }
     };
     onRadioButtonChange=(e)=>{        
@@ -38,14 +26,17 @@ class TaskDetails extends Component {
             [e.target.name]: e.target.value,
         });
     }
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log("pevprops");
     };
     componentDidMount() {
         this.props.dispatch(getTaskByEmpId(this.props.match.params.id));
     };
     static getDerivedStateFromProps(nextProps, prevState) {
-        if(Object.keys(nextProps.taskSelected).length > 0){
-            return { taskSelected :  nextProps.taskSelected };
+        if(nextProps.taskSelected){
+            if(Object.keys(nextProps.taskSelected).length > 0){
+                return { taskSelected :  nextProps.taskSelected.empDetails };
+            }        
         }        
         return null;
     };
@@ -66,7 +57,10 @@ class TaskDetails extends Component {
             height: '30px',
             lineHeight: '30px',
         };
-        const { workLocation } =  this.state; 
+        if(this.state.taskSelected === undefined || this.state.taskSelected.workInfo === undefined){
+            return (<div></div>);    
+        } else{
+        const { workLocation } =  this.state.taskSelected.workInfo; 
         return (
             <div>
                 <h3>HOME COMPONENT</h3>
@@ -163,10 +157,11 @@ class TaskDetails extends Component {
             </div>
         );
     }
+    }
 }
 
 TaskDetails.propTypes = {
-
+    taskSelected:{}
 }
 
 const mapStateToProps = state => {

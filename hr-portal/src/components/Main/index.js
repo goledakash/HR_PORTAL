@@ -29,7 +29,7 @@ class Main extends Component {
     }
     
     componentDidUpdate(prevProps) {
-        
+        //console.log();
     }
     componentDidMount(){
         this.props.dispatch(getEmployeeListFromFirebase()); 
@@ -49,27 +49,21 @@ class Main extends Component {
         this.setState({collapsed: !this.state.collapsed});
     };
 
-    
+    /* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                            <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
+                            </Button> */
+
+                            
     render() { 
         const { taskList } = this.props;
         return ( 
             <Layout>
-
             <Sider
               trigger={null}
               collapsible
-              collapsed={this.state.collapsed}
-            >
-                            {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-                            <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
-                            </Button> */}
-
-                            <div >
-                                <Menu
-                                defaultSelectedKeys={['1']}
-                                mode="inline"
-                                theme="light"
-                                >
+              collapsed={this.state.collapsed}>
+                            <div>
+                                <Menu defaultSelectedKeys={['1']} mode="inline" theme="light">
                                         <Menu.Item key="1">
                                             <Icon type="profile" theme="outlined" />
                                             <span>
@@ -85,20 +79,16 @@ class Main extends Component {
                                 </Menu>
                             </div>
             </Sider>
-
             <Layout>
                     <Header style={{ background: '#fff', padding: 0 }}>
-                        <Icon
-                        className="trigger"
-                        type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                        onClick={this.toggleCollapsed}
-                        />
+                        <Icon className="trigger" type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggleCollapsed}/>
                     </Header>
-
                     <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
                         <Tabs defaultActiveKey="1" >
                             <TabPane tab="Pending" key="1">
-                                <List bordered dataSource={taskList} renderItem={item => (<List.Item onClick={() => this.onTaskClick(item.empId)}>{item.firstName} {item.lastName}</List.Item>)}/>
+                                <List bordered dataSource={taskList} renderItem={item => 
+                                    (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}>{item.empDetails.firstName} {item.empDetails.lastName}</List.Item>)
+                                    }/>
                             </TabPane>
                             <TabPane tab="Completed" key="2">
                                 <List bordered dataSource={this.state.dataEmployeeArray} renderItem={item => (<List.Item onClick={() => this.onTaskClick(item.empId)}>{item.firstName} {item.lastName}</List.Item>)}/>
@@ -106,9 +96,7 @@ class Main extends Component {
                         </Tabs>
                     </Content>
             </Layout>
-
-            </Layout>
-         );
+            </Layout>);
     }
 }
 

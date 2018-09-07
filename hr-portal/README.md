@@ -24,12 +24,6 @@
       "state":"",
       "zipCode":""
     },
-    taskInfo:{
-      "taskCompleted":"",
-      "taskPrioirty":"1",
-      "applicationType":"",
-      "taskCreatedDate":"",  
-    },  
     "workInfo":{
       "workLocation":{
         "address1":"",
@@ -57,6 +51,12 @@
       "venContName":"",
       "venContPhone":"",
     },
+    taskInfo:{
+      "taskCompleted":"",
+      "taskPrioirty":"1",
+      "applicationType":"",
+      "taskCreatedDate":"",  
+    },  
     recruiter:{
       projectStartDate:"",
         empSignedOfferLetter:"",

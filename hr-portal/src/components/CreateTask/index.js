@@ -176,18 +176,11 @@ class CreateTask extends Component {
     };
 
       onSubmit = () => {
-        const errors = this.validate(this.state.empDetails);
-        if(Object.keys(errors).length===0){
-            // this.props.submit(this.state.data);
-            console.log(this.state.empDetails);
-            this.props.dispatch(
-                employeeInfoSaveToFirebaseDatabase(
-                    // this.state.employeeDetails.
-                  this.state.empDetails,
-
-                )
-              );
-        }
+        //const errors = this.validate(this.state.empDetails);
+       // if(Object.keys(errors).length===0){
+            // this.props.submit(this.state.data);             
+            this.props.dispatch(employeeInfoSaveToFirebaseDatabase(this.state.empDetails));
+        //}
       };
 
       validate = empDetails => {
@@ -262,29 +255,29 @@ class CreateTask extends Component {
                     <Panel header="Employee Registration" key="1">
                         <Form>
                         <Row>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                                 <Card title="EmployeeDetails">
-                                <Form.Item error={!!errors.firstName}>
+                                <Form.Item error={!!errors.firstName}  label="First Name" className= "firstName">
                                     <Input id="firstName" type="firstName" name="firstName" value= {empDetails.firstName} onChange={this.onChange} placeholder="First Name" />
                                         {errors.firstName && <InlineError text= {errors.firstName}/>}
                                 </Form.Item>
 
-                                <Form.Item error={!!errors.lastName}>
+                                <Form.Item error={!!errors.lastName} label="Last Name">
                                     <Input id="lastName" type="lastName" name="lastName" value= {empDetails.lastName} onChange={this.onChange} placeholder="Last Name" />
                                     {errors.lastName && <InlineError text= {errors.lastName}/>}
                                 </Form.Item>
 
-                                <Form.Item error={!!errors.emailId01}>
+                                <Form.Item error={!!errors.emailId01} label="Primary Email:">
                                     <Input id="emailId01" type="emailId01" name="emailId01" value= {empDetails.emailId01} onChange={this.onChange} placeholder="Primary Email" />
                                     {errors.emailId01 && <InlineError text= {errors.emailId01}/>}
                                 </Form.Item>
 
-                                <Form.Item error={!!errors.emailId02}>
+                                <Form.Item error={!!errors.emailId02} label="Secondary Email:">
                                     <Input id="emailId02" type="emailId02" name="emailId02" value= {empDetails.emailId02}onChange={this.onChange} placeholder="Secondary Email" />
                                     {errors.emailId02 && <InlineError text= {errors.emailId02}/>}
                                 </Form.Item>
 
-                                <Form.Item error={!!errors.phoneNo}>
+                                <Form.Item error={!!errors.phoneNo} label="Phone Number:">
                                     <Input id="phoneNo" type="phoneNo" name="phoneNo" value={empDetails.phoneNo}onChange={this.onChange} placeholder= "(000) 000-0000"/>
                                     {errors.phoneNo && <InlineError text= {errors.phoneNo}/>}
                                 </Form.Item>
@@ -295,27 +288,27 @@ class CreateTask extends Component {
                             <Col xs={8} sm={8} md={8} lg={8} xl={8}>
                                 <Card title="Contact Details">
                                     
-                                    <Form.Item error={!!errors.address1}>
+                                    <Form.Item error={!!errors.address1}  label="Address 1">
                                             <Input id="address1" type="address1" name="address1"value= {empDetails.contDetails.address1} onChange={this.onContactChange} placeholder="Address 1" />
                                             {errors.address1 && <InlineError text= {errors.address1}/>}
                                     </Form.Item>
 
-                                    <Form.Item error={!!errors.address2}>
+                                    <Form.Item error={!!errors.address2}  label="Address 2">
                                         <Input id="address2" type="address2" name="address2"value= {empDetails.contDetails.address2} onChange={this.onContactChange} placeholder="Address 2" />
                                         {errors.address2 && <InlineError text= {errors.address2}/>}
                                     </Form.Item>
 
-                                    <Form.Item error={!!errors.city}>
+                                    <Form.Item error={!!errors.city}  label="City">
                                         <Input id="city" type="city" name="city"value= {empDetails.contDetails.city} onChange={this.onContactChange}placeholder="City" />
                                         {errors.city && <InlineError text= {errors.city}/>}
                                     </Form.Item>
 
-                                    <Form.Item error={!!errors.state}>
+                                    <Form.Item error={!!errors.state}  label="State">
                                             <Input id="state" type="state" name="state"  value= {empDetails.contDetails.state} onChange={this.onContactChange} placeholder="State" />
                                             {errors.state && <InlineError text= {errors.state}/>}
                                     </Form.Item>
 
-                                    <Form.Item error={!!errors.zipCode}>
+                                    <Form.Item error={!!errors.zipCode}  label="Zip Code">
                                             <Input  id="zipCode" type="zipCode" name="zipCode" value={empDetails.contDetails.zipCode}onChange={this.onContactChange} placeholder= "Enter Your Zipcode"/>
                                             {errors.zipCode && <InlineError text= {errors.zipCode}/>}
                                     </Form.Item>
@@ -334,25 +327,25 @@ class CreateTask extends Component {
                     <Panel header="Work Related Information" key="2">
                         <Form>
                         <Row>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
-                                <Card title="Work Details">
-                                    <Form.Item error={!!errors.address1}>
+                            <Col>
+                                <Card title="Work Location">
+                                    <Form.Item error={!!errors.address1} label="Address 1">
                                             <Input id="address1" type="address1" name="address1"value= {empDetails.workInfo.workLocation.address1} onChange={this.onWorkLocationChange} placeholder="Address 1" />
                                             {errors.address1 && <InlineError text= {errors.address1}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.address2}>
+                                    <Form.Item error={!!errors.address2}  label="Address 2">
                                             <Input id="address2" type="address2" name="address2" value= {empDetails.workInfo.workLocation.address2} onChange={this.onWorkLocationChange} placeholder="Address 2" />
                                             {errors.address2 && <InlineError text= {errors.address2}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.city}>
+                                    <Form.Item error={!!errors.city}  label="City">
                                         <Input id="city" type="city" name="city" value= {empDetails.workInfo.workLocation.city} onChange={this.onWorkLocationChange}placeholder="City" />
                                         {errors.city && <InlineError text= {errors.city}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.state}>
+                                    <Form.Item error={!!errors.state}  label="State">
                                         <Input id="state" type="state" name="state" value= {empDetails.workInfo.workLocation.state} onChange={this.onWorkLocationChange} placeholder="State" />
                                         {errors.state && <InlineError text= {errors.state}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.zipCode}>
+                                    <Form.Item error={!!errors.zipCode}  label="Zip Code">
                                         <Input id="zipCode" type="zipCode" name="zipCode" value={empDetails.workInfo.workLocation.zipCode}onChange={this.onWorkLocationChange} placeholder= "Enter Your Zipcode"/>
                                         {errors.zipCode && <InlineError text= {errors.zipCode}/>}
                                     </Form.Item>
@@ -368,33 +361,33 @@ class CreateTask extends Component {
                     <Panel header="Client Related Information" key="3">
                     <Form>
                         <Row>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col>
                                 <Card title="Client Details">
-                                    <Form.Item error={!!errors.clientName}>
+                                    <Form.Item error={!!errors.clientName} label="Client Name">
                                             <Input id="clientName" type="clientName" name="clientName"value= {empDetails.clientInfo.clientName} onChange={this.onClientInfoChange} placeholder="Client Name" />
                                             {errors.clientName && <InlineError text= {errors.clientName}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.managerName}>
+                                    <Form.Item error={!!errors.managerName}  label="Manager Name">
                                             <Input id="managerName" type="managerName" name="managerName" value= {empDetails.clientInfo.managerName} onChange={this.onClientInfoChange} placeholder="Manager First Last" />
                                             {errors.managerName && <InlineError text= {errors.managerName}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.address1}>
+                                    <Form.Item error={!!errors.address1} label="Address 1">
                                             <Input id="address1" type="address1" name="address1"value= {empDetails.clientInfo.clientAddress.address1} onChange={this.onClientAddressChange} placeholder="Address 1" />
                                             {errors.address1 && <InlineError text= {errors.address1}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.address2}>
+                                    <Form.Item error={!!errors.address2} label="Address 2">
                                             <Input id="address2" type="address2" name="address2" value= {empDetails.clientInfo.clientAddress.address2} onChange={this.onClientAddressChange} placeholder="Address 2" />
                                             {errors.address2 && <InlineError text= {errors.address2}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.city}>
+                                    <Form.Item error={!!errors.city} label="City">
                                             <Input id="city" type="city" name="city"value= {empDetails.clientInfo.clientAddress.city} onChange={this.onClientAddressChange} placeholder="City" />
                                             {errors.city && <InlineError text= {errors.city}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.state}>
+                                    <Form.Item error={!!errors.state} label="State">
                                             <Input id="state" type="state" name="state" value= {empDetails.clientInfo.clientAddress.state} onChange={this.onClientAddressChange} placeholder="State" />
                                             {errors.state && <InlineError text= {errors.state}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.zipCode}>
+                                    <Form.Item error={!!errors.zipCode} label="Zip Code">
                                             <Input id="zipCode" type="zipCode" name="zipCode" value={empDetails.clientInfo.clientAddress.zipCode} onChange={this.onClientAddressChange} placeholder= "Enter Your Zipcode"/>
                                             {errors.zipCode && <InlineError text= {errors.zipCode}/>}
                                     </Form.Item>
@@ -410,26 +403,25 @@ class CreateTask extends Component {
                     <Panel header="Vendor Related Information" key="4">
                         <Form>
                             <Row>
-                                <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                                <Col>
                                     <Card title="Vendor Details">
-                                        <Form.Item error={!!errors.vendorAgreement}>
-                                            Agreement signed by Vendor?
+                                        <Form.Item error={!!errors.vendorAgreement} label="Agreement signed by Vendor?">                                            
                                             <RadioGroup name="vendorAgreement" options={options} onChange={this.onVendorInfoChange}  />
                                             {errors.vendorAgreement && <InlineError text= {errors.vendorAgreement}/>}
                                         </Form.Item>
-                                        <Form.Item error={!!errors.vendorName}>
+                                        <Form.Item error={!!errors.vendorName} label="Vendor Name">
                                             <Input id="vendorName" type="vendorName" name="vendorName"value= {empDetails.vendorInfo.vendorName} onChange={this.onVendorInfoChange} placeholder="Vendor Name" />
                                             {errors.vendorName && <InlineError text= {errors.vendorName}/>}
                                         </Form.Item>
-                                        <Form.Item error={!!errors.vendorContact}>
+                                        <Form.Item error={!!errors.vendorContact} label="Vendor Phone">
                                             <Input id="vendorContact" type="vendorContact" name="vendorContact" value={empDetails.vendorInfo.vendorContact} onChange={this.onVendorInfoChange} placeholder= "(000) 000-0000"/>
                                             {errors.vendorContact && <InlineError text= {errors.vendorContact}/>}
                                         </Form.Item>
-                                        <Form.Item error={!!errors.venContName}>
+                                        <Form.Item error={!!errors.venContName} label="Vendor Contact Person">
                                             <Input id="venContName" type="venContName" name="venContName"value= {empDetails.vendorInfo.venContName} onChange={this.onVendorInfoChange} placeholder="Vendor Contact Name" />
                                              {errors.venContName && <InlineError text= {errors.venContName}/>}
                                         </Form.Item>
-                                        <Form.Item error={!!errors.venContPhone}>
+                                        <Form.Item error={!!errors.venContPhone} label="Vendor Contact Person Phone">
                                             <Input id="venContPhone" type="venContPhone" name="venContPhone" value={empDetails.vendorInfo.venContPhone} onChange={this.onVendorInfoChange} placeholder= "(000) 000-0000" />
                                             {errors.venContPhone && <InlineError text= {errors.venContPhone}/>}
                                         </Form.Item>
@@ -445,59 +437,53 @@ class CreateTask extends Component {
                     <Panel header=" Recruiter Related Information" key="5">
                         <Form>  
                         <Row>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col>
                                 <Card title="Recruiter Details">
-                                    <Form.Item error={!!errors.projectStartDate}>
-                                        <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Placement Date" defaultValue={empDetails.recruiter.projectStartDate}/>
+                                    <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
+                                        <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={empDetails.recruiter.projectStartDate}/>
                                         {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.empSignedOfferLetter}>
-                                        Is Offer Letter Signed by Employee?
+                                    <Form.Item error={!!errors.empSignedOfferLetter}  label="Is Offer Letter Signed by Employee?">                                        
                                         <RadioGroup name="empSignedOfferLetter" options={options} onChange={this.onRecruiterChange} />
                                         {errors.empSignedOfferLetter && <InlineError text= {errors.empSignedOfferLetter}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.placementDate}>
+                                    <Form.Item error={!!errors.placementDate} label="Placement Date">
                                         <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={empDetails.recruiter.placementDate}/>
                                         {errors.placementDate && <InlineError text= {errors.placementDate}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.urgentSituation}>
+                                    <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
                                         <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={empDetails.recruiter.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
                                         {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.applicationType}>
-                                        Applied H1 Application Type?
+                                    <Form.Item error={!!errors.applicationType} label="Applied H1 Application Type?">                                        
                                         <RadioGroup name="applicationType" options={h1applicationType} onChange={this.onRecruiterChange} />
                                         {errors.applicationType && <InlineError text= {errors.applicationType}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.docsCollectingStartDate}>
+                                    <Form.Item error={!!errors.docsCollectingStartDate} label="Documents Collection Start">
                                         <DatePicker onChange={this.onDocsCollectingStartDateChange} placeholder= "Collection Start" defaultValue ={empDetails.recruiter.docsCollectingStartDate}/>
                                         {errors.docsCollectingStartDate && <InlineError text= {errors.docsCollectingStartDate}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.employerRelationDocuments}>
-                                        Are Employer-Employee relation documents needed?
+                                    <Form.Item error={!!errors.employerRelationDocuments}  label="Are Employer-Employee relation documents needed?">                                        
                                         <RadioGroup name="employerRelationDocuments" options={options} onChange={this.onRecruiterChange} />
                                         {errors.employerRelationDocuments && <InlineError text= {errors.employerRelationDocuments}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.vendorLetterStatus}>
-                                        Vendor Letter Status?
+                                    <Form.Item error={!!errors.vendorLetterStatus} label="Vendor Letter Status?">                                        
                                         <RadioGroup name="vendorLetterStatus" options={letterStatus} onChange={this.onRecruiterChange} />
                                         {errors.vendorLetterStatus && <InlineError text= {errors.vendorLetterStatus}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.clientLetterStatus}>
-                                        Client Letter Status?
+                                    <Form.Item error={!!errors.clientLetterStatus}  label="Client Letter Status?">                                        
                                         <RadioGroup name="clientLetterStatus" options={letterStatus} onChange={this.onRecruiterChange} />
                                         {errors.clientLetterStatus && <InlineError text= {errors.clientLetterStatus}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.empVerifiedWrkLocation}>
+                                    <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
                                         <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {empDetails.recruiter.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
                                         {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.rectrSentPlacDet}>
+                                    <Form.Item error={!!errors.rectrSentPlacDet} label="Recruiter Sent Placement Details ">
                                         <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={empDetails.recruiter.rectrSentPlacDet}/>
                                         {errors.rectrSentPlacDet && <InlineError text= {errors.rectrSentPlacDet}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.rectrSentVenAgreeSignedCopy}>
-                                        Agreement signed by Vendor?
+                                    <Form.Item error={!!errors.rectrSentVenAgreeSignedCopy} label="Agreement signed by Vendor?">                                        
                                         <RadioGroup name="rectrSentVenAgreeSignedCopy" options={options} onChange={this.onRecruiterChange}  />
                                         {errors.rectrSentVenAgreeSignedCopy && <InlineError text= {errors.rectrSentVenAgreeSignedCopy}/>}
                                     </Form.Item>
