@@ -3,7 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import  Validator from 'validator';
 import InlineError from '../../messages/InlineError';
-import { Collapse, Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
+import { Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
 
 const options = [
     { label: 'yes', value: 'yes' },
@@ -82,7 +82,6 @@ class LCA extends Component {
 
         return ( 
             <div>
-                <h2>LCA</h2>
                 <Form>  
                         <Row>
                             <Col xs={8} sm={8} md={8} lg={8} xl={8}>

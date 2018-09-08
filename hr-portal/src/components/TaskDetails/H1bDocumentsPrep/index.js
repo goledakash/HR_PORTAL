@@ -1,4 +1,18 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import  Validator from 'validator';
+import InlineError from '../../messages/InlineError';
+import { Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
+
+const options = [
+    { label: 'yes', value: 'yes' },
+    { label: 'no', value: 'no' },
+  ];
+
+
+const RadioGroup = Radio.Group;
+  
+const { TextArea } = Input;
 
 
 class H1bDocumentsPrep extends Component {
@@ -30,13 +44,80 @@ class H1bDocumentsPrep extends Component {
                 recvdAllH1bDocsFrmEmp:"",
                 tmStRecvdAllH1bDocsFrmEmp:"",
                 tmEdRecvdAllH1bDocsFrmEmp:"",        
-              }
+              },
+              errors: {},
          }
     }
+
+
+    onH1BDocPrepChange = (e) => {
+        let step4 = Object.assign({}, this.state.step4);
+        step4[e.target.name] = [e.target.value];
+        return this.setState({step4});
+    };
+
     render() { 
+        const { step4, errors } = this.state;
+
         return ( 
             <div>
-                <h2>H1bDocumentsPrep</h2>
+                    <Form>  
+                        <Row>
+                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                                <Card title="H1B Documents Preparation">
+                                    <Form.Item error={!!errors.dependencies}  label="Any Dependencies?">                                        
+                                        <RadioGroup name="dependencies" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.dependencies && <InlineError text= {errors.dependencies}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.recvdVendorLtrFrmEmp}  label="Received Vendor Letter from Employee?">                                        
+                                        <RadioGroup name="recvdVendorLtrFrmEmp" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.recvdVendorLtrFrmEmp && <InlineError text= {errors.recvdVendorLtrFrmEmp}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.recvdClntLtrFrmEmp}  label="Received Client Letter from Employee?">                                        
+                                        <RadioGroup name="recvdClntLtrFrmEmp" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.recvdClntLtrFrmEmp && <InlineError text= {errors.recvdClntLtrFrmEmp}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.otherPendngDocs}  label="Any Pending Documents?">                                        
+                                        <RadioGroup name="otherPendngDocs" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.otherPendngDocs && <InlineError text= {errors.otherPendngDocs}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.jobTitleIsCorrect}  label="Is Job Title Correct?">                                        
+                                        <RadioGroup name="jobTitleIsCorrect" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.jobTitleIsCorrect && <InlineError text= {errors.jobTitleIsCorrect}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.empHasDependents}  label="Does Employee have any Dependents?">                                        
+                                        <RadioGroup name="empHasDependents" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.empHasDependents && <InlineError text= {errors.empHasDependents}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.recvdAllH4DocsFrmEmp}  label="Received ALL H4 Docs from Employee?">                                        
+                                        <RadioGroup name="recvdAllH4DocsFrmEmp" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.recvdAllH4DocsFrmEmp && <InlineError text= {errors.recvdAllH4DocsFrmEmp}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.recvdAllH4DepDocsFrmEmp}  label="Received ALL H4 Dep Docs from Employee?">                                        
+                                        <RadioGroup name="recvdAllH4DepDocsFrmEmp" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.recvdAllH4DepDocsFrmEmp && <InlineError text= {errors.recvdAllH4DepDocsFrmEmp}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.recvdAllH1bDocsFrmEmp}  label="Received ALL H1 Docs from Employee?">                                        
+                                        <RadioGroup name="recvdAllH1bDocsFrmEmp" options={options} onChange={this.onH1BDocPrepChange} />
+                                        {errors.recvdAllH1bDocsFrmEmp && <InlineError text= {errors.recvdAllH1bDocsFrmEmp}/>}
+                                    </Form.Item>
+
+                                    <Form.Item >
+                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
+                                    </Form.Item >
+
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Form>
             </div>
          );
     }
