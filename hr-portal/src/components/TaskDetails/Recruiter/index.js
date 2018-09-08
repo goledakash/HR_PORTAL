@@ -49,6 +49,42 @@ class Recruiter extends Component {
             errors: {},
           }
     }
+
+    onProjectStartDateChange = (e, date) => {
+        this.setState({
+            ...this.state.step2, projectStartDate: date,
+        });
+        // let empDetails = Object.assign({}, this.state.empDetails);
+        // empDetails.recruiter[e.target.name] = [e.target.value];
+        // return this.setState({empDetails});
+    };
+
+    onRecruiterChange = (e) => {
+        let step2 = Object.assign({}, this.state.step2);
+        step2[e.target.name] = [e.target.value];
+        return this.setState({step2});
+    };
+
+    onPlacementDateChange = (e, date) => {
+        this.setState({
+            ...this.state.step2, placementDate: date,
+        });
+    };
+
+
+    onDocsCollectingStartDateChange = (e, date) => {
+        this.setState({
+            ...this.state.step2, docsCollectingStartDate: date,
+        });
+    };
+
+    onRectrSentPlacDetChange = (e, date) => {
+        this.setState({
+            ...this.state.step2, rectrSentPlacDet: date,
+        });
+    };
+
+
     render() { 
         const { step2, errors } = this.state;
         return ( 
@@ -105,6 +141,10 @@ class Recruiter extends Component {
                                         <RadioGroup name="rectrSentVenAgreeSignedCopy" options={options} onChange={this.onRecruiterChange}  />
                                         {errors.rectrSentVenAgreeSignedCopy && <InlineError text= {errors.rectrSentVenAgreeSignedCopy}/>}
                                     </Form.Item>
+
+                                    <Form.Item >
+                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
+                                    </Form.Item >
 
                                 </Card>
                             </Col>
