@@ -7,6 +7,14 @@ import { logoutUser } from "../../redux/actions/Auth";
 import { Row, Col, Card, Radio } from 'antd';
 import { getTaskByEmpId } from "../../redux/actions/Employee";
 
+import LCA from './LCA';
+import Recruiter from './Recruiter';
+import H1bDocumentsPrep from './H1bDocumentsPrep';
+import H1bDocumentsHRReview from './H1bDocumentsHRReview';
+import AttorneyReceivedDocs from './AttorneyReceivedDocs';
+import AttorneyReviewedDocs from './AttorneyReviewedDocs';
+import AttorneyFilesPetiton from './AttorneyFilesPetiton';
+
 
 const TabPane = Tabs.TabPane;
 const Panel = Collapse.Panel;
@@ -100,51 +108,25 @@ class TaskDetails extends Component {
                         </Row>
                     </Panel>
                     <Panel header="From Recruiter" key="2">
-                        <Row>
-                            <Col xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <Card>
-                                    <span>Employee Verified Work Location </span>
-                                    <RadioGroup name="empVerifiedWrkLocation" onChange={this.onRadioButtonChange} value={this.state.empVerifiedWrkLocation}>                                    
-                                        <Radio style={radioStyle} value={true}>Yes</Radio>
-                                        <Radio style={radioStyle} value={false}>No</Radio>        
-                                    </RadioGroup>                                
-                                </Card>
-                            </Col>
-                            <Col xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <Card>
-                                    <Input placeholder="Work Site Address" />
-                                </Card>
-                            </Col>
-                            <Col xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <Card>
-                                    <Input placeholder="Work Site Address" />
-                                </Card>
-                            </Col>
-                        </Row>
+                            <Recruiter />
                     </Panel>
                     <Panel header="LCA Documents and Application for Certification" key="3">
-                                                
+                            <LCA />
                     </Panel>
                     <Panel header="Upload your H1B Documents" key="4">
-                        
+                            <H1bDocumentsPrep />
                     </Panel>
                     <Panel header="Submitted Documents Review by HR" key="5">
-                        <Card title="Card title">
-                            <span>Documents Reviewed: </span>
-                            <RadioGroup onChange={this.onChange} value={this.state.empVerifiedWrkLocation}>                                    
-                                <Radio style={radioStyle} value={true}>Yes</Radio>
-                                <Radio style={radioStyle} value={false}>No</Radio>        
-                            </RadioGroup> 
-                        </Card>
+                            <H1bDocumentsHRReview />
                     </Panel>
                     <Panel header="Send Reviewed Documents to Attorney" key="6">
-
+                            <AttorneyReceivedDocs />
                     </Panel>
                     <Panel header="Documents Reviewed by Attorney" key="7">
-
+                            <AttorneyReviewedDocs />
                     </Panel>
                     <Panel header="Documents accepted by Attorney" key="8">
-
+                            <AttorneyFilesPetiton />
                     </Panel>
                     <Panel header="Attorney files the petition with USCIS and shares the FEDEX Number" key="9">
 

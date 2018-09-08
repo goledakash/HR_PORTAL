@@ -97,7 +97,7 @@ class CreateTask extends Component {
                   }
 
          },
-
+         isServerRespondedSuccess: false,
          errors: {}
          
     }
@@ -173,6 +173,29 @@ class CreateTask extends Component {
         this.setState({
             ...this.state.empDetails.recruiter, rectrSentPlacDet: date,
         });
+    };
+
+    componentDidMount(props) {
+        console.log(this.props.taskList.length);
+        console.log("Emp Data From Reducer " + this.props.isEmpDataReceived);
+        console.log("Intial State " + this.state.isServerRespondedSuccess);
+        if(this.props.isEmpDataReceived){
+            // this.setState({...this.state.isServerRespondedSuccess, isServerRespondedSuccess : this.props.isEmpDataReceived});
+
+            let isServerRespondedSuccess = Object.assign({}, this.state.isServerRespondedSuccess);
+            isServerRespondedSuccess = this.props.isEmpDataReceived;
+            console.log("Changed Success State " + this.state.isServerRespondedSuccess);
+            return this.setState({isServerRespondedSuccess});
+        }
+        else{
+            console.log("Changed Error State " + this.state.isServerRespondedSuccess);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if((this.props.taskList.length + 1) === nextProps.taskList.length){
+            console.log("RE-RENDER THIS SOMEHOW AND INCLUDE A MESSAGE COMPONENT");
+        }
     };
 
       onSubmit = () => {
@@ -496,7 +519,7 @@ class CreateTask extends Component {
 
 
 
-                    
+
 
 
                     <Form>
@@ -515,6 +538,8 @@ const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.Auth.isUserLoggedIn,
         userObject: state.Auth.userObject,
+        isEmpDataReceived: state.EmpData.isEmpDataReceived,
+        taskList: state.EmpData.employeeData,
     };
 };
  
