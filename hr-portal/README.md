@@ -93,6 +93,7 @@
         taskName:"Recruiter",
         taskActive:"true",
         actionAssignedTo:"Akash",
+        vendorAgreement: "yes",
         projectStartDate:"",
         empSignedOfferLetter:"",
         placementDate:"",
@@ -105,10 +106,17 @@
         empVerifiedWrkLocation:"",
         rectrSentPlacDet:"",
         rectrSentVenAgreeSignedCopy:"",
+        comments:[{
+          msg:"",
+          createdAt:"",
+          user:"",
+          taskAssignedTo:""
+        }]
       },
       step3:{
         taskName:"LCA",
         taskActive:"true",
+        taskStartedActive:"true",
         actionAssignedTo:"Akash",
         dependencies:"",
         empVerWorkLocation:"",
@@ -134,7 +142,13 @@
         expectedApprovalDate:"", 
         taskCompletedTotalTime:"",
         taskStartedTotalTime:"",
-        lcaSentToEmployee:true    
+        lcaSentToEmployee:true,
+        comments:[{
+          msg:"",
+          createdAt:"",
+          user:"",
+          taskAssignedTo:""
+        }]    
       },
       step4:{
         taskName:"H1bDocumentsPrep",
@@ -160,7 +174,13 @@
         tmEdRecvdAllH4DepDocsFrmEmp:"",  
         recvdAllH1bDocsFrmEmp:"",
         tmStRecvdAllH1bDocsFrmEmp:"",
-        tmEdRecvdAllH1bDocsFrmEmp:"",        
+        tmEdRecvdAllH1bDocsFrmEmp:"",  
+        comments:[{
+          msg:"",
+          createdAt:"",
+          user:"",
+          taskAssignedTo:""
+        }]      
       },
       step5:{
         taskName:"H1bDocumentsHRReview",
@@ -170,6 +190,12 @@
         hrRecvdAllDocsAndReviewdFromEmp:"",
         tmStHrRecvdAllDocsAndReviewdFromEmp:"",
         tmEdHrRecvdAllDocsAndReviewdFromEmp:"",
+        comments:[{
+          msg:"",
+          createdAt:"",
+          user:"",
+          taskAssignedTo:""
+        }]
       },
       step6:{
         taskName:"AttorneyReceivedDocs",
@@ -179,6 +205,12 @@
         attroneyReceivedAllDocsFromBusiness:"",
         tmStAttroneyReceivedAllDocsFromBusiness:"",
         tmEdAttroneyReceivedAllDocsFromBusiness:"",
+        comments:[{
+          msg:"",
+          createdAt:"",
+          user:"",
+          taskAssignedTo:""
+        }]
       },
       step7:{
         taskName:"AttorneyReviewedDocs",
@@ -188,6 +220,12 @@
         attroneyReviewedAllDocsFromBusiness:"",
         tmStAttroneyReceivedAllDocsFromBusiness:"",
         tmEdAttroneyReceivedAllDocsFromBusiness:"",
+        comments:[{
+          msg:"",
+          createdAt:"",
+          user:"",
+          taskAssignedTo:""
+        }]
       },
       step8:{
         taskName:"AttorneyFilesPetiton",
@@ -200,6 +238,12 @@
         attroneyUpdatedFedexNumber:"",
         tmStAttroneyUpdatedFedexNumber:"",
         tmEdAttroneyUpdatedFedexNumber:"",
+        comments:[{
+          msg:"",
+          createdAt:"",
+          user:"",
+          taskAssignedTo:""
+        }]
       },
     }
 }

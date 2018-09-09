@@ -73,8 +73,7 @@ class CreateTask extends Component {
                       },
                   },
                 
-                vendorInfo:{
-                    vendorAgreement: 'yes',
+                vendorInfo:{                    
                     vendorName: '',
                     vendorContact: '',
                     venContName:'',
@@ -428,10 +427,10 @@ class CreateTask extends Component {
                             <Row>
                                 <Col>
                                     <Card title="Vendor Details">
-                                        <Form.Item error={!!errors.vendorAgreement} label="Agreement signed by Vendor?">                                            
+                                        {/* <Form.Item error={!!errors.vendorAgreement} label="Agreement signed by Vendor?">                                            
                                             <RadioGroup name="vendorAgreement" options={options} onChange={this.onVendorInfoChange}  />
                                             {errors.vendorAgreement && <InlineError text= {errors.vendorAgreement}/>}
-                                        </Form.Item>
+                                        </Form.Item> */}
                                         <Form.Item error={!!errors.vendorName} label="Vendor Name">
                                             <Input id="vendorName" type="vendorName" name="vendorName"value= {empDetails.vendorInfo.vendorName} onChange={this.onVendorInfoChange} placeholder="Vendor Name" />
                                             {errors.vendorName && <InlineError text= {errors.vendorName}/>}

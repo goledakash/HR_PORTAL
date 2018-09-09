@@ -45,7 +45,7 @@ class H1bDocumentsHRReview extends Component {
             <div>
                     <Form>  
                         <Row>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col>
                                 <Card title="H1B Documents Review">
                                     <Form.Item error={!!errors.dependencies}  label="Any Dependencies?">                                        
                                         <RadioGroup name="dependencies" options={options} onChange={this.onH1BDocReviewChange} />
