@@ -78,9 +78,18 @@ class LCA extends Component {
     };
 
     //On LCA Submit Button Clicked
-    onSubmit = () => {
-        let step3 = this.state.step3;
-        this.props.onAccordionSubmit(step3, 'step3');
+    onCancelButtonClicked = () => {
+
+    }    
+    onSubmitButtonClicked = () => {
+        this.props.onAccordionSubmit(this.state.step3, "step3");
+    }
+
+    componentDidMount() {
+        if(this.props.taskSelected.business){
+            let step3 =  this.props.taskSelected.business.step3;
+            this.setState({step3})
+        }
     }
 
     render() { 
@@ -90,7 +99,7 @@ class LCA extends Component {
             <div>
                 <Form>  
                         <Row>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col>
                                 <Card title="LCA Details">
                                     <Form.Item error={!!errors.dependencies}  label="Any Dependencies?">                                        
                                         <RadioGroup name="dependencies" options={options} onChange={this.onLCAChange} />
@@ -152,6 +161,14 @@ class LCA extends Component {
                                     </Form.Item >
 
                                 </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>   
+                                <div>
+                                    <Button type="primary" onClick={() => this.onCancelButtonClicked()}>Cancel</Button>
+                                    <Button type="primary" onClick={() => this.onSubmitButtonClicked()}>Submit</Button>
+                                </div>
                             </Col>
                         </Row>
                     </Form>

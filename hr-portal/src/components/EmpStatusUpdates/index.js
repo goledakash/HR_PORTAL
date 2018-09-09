@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Steps, Timeline , Button, message} from 'antd';
+import { Steps, Timeline , Button, message, Card} from 'antd';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
@@ -231,22 +231,22 @@ class EmpStatusUpdates extends Component {
                         </Steps>
                         <div className="steps-content">    
 
-                            {(current === 0) &&(<Timeline>
+                            {(current === 0) &&(<Card><Timeline>
                                 <Timeline.Item>Is Employee Information Submitted?: <b>{business.step1.taskActive ? 'NOT COMPLETED': 'COMPLETED' }</b></Timeline.Item>
-                                </Timeline>)}
+                                </Timeline></Card>)}
 
-                            {(current === 1) &&(<Timeline>
+                            {(current === 1) &&(<Card><Timeline>
                                 <Timeline.Item>Is Recruiter Information Submitted?: <b>{business.step2.taskActive ? 'NOT COMPLETED': 'COMPLETED' }</b></Timeline.Item>
-                                </Timeline>)}
+                                </Timeline></Card>)}
 
-                            {(current === 2) &&(<Timeline>
+                            {(current === 2) &&(<Card><Timeline>
                                 <Timeline.Item>Roles Responsibilities Submitted by Employee: <b>{business.step3.rolesRespSubmittedByEmp ? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
                                 <Timeline.Item>Roles Responsibilities Verified: <b>{business.step3.rolesRespVerified? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
                                 <Timeline.Item>Info Updated to portal by Business:<b> {business.step3.infoUptdToPortalByBiz? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
                                 <Timeline.Item>Review of Uncertified LCA: <b>{business.step3.reviewUnCertLCA? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
                                 <Timeline.Item>LCA Filed for Certification:<b> {business.step3.lcaFiledForCert? 'COMPLETED': 'NOT COMPLETED'}</b></Timeline.Item>
                                 <Timeline.Item>LCA Sent to Employee: <b>{business.step3.lcaSentToEmployee? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>
-                                </Timeline>)}
+                                </Timeline></Card>)}
                                 
                             {(current === 3) &&(<Timeline>
                                 <Timeline.Item>Employee's Vendor Letter Received?: <b>{business.step4.recvdVendorLtrFrmEmp ? 'COMPLETED': 'NOT COMPLETED' }</b></Timeline.Item>

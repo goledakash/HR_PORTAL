@@ -32,6 +32,15 @@ class TaskDetails extends Component {
     onAccordionSubmit = (data, key) => { 
         let taskSelected = this.state.taskSelected;
         taskSelected.business[key] = data;
+        if(key === "step3"){
+            taskSelected.taskInfo["isTaskCreated"] = false;
+            taskSelected.taskInfo["isTaskPending"] = true;
+        }
+        this.setState({taskSelected});
+    }
+    onEmpDetailsSubmit = (data, key) => {
+        let taskSelected = this.state.taskSelected;
+        taskSelected[key] = data;
         this.setState({taskSelected});
     }
     onRadioButtonChange=(e)=>{        
@@ -61,31 +70,12 @@ class TaskDetails extends Component {
         // workLocation[e.target.name] = [e.target.value];
         // return this.setState({workLocation});
     };
-    
-    // onH1bDocumentsPrepSubmit = () => {
-
-    // }
-    // onH1bDocumentsHRReviewSubmit = () => {
-
-    // }
-    // onAttorneyReceivedDocsSubmit = () => { 
         
-    // }
-    // onAttorneyReviewedDocsSubmit = () => { 
-
-    // }
-    // onAttorneyFilesPetitonSubmit = () => { 
-
-    // }
 
     render() {
         const { modeHor } = 'top';
         const { modeVer } = 'left';
-        const radioStyle = {
-            display: 'block',
-            height: '30px',
-            lineHeight: '30px',
-        };
+        const radioStyle = { display: 'block', height: '30px', lineHeight: '30px'};
         if(this.state.taskSelected === undefined || this.state.taskSelected.empDetails  === undefined || this.state.taskSelected.empDetails.workInfo === undefined){
             return (<div></div>);    
         } else{
@@ -98,10 +88,10 @@ class TaskDetails extends Component {
                 </Button>
                 <Collapse accordion>
                     <Panel header="From Employee" key="1">
-                        
+                        <FromEmployee  {...this.props} onEmpDetailsSubmit={this.onEmpDetailsSubmit} />
                     </Panel>
                     <Panel header="From Recruiter" key="2">
-                            <Recruiter />
+                            <Recruiter {...this.props} onAccordionSubmit={this.onAccordionSubmit} />
                     </Panel>
                     <Panel header="LCA Documents and Application for Certification" key="3">
                             <LCA {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>

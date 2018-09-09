@@ -27,6 +27,13 @@ const letterStatus = [
     { label: 'notApplied', value: 'notApplied' },
   ];
 
+const taskPrioity = [
+    { label: 'very high', value: '1' },
+    { label: 'high', value: '2' },
+    { label: 'medium', value: '3' },
+    { label: 'low', value: '4' },
+];
+
 const RadioGroup = Radio.Group;
 
 const { TextArea } = Input;
@@ -42,7 +49,6 @@ class CreateTask extends Component {
                 emailId01: 'akash@goled.com',
                 emailId02: 'goled@akash.com',
                 phoneNo: '1112223333',
-
                 contDetails:{
                   address1:'ghvvhvh',
                   address2:'ebvhjvf',
@@ -50,7 +56,6 @@ class CreateTask extends Component {
                   state:'bhkqh',
                   zipCode:'666644'
                 },
-
                 workInfo:{
                     workLocation:{
                       address1:'ghvechjg',
@@ -59,8 +64,7 @@ class CreateTask extends Component {
                       state:'fqbhkj',
                       zipCode:'555544'
                     },
-                  },
-                
+                },                
                 clientInfo:{
                     clientName: 'vggvhj',
                     managerName:'bjhww',
@@ -71,14 +75,13 @@ class CreateTask extends Component {
                         state:'rrrc',
                         zipCode:'888877',
                       },
-                  },
-                
+                },                
                 vendorInfo:{                    
                     vendorName: '',
                     vendorContact: '',
                     venContName:'',
                     venContPhone:'',
-                  },
+                },
                 //moment('11/08/2017')
                 recruiter:{
                       projectStartDate: '',
@@ -93,8 +96,15 @@ class CreateTask extends Component {
                       empVerifiedWrkLocation:'',
                       rectrSentPlacDet: '',
                       rectrSentVenAgreeSignedCopy:'',
-                  }
-
+                },
+                taskInfo:{      
+                    "taskPrioirty":"1",
+                    "applicationType":"",
+                    "taskCreatedDate":"",  
+                    "isTaskCreated":"",
+                    "isTaskPending":"",
+                    "isTaskCompleted":"",            
+                },
          },
          isServerRespondedSuccess: false,
          errors: {}
@@ -159,6 +169,17 @@ class CreateTask extends Component {
     onRecruiterChange = (e) => {
         let empDetails = Object.assign({}, this.state.empDetails);
         empDetails.recruiter[e.target.name] = [e.target.value];
+        if(e.target.name === "applicationType"){
+            empDetails.taskInfo["applicationType"] = [e.target.value];
+        }        
+        return this.setState({empDetails});
+    };
+
+    onTaskInfoChange = (e) => {
+        let empDetails = Object.assign({}, this.state.empDetails);
+        empDetails.taskInfo[e.target.name] = [e.target.value];
+        empDetails.taskInfo["isTaskCreated"] = true;
+        empDetails.taskInfo["taskCreatedDate"] = moment().valueOf();
         return this.setState({empDetails});
     };
 
@@ -175,15 +196,10 @@ class CreateTask extends Component {
     };
 
     componentDidMount(props) {
-        console.log(this.props.taskList.length);
-        console.log("Emp Data From Reducer " + this.props.isEmpDataReceived);
-        console.log("Intial State " + this.state.isServerRespondedSuccess);
         if(this.props.isEmpDataReceived){
             // this.setState({...this.state.isServerRespondedSuccess, isServerRespondedSuccess : this.props.isEmpDataReceived});
-
             let isServerRespondedSuccess = Object.assign({}, this.state.isServerRespondedSuccess);
-            isServerRespondedSuccess = this.props.isEmpDataReceived;
-            console.log("Changed Success State " + this.state.isServerRespondedSuccess);
+            isServerRespondedSuccess = this.props.isEmpDataReceived;        
             return this.setState({isServerRespondedSuccess});
         }
         else{
@@ -254,6 +270,7 @@ class CreateTask extends Component {
         // if(!Validator.isISO8601(empDetails.recruiter.docsCollectingStartDate)) errors.docsCollectingStartDate = "Select a Date";
         if(!empDetails.recruiter.employerRelationDocuments) errors.employerRelationDocuments = "Please Select";
         if(!empDetails.recruiter.vendorLetterStatus) errors.vendorLetterStatus = "Please Select";
+        if(!empDetails.taskInfo.taskPrioirty) errors.taskPrioirty = "Please Select";
         if(!empDetails.recruiter.clientLetterStatus) errors.clientLetterStatus = "Please Select";
         if(!empDetails.recruiter.empVerifiedWrkLocation) errors.empVerifiedWrkLocation = "Can't be empty";
         // if(!Validator.isISO8601(empDetails.recruiter.rectrSentPlacDet)) errors.rectrSentPlacDet = "Select a Date";
@@ -273,7 +290,7 @@ class CreateTask extends Component {
                         <Link to={{pathname: "/main"}}>Back to Main</Link>
                 </Button>
                 <Collapse accordion>
-{/* Employee Registration */}
+                    {/* Employee Registration */}
                     <Panel header="Employee Registration" key="1">
                         <Form>
                         <Row>
@@ -306,7 +323,6 @@ class CreateTask extends Component {
 
                                 </Card>
                             </Col>
-
                             <Col xs={8} sm={8} md={8} lg={8} xl={8}>
                                 <Card title="Contact Details">
                                     
@@ -341,15 +357,11 @@ class CreateTask extends Component {
 
                         </Form>
                     </Panel>
-
-
-{/* WorkInfo */}
-
-
+                    {/* WorkInfo */}
                     <Panel header="Work Related Information" key="2">
                         <Form>
                         <Row>
-                            <Col>
+                            <Col >
                                 <Card title="Work Location">
                                     <Form.Item error={!!errors.address1} label="Address 1">
                                             <Input id="address1" type="address1" name="address1"value= {empDetails.workInfo.workLocation.address1} onChange={this.onWorkLocationChange} placeholder="Address 1" />
@@ -377,9 +389,7 @@ class CreateTask extends Component {
                         </Row>
                         </Form>
                     </Panel>
-
-{/* ClientInfo */}
-
+                    {/* ClientInfo */}
                     <Panel header="Client Related Information" key="3">
                     <Form>
                         <Row>
@@ -420,8 +430,7 @@ class CreateTask extends Component {
 
                     </Form>
                     </Panel>
-
-{/* VendorInfo */}
+                    {/* VendorInfo */}
                     <Panel header="Vendor Related Information" key="4">
                         <Form>
                             <Row>
@@ -452,39 +461,21 @@ class CreateTask extends Component {
                             </Row>
                         </Form>
                     </Panel>
-
-
-{/* Recruiter */}
-
+                    {/* Recruiter */}
                     <Panel header=" Recruiter Related Information" key="5">
                         <Form>  
                         <Row>
-                            <Col>
-                                <Card title="Recruiter Details">
-                                    <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
-                                        <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={empDetails.recruiter.projectStartDate}/>
-                                        {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
-                                    </Form.Item>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12} >
+                                <Card title="Recruiter Details">                                    
                                     <Form.Item error={!!errors.empSignedOfferLetter}  label="Is Offer Letter Signed by Employee?">                                        
                                         <RadioGroup name="empSignedOfferLetter" options={options} onChange={this.onRecruiterChange} />
                                         {errors.empSignedOfferLetter && <InlineError text= {errors.empSignedOfferLetter}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.placementDate} label="Placement Date">
-                                        <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={empDetails.recruiter.placementDate}/>
-                                        {errors.placementDate && <InlineError text= {errors.placementDate}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
-                                        <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={empDetails.recruiter.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
-                                        {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
-                                    </Form.Item>
+                                    </Form.Item>                                                                        
                                     <Form.Item error={!!errors.applicationType} label="Applied H1 Application Type?">                                        
                                         <RadioGroup name="applicationType" options={h1applicationType} onChange={this.onRecruiterChange} />
                                         {errors.applicationType && <InlineError text= {errors.applicationType}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.docsCollectingStartDate} label="Documents Collection Start">
-                                        <DatePicker onChange={this.onDocsCollectingStartDateChange} placeholder= "Collection Start" defaultValue ={empDetails.recruiter.docsCollectingStartDate}/>
-                                        {errors.docsCollectingStartDate && <InlineError text= {errors.docsCollectingStartDate}/>}
-                                    </Form.Item>
+                                    
                                     <Form.Item error={!!errors.employerRelationDocuments}  label="Are Employer-Employee relation documents needed?">                                        
                                         <RadioGroup name="employerRelationDocuments" options={options} onChange={this.onRecruiterChange} />
                                         {errors.employerRelationDocuments && <InlineError text= {errors.employerRelationDocuments}/>}
@@ -496,15 +487,7 @@ class CreateTask extends Component {
                                     <Form.Item error={!!errors.clientLetterStatus}  label="Client Letter Status?">                                        
                                         <RadioGroup name="clientLetterStatus" options={letterStatus} onChange={this.onRecruiterChange} />
                                         {errors.clientLetterStatus && <InlineError text= {errors.clientLetterStatus}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
-                                        <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {empDetails.recruiter.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
-                                        {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.rectrSentPlacDet} label="Recruiter Sent Placement Details ">
-                                        <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={empDetails.recruiter.rectrSentPlacDet}/>
-                                        {errors.rectrSentPlacDet && <InlineError text= {errors.rectrSentPlacDet}/>}
-                                    </Form.Item>
+                                    </Form.Item>                                                                        
                                     <Form.Item error={!!errors.rectrSentVenAgreeSignedCopy} label="Agreement signed by Vendor?">                                        
                                         <RadioGroup name="rectrSentVenAgreeSignedCopy" options={options} onChange={this.onRecruiterChange}  />
                                         {errors.rectrSentVenAgreeSignedCopy && <InlineError text= {errors.rectrSentVenAgreeSignedCopy}/>}
@@ -512,15 +495,41 @@ class CreateTask extends Component {
 
                                 </Card>
                             </Col>
+                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Card title=""> 
+                                <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
+                                    <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={empDetails.recruiter.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
+                                    {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
+                                </Form.Item>
+                                <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
+                                    <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {empDetails.recruiter.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
+                                    {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
+                                </Form.Item>
+                                <Form.Item error={!!errors.placementDate} label="Placement Date">
+                                    <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={empDetails.recruiter.placementDate}/>
+                                    {errors.placementDate && <InlineError text= {errors.placementDate}/>}
+                                </Form.Item>
+                                <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
+                                    <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={empDetails.recruiter.projectStartDate}/>
+                                    {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
+                                </Form.Item>
+                                <Form.Item error={!!errors.docsCollectingStartDate} label="Documents Collection Start">
+                                    <DatePicker onChange={this.onDocsCollectingStartDateChange} placeholder= "Collection Start" defaultValue ={empDetails.recruiter.docsCollectingStartDate}/>
+                                    {errors.docsCollectingStartDate && <InlineError text= {errors.docsCollectingStartDate}/>}
+                                </Form.Item>
+                                <Form.Item error={!!errors.rectrSentPlacDet} label="Recruiter Sent Placement Details ">
+                                    <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={empDetails.recruiter.rectrSentPlacDet}/>
+                                    {errors.rectrSentPlacDet && <InlineError text= {errors.rectrSentPlacDet}/>}
+                                </Form.Item>
+                                <Form.Item error={!!errors.taskPrioirty} label="Task Priority">                                        
+                                    <RadioGroup name="taskPrioirty" options={taskPrioity} onChange={this.onTaskInfoChange} />
+                                    {errors.taskPrioirty && <InlineError text= {errors.taskPrioirty}/>}
+                                </Form.Item>
+                                </Card>
+                            </Col>
                         </Row>
                         </Form>
                     </Panel>
-
-
-
-
-
-
                     <Form>
                         <Form.Item>
                             <Button type="primary" onClick={this.onSubmit}>Submit</Button>

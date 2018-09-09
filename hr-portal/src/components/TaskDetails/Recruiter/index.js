@@ -20,7 +20,12 @@ const letterStatus = [
     { label: 'waiting', value: 'waiting' },
     { label: 'notApplied', value: 'notApplied' },
   ];
-
+  const taskPrioity = [
+    { label: 'very high', value: '1' },
+    { label: 'high', value: '2' },
+    { label: 'medium', value: '3' },
+    { label: 'low', value: '4' },
+];
 const RadioGroup = Radio.Group;
 
 const { TextArea } = Input;
@@ -30,24 +35,40 @@ class Recruiter extends Component {
         super(props);
         this.state = {
             step2:{
-                taskName:"Recruiter",
+                taskName:"",
                 taskActive: true,
-                actionAssignedTo:"Akash",
+                actionAssignedTo:"",
                 projectStartDate:"",
                 empSignedOfferLetter:"",
                 placementDate:"",
                 urgentSituation:"",
-                applicationType:"type1",
+                applicationType:"",
                 docsCollectingStartDate:"",
-                employerRelationDocuments: "yes",
-                vendorLetterStatus: "approved",
-                clientLetterStatus: "waiting",
+                employerRelationDocuments: "",
+                vendorLetterStatus: "",
+                clientLetterStatus: "",
                 empVerifiedWrkLocation:"",
                 rectrSentPlacDet:"",
                 rectrSentVenAgreeSignedCopy:"",
             },
+            taskInfo:{
+                taskCompleted:"",
+                taskPrioirty:"1",
+                applicationType:"",
+                taskCreatedDate:"", 
+                isTaskCreated:"",
+                isTaskPending:"",
+                isTaskCompleted:"" 
+            },
             errors: {},
-          }
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.taskSelected.business){
+            let step2 =  this.props.taskSelected.business.step2;
+            this.setState({step2})
+        }
     }
 
     onProjectStartDateChange = (e, date) => {
@@ -64,7 +85,13 @@ class Recruiter extends Component {
         step2[e.target.name] = [e.target.value];
         return this.setState({step2});
     };
-
+    onTaskInfoChange = (e) => {
+        // let empDetails = Object.assign({}, this.state.empDetails);
+        // empDetails.taskInfo[e.target.name] = [e.target.value];
+        // empDetails.taskInfo["isTaskCreated"] = true;
+        // empDetails.taskInfo["taskCreatedDate"] = moment().valueOf();
+        // return this.setState({empDetails});
+    };
     onPlacementDateChange = (e, date) => {
         this.setState({
             ...this.state.step2, placementDate: date,
@@ -84,6 +111,12 @@ class Recruiter extends Component {
         });
     };
 
+    onCancelButtonClicked = () => {
+
+    }    
+    onSubmitButtonClicked = () => {
+        this.props.onAccordionSubmit(this.state.step2, "step2");
+    }
 
     render() { 
         const { step2, errors } = this.state;
@@ -91,24 +124,15 @@ class Recruiter extends Component {
             <div>
                     <Form>  
                         <Row>
-                            <Col>
+                            <Col  xs={12} sm={12} md={12} lg={12} xl={12} >
                                 <Card title="Recruiter Details">
-                                    <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
-                                        <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={step2.projectStartDate}/>
-                                        {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
-                                    </Form.Item>
+                                    
                                     <Form.Item error={!!errors.empSignedOfferLetter}  label="Is Offer Letter Signed by Employee?">                                        
                                         <RadioGroup name="empSignedOfferLetter" options={options} onChange={this.onRecruiterChange} />
                                         {errors.empSignedOfferLetter && <InlineError text= {errors.empSignedOfferLetter}/>}
                                     </Form.Item>
-                                    <Form.Item error={!!errors.placementDate} label="Placement Date">
-                                        <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={step2.placementDate}/>
-                                        {errors.placementDate && <InlineError text= {errors.placementDate}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
-                                        <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={step2.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
-                                        {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
-                                    </Form.Item>
+                                    
+                                    
                                     <Form.Item error={!!errors.applicationType} label="Applied H1 Application Type?">                                        
                                         <RadioGroup name="applicationType" options={h1applicationType} onChange={this.onRecruiterChange} />
                                         {errors.applicationType && <InlineError text= {errors.applicationType}/>}
@@ -128,11 +152,7 @@ class Recruiter extends Component {
                                     <Form.Item error={!!errors.clientLetterStatus}  label="Client Letter Status?">                                        
                                         <RadioGroup name="clientLetterStatus" options={letterStatus} onChange={this.onRecruiterChange} />
                                         {errors.clientLetterStatus && <InlineError text= {errors.clientLetterStatus}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
-                                        <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {step2.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
-                                        {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
-                                    </Form.Item>
+                                    </Form.Item>                                    
                                     <Form.Item error={!!errors.rectrSentPlacDet} label="Recruiter Sent Placement Details ">
                                         <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={step2.rectrSentPlacDet}/>
                                         {errors.rectrSentPlacDet && <InlineError text= {errors.rectrSentPlacDet}/>}
@@ -141,12 +161,58 @@ class Recruiter extends Component {
                                         <RadioGroup name="rectrSentVenAgreeSignedCopy" options={options} onChange={this.onRecruiterChange}  />
                                         {errors.rectrSentVenAgreeSignedCopy && <InlineError text= {errors.rectrSentVenAgreeSignedCopy}/>}
                                     </Form.Item>
-
-                                    <Form.Item >
-                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
-                                    </Form.Item >
-
                                 </Card>
+                            </Col>
+                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                                <Card title="">
+                                <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
+                                        <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={step2.projectStartDate}/>
+                                        {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
+                                        <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={step2.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
+                                        {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
+                                        <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {step2.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
+                                        {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.placementDate} label="Placement Date">
+                                        <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={step2.placementDate}/>
+                                        {errors.placementDate && <InlineError text= {errors.placementDate}/>}
+                                    </Form.Item>
+                                </Card>
+                                <Card title="">
+                                    <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
+                                        <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={step2.projectStartDate}/>
+                                        {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
+                                        <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={step2.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
+                                        {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
+                                        <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {step2.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
+                                        {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.placementDate} label="Placement Date">
+                                        <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={step2.placementDate}/>
+                                        {errors.placementDate && <InlineError text= {errors.placementDate}/>}
+                                    </Form.Item>
+                                </Card>
+                                <Card title="">
+                                <Form.Item label="Task Priority">                                        
+                                    <RadioGroup name="taskPrioirty" options={taskPrioity} onChange={this.onTaskInfoChange} />                                   
+                                </Form.Item>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>   
+                                <div>
+                                    <Button type="primary" onClick={() => this.onCancelButtonClicked()}>Cancel</Button>
+                                    <Button type="primary" onClick={() => this.onSubmitButtonClicked()}>Submit</Button>
+                                </div>
                             </Col>
                         </Row>
                     </Form>

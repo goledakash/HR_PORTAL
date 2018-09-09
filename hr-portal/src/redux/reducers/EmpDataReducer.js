@@ -2,11 +2,24 @@ import * as Type from "../actions/ActionTypes";
 
 //   
 const taskObject = {
+  comments:[{
+    taskMsg:"",
+    empMsg:"",
+    businessMsg:"",
+    createdAt:"",
+    loggedInUser:"",
+    taskAssignedTo:"",
+    taskToBeCmpDueDate:"",
+    taskCmpExpDueDate:"",
+  }],
   taskInfo:{
   taskCompleted:"",
   taskPrioirty:"1",
   applicationType:"",
-  taskCreatedDate:"",  
+  taskCreatedDate:"", 
+  isTaskCreated:"",
+  isTaskPending:"",
+  isTaskCompleted:"",   
   },
   empStatus:{
     curStatusMsg:"",

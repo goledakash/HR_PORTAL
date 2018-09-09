@@ -55,6 +55,20 @@ class H1bDocumentsPrep extends Component {
         step4[e.target.name] = [e.target.value];
         return this.setState({step4});
     };
+    
+    componentDidMount() {
+        if(this.props.taskSelected.business){
+            let step5 =  this.props.taskSelected.business.step5;
+            this.setState({step5})
+        }
+    }
+
+    onCancelButtonClicked = () => {
+
+    }    
+    onSubmitButtonClicked = () => {
+        this.props.onAccordionSubmit(this.state.step4, "step4");
+    }
 
     render() { 
         const { step4, errors } = this.state;
@@ -110,11 +124,15 @@ class H1bDocumentsPrep extends Component {
                                         {errors.recvdAllH1bDocsFrmEmp && <InlineError text= {errors.recvdAllH1bDocsFrmEmp}/>}
                                     </Form.Item>
 
-                                    <Form.Item >
-                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
-                                    </Form.Item >
-
                                 </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>   
+                                <div>
+                                    <Button type="primary" onClick={() => this.onCancelButtonClicked()}>Cancel</Button>
+                                    <Button type="primary" onClick={() => this.onSubmitButtonClicked()}>Submit</Button>
+                                </div>
                             </Col>
                         </Row>
                     </Form>

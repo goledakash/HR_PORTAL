@@ -35,11 +35,25 @@ class AttorneyFilesPetiton extends Component {
          }
     }
 
+    componentDidMount() {
+        if(this.props.taskSelected.business){
+            let step8 =  this.props.taskSelected.business.step8;
+            this.setState({step8})
+        }
+    }    
+
     onAttorneyFilesPetitionChange= (e) => {
         let step8 = Object.assign({}, this.state.step8);
         step8[e.target.name] = [e.target.value];
         return this.setState({step8});
     };
+
+    onCancelButtonClicked = () => {
+
+    }    
+    onSubmitButtonClicked = () => {
+        this.props.onAccordionSubmit(this.state.step8, "step8");
+    }
 
     render() { 
         const { step8, errors } = this.state;
@@ -66,11 +80,15 @@ class AttorneyFilesPetiton extends Component {
                                         {errors.attroneyUpdatedFedexNumber && <InlineError text= {errors.attroneyUpdatedFedexNumber}/>}
                                     </Form.Item>
 
-                                    <Form.Item >
-                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
-                                    </Form.Item >
-
                                 </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>   
+                                <div>
+                                    <Button type="primary" onClick={() => this.onCancelButtonClicked()}>Cancel</Button>
+                                    <Button type="primary" onClick={() => this.onSubmitButtonClicked()}>Submit</Button>
+                                </div>
                             </Col>
                         </Row>
                     </Form>

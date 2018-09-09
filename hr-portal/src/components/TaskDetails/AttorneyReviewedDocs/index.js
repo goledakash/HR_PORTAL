@@ -32,11 +32,24 @@ class AttorneyReviewedDocs extends Component {
          }
     }
 
+    componentDidMount() {
+        if(this.props.taskSelected.business){
+            let step7 =  this.props.taskSelected.business.step7;
+            this.setState({step7})
+        }
+    }
     onAttorneyReviewedChange= (e) => {
         let step7 = Object.assign({}, this.state.step7);
         step7[e.target.name] = [e.target.value];
         return this.setState({step7});
     };
+
+    onCancelButtonClicked = () => {
+
+    }    
+    onSubmitButtonClicked = () => {
+        this.props.onAccordionSubmit(this.state.step7, "step7");
+    }
 
     render() { 
         const { step7, errors } = this.state;
@@ -58,11 +71,15 @@ class AttorneyReviewedDocs extends Component {
                                         {errors.attroneyReviewedAllDocsFromBusiness && <InlineError text= {errors.attroneyReviewedAllDocsFromBusiness}/>}
                                     </Form.Item>
 
-                                    <Form.Item >
-                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
-                                    </Form.Item >
-
                                 </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>   
+                                <div>
+                                    <Button type="primary" onClick={() => this.onCancelButtonClicked()}>Cancel</Button>
+                                    <Button type="primary" onClick={() => this.onSubmitButtonClicked()}>Submit</Button>
+                                </div>
                             </Col>
                         </Row>
                     </Form>

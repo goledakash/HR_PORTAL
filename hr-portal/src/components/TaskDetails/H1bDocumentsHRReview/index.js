@@ -31,13 +31,24 @@ class H1bDocumentsHRReview extends Component {
          }
     }
 
+    componentDidMount() {
+        if(this.props.taskSelected.business){
+            let step5 =  this.props.taskSelected.business.step5;
+            this.setState({step5})
+        }
+    }
 
     onH1BDocReviewChange = (e) => {
         let step5 = Object.assign({}, this.state.step5);
         step5[e.target.name] = [e.target.value];
         return this.setState({step5});
     };
+    onCancelButtonClicked = () => {
 
+    }    
+    onSubmitButtonClicked = () => {
+        this.props.onAccordionSubmit(this.state.step5, "step5");
+    }
     render() { 
         const { step5, errors } = this.state;
 
@@ -57,11 +68,15 @@ class H1bDocumentsHRReview extends Component {
                                         {errors.hrRecvdAllDocsAndReviewdFromEmp && <InlineError text= {errors.hrRecvdAllDocsAndReviewdFromEmp}/>}
                                     </Form.Item>
 
-                                    <Form.Item >
-                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
-                                    </Form.Item >
-
                                 </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>   
+                                <div>
+                                    <Button type="primary" onClick={() => this.onCancelButtonClicked()}>Cancel</Button>
+                                    <Button type="primary" onClick={() => this.onSubmitButtonClicked()}>Submit</Button>
+                                </div>
                             </Col>
                         </Row>
                     </Form>

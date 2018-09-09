@@ -12,6 +12,7 @@
 // Maintain different JSON for Employee status, Employee Work Details, Employee Personal Details.
 {
     "empId":"",
+    taskId:"",
     "firstName": "akash",
     "lastName": "goled",
     "emailId01": "abc@abc.com",
@@ -51,12 +52,24 @@
       "venContName":"",
       "venContPhone":"",
     },
-    taskInfo:{
-      "taskCompleted":"",
+    taskInfo:{      
       "taskPrioirty":"1",
       "applicationType":"",
       "taskCreatedDate":"",  
-    },  
+      "isTaskCreated":"",
+      "isTaskPending":"",
+      "isTaskCompleted":"",                  
+    }, 
+    comments:[{
+      taskMsg:"",
+      empMsg:"",
+      businessMsg:"",
+      createdAt:"",
+      loggedInUser:"",
+      taskAssignedTo:"",
+      taskToBeCmpDueDate:"",
+      taskCmpExpDueDate:"",
+    }],
     recruiter:{
       projectStartDate:"",
         empSignedOfferLetter:"",
@@ -105,13 +118,7 @@
         clientLetterStatus: "waiting",
         empVerifiedWrkLocation:"",
         rectrSentPlacDet:"",
-        rectrSentVenAgreeSignedCopy:"",
-        comments:[{
-          msg:"",
-          createdAt:"",
-          user:"",
-          taskAssignedTo:""
-        }]
+        rectrSentVenAgreeSignedCopy:"",        
       },
       step3:{
         taskName:"LCA",
@@ -142,13 +149,7 @@
         expectedApprovalDate:"", 
         taskCompletedTotalTime:"",
         taskStartedTotalTime:"",
-        lcaSentToEmployee:true,
-        comments:[{
-          msg:"",
-          createdAt:"",
-          user:"",
-          taskAssignedTo:""
-        }]    
+        lcaSentToEmployee:true   
       },
       step4:{
         taskName:"H1bDocumentsPrep",
@@ -174,13 +175,7 @@
         tmEdRecvdAllH4DepDocsFrmEmp:"",  
         recvdAllH1bDocsFrmEmp:"",
         tmStRecvdAllH1bDocsFrmEmp:"",
-        tmEdRecvdAllH1bDocsFrmEmp:"",  
-        comments:[{
-          msg:"",
-          createdAt:"",
-          user:"",
-          taskAssignedTo:""
-        }]      
+        tmEdRecvdAllH1bDocsFrmEmp:""    
       },
       step5:{
         taskName:"H1bDocumentsHRReview",
@@ -189,13 +184,7 @@
         dependencies:"",
         hrRecvdAllDocsAndReviewdFromEmp:"",
         tmStHrRecvdAllDocsAndReviewdFromEmp:"",
-        tmEdHrRecvdAllDocsAndReviewdFromEmp:"",
-        comments:[{
-          msg:"",
-          createdAt:"",
-          user:"",
-          taskAssignedTo:""
-        }]
+        tmEdHrRecvdAllDocsAndReviewdFromEmp:""
       },
       step6:{
         taskName:"AttorneyReceivedDocs",
@@ -204,13 +193,7 @@
         dependencies:"",
         attroneyReceivedAllDocsFromBusiness:"",
         tmStAttroneyReceivedAllDocsFromBusiness:"",
-        tmEdAttroneyReceivedAllDocsFromBusiness:"",
-        comments:[{
-          msg:"",
-          createdAt:"",
-          user:"",
-          taskAssignedTo:""
-        }]
+        tmEdAttroneyReceivedAllDocsFromBusiness:""
       },
       step7:{
         taskName:"AttorneyReviewedDocs",
@@ -219,13 +202,7 @@
         dependencies:"",
         attroneyReviewedAllDocsFromBusiness:"",
         tmStAttroneyReceivedAllDocsFromBusiness:"",
-        tmEdAttroneyReceivedAllDocsFromBusiness:"",
-        comments:[{
-          msg:"",
-          createdAt:"",
-          user:"",
-          taskAssignedTo:""
-        }]
+        tmEdAttroneyReceivedAllDocsFromBusiness:""
       },
       step8:{
         taskName:"AttorneyFilesPetiton",
@@ -237,13 +214,7 @@
         tmEdAttroneyFilesPetiton:"",
         attroneyUpdatedFedexNumber:"",
         tmStAttroneyUpdatedFedexNumber:"",
-        tmEdAttroneyUpdatedFedexNumber:"",
-        comments:[{
-          msg:"",
-          createdAt:"",
-          user:"",
-          taskAssignedTo:""
-        }]
+        tmEdAttroneyUpdatedFedexNumber:""
       },
     }
 }
