@@ -77,6 +77,12 @@ class LCA extends Component {
         return this.setState({step3});
     };
 
+    //On LCA Submit Button Clicked
+    onSubmit = () => {
+        let step3 = this.state.step3;
+        this.props.onAccordionSubmit(step3, 'step3');
+    }
+
     render() { 
         const { step3, errors } = this.state;
 

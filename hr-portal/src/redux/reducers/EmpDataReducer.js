@@ -31,6 +31,7 @@ const taskObject = {
       taskActive:"true",
       actionAssignedTo:"Akash",
       projectStartDate:"",
+      vendorAgreement: "yes",
       empSignedOfferLetter:"",
       placementDate:"",
       urgentSituation:"",

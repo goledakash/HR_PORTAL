@@ -45,7 +45,7 @@ class AttorneyReviewedDocs extends Component {
             <div>
                     <Form>  
                         <Row>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col>
                                 <Card title="Attorney Reviewed Docs">
                                     
                                     <Form.Item error={!!errors.dependencies}  label="Any Dependencies?">                                        

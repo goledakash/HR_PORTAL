@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/Auth";
 import { Row, Col, Card, Radio } from 'antd';
 import { getTaskByEmpId } from "../../redux/actions/Employee";
-
+import FromEmployee from './FromEmployee';
 import LCA from './LCA';
 import Recruiter from './Recruiter';
 import H1bDocumentsPrep from './H1bDocumentsPrep';
@@ -29,6 +29,11 @@ class TaskDetails extends Component {
             taskSelected:{}            
         }
     };
+    onAccordionSubmit = (data, key) => { 
+        let taskSelected = this.state.taskSelected;
+        taskSelected.business[key] = data;
+        this.setState({taskSelected});
+    }
     onRadioButtonChange=(e)=>{        
         this.setState({
             [e.target.name]: e.target.value,
@@ -43,7 +48,7 @@ class TaskDetails extends Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         if(nextProps.taskSelected){
             if(Object.keys(nextProps.taskSelected).length > 0){
-                return { taskSelected :  nextProps.taskSelected.empDetails };
+                return { taskSelected :  nextProps.taskSelected };
             }        
         }        
         return null;
@@ -52,10 +57,26 @@ class TaskDetails extends Component {
         this.props.dispatch(logoutUser(this.props.userObject.user.uid));
     };
     onChange = (e) => { 
-        let workLocation = this.state.workLocation;
-        workLocation[e.target.name] = [e.target.value];
-        return this.setState({workLocation});
+        // let workLocation = this.state.workLocation;
+        // workLocation[e.target.name] = [e.target.value];
+        // return this.setState({workLocation});
     };
+    
+    // onH1bDocumentsPrepSubmit = () => {
+
+    // }
+    // onH1bDocumentsHRReviewSubmit = () => {
+
+    // }
+    // onAttorneyReceivedDocsSubmit = () => { 
+        
+    // }
+    // onAttorneyReviewedDocsSubmit = () => { 
+
+    // }
+    // onAttorneyFilesPetitonSubmit = () => { 
+
+    // }
 
     render() {
         const { modeHor } = 'top';
@@ -65,10 +86,10 @@ class TaskDetails extends Component {
             height: '30px',
             lineHeight: '30px',
         };
-        if(this.state.taskSelected === undefined || this.state.taskSelected.workInfo === undefined){
+        if(this.state.taskSelected === undefined || this.state.taskSelected.empDetails  === undefined || this.state.taskSelected.empDetails.workInfo === undefined){
             return (<div></div>);    
         } else{
-        const { workLocation } =  this.state.taskSelected.workInfo; 
+        const { workLocation } =  this.state.taskSelected.empDetails.workInfo; 
         return (
             <div>
                 <h3>HOME COMPONENT</h3>
@@ -77,56 +98,28 @@ class TaskDetails extends Component {
                 </Button>
                 <Collapse accordion>
                     <Panel header="From Employee" key="1">
-                        <Row>
-                        <Col xs={8} sm={8} md={8} lg={8} xl={8}>
-                                <Card title="WorkLocation">                                 
-                                    <Input id="address1"  type="text" name="address1" value= {workLocation.address1} onChange={this.onChange} placeholder="Address 1"  /> 
-                                    <Input id="address2" type="text" name="address2" value= {workLocation.address2} onChange={this.onChange} placeholder="Address 2"  /> 
-                                    <Input id="city" type="text" name="city" value= {workLocation.city} onChange={this.onChange} placeholder="city"  /> 
-                                    <Input id="state" type="text" name="state" value= {workLocation.state} onChange={this.onChange} placeholder="state"  /> 
-                                    <Input id="zipcode" type="text" name="zipcode" value= {workLocation.zipcode} onChange={this.onChange} placeholder="zipcode"  /> 
-                                </Card>
-                            </Col>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
-                                <Card title="Vendor">
-                                    <Input id="address1"  type="text" name="address1" value= {workLocation.address1} onChange={this.onChange} placeholder="Address 1"  /> 
-                                    <Input id="address2" type="text" name="address2" value= {workLocation.address2} onChange={this.onChange} placeholder="Address 2"  /> 
-                                    <Input id="city" type="text" name="city" value= {workLocation.city} onChange={this.onChange} placeholder="city"  /> 
-                                    <Input id="state" type="text" name="state" value= {workLocation.state} onChange={this.onChange} placeholder="state"  /> 
-                                    <Input id="zipcode" type="text" name="zipcode" value= {workLocation.zipcode} onChange={this.onChange} placeholder="zipcode"  /> 
-                                </Card>
-                            </Col>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
-                            <Card title="Client">
-                                    <Input id="address1"  type="text" name="address1" value= {workLocation.address1} onChange={this.onChange} placeholder="Address 1"  /> 
-                                    <Input id="address2" type="text" name="address2" value= {workLocation.address2} onChange={this.onChange} placeholder="Address 2"  /> 
-                                    <Input id="city" type="text" name="city" value= {workLocation.city} onChange={this.onChange} placeholder="city"  /> 
-                                    <Input id="state" type="text" name="state" value= {workLocation.state} onChange={this.onChange} placeholder="state"  /> 
-                                    <Input id="zipcode" type="text" name="zipcode" value= {workLocation.zipcode} onChange={this.onChange} placeholder="zipcode"  /> 
-                                </Card>
-                            </Col>
-                        </Row>
+                        
                     </Panel>
                     <Panel header="From Recruiter" key="2">
                             <Recruiter />
                     </Panel>
                     <Panel header="LCA Documents and Application for Certification" key="3">
-                            <LCA />
+                            <LCA {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
                     </Panel>
                     <Panel header="Upload your H1B Documents" key="4">
-                            <H1bDocumentsPrep />
+                            <H1bDocumentsPrep {...this.props} onAccordionSubmit={this.onAccordionSubmit} />
                     </Panel>
                     <Panel header="Submitted Documents Review by HR" key="5">
-                            <H1bDocumentsHRReview />
+                            <H1bDocumentsHRReview {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
                     </Panel>
                     <Panel header="Send Reviewed Documents to Attorney" key="6">
-                            <AttorneyReceivedDocs />
+                            <AttorneyReceivedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
                     </Panel>
                     <Panel header="Documents Reviewed by Attorney" key="7">
-                            <AttorneyReviewedDocs />
+                            <AttorneyReviewedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
                     </Panel>
                     <Panel header="Documents accepted by Attorney" key="8">
-                            <AttorneyFilesPetiton />
+                            <AttorneyFilesPetiton {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
                     </Panel>
                     <Panel header="Attorney files the petition with USCIS and shares the FEDEX Number" key="9">
 
@@ -142,7 +135,7 @@ class TaskDetails extends Component {
     }
 }
 
-TaskDetails.propTypes = {
+TaskDetails.defaultProps = {
     taskSelected:{}
 }
 
