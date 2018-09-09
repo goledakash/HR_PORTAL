@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  Validator from 'validator';
 import InlineError from '../../messages/InlineError';
-import { Collapse, Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
+import { Modal, Collapse, Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
 
 
 const options = [
@@ -60,6 +60,17 @@ class Recruiter extends Component {
                 isTaskPending:"",
                 isTaskCompleted:"" 
             },
+            comments:[{
+                taskMsg:"",
+                empMsg:"",
+                businessMsg:"",
+                createdAt:"",
+                loggedInUser:"",
+                taskAssignedTo:"",
+                taskToBeCmpDueDate:"",
+                taskCmpExpDueDate:"",
+              }],
+              visible: false,
             errors: {},
         }
     }
@@ -70,6 +81,27 @@ class Recruiter extends Component {
             this.setState({step2})
         }
     }
+
+    showModal = () => {
+        this.setState({
+          visible: true,
+        });
+      }
+
+      handleOk = (e) => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      }
+    
+      handleCancel = (e) => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      }
+    
 
     onProjectStartDateChange = (e, date) => {
         this.setState({
@@ -111,6 +143,12 @@ class Recruiter extends Component {
         });
     };
 
+    onBusinessMessageChange = (e) => {
+        let comments = Object.assign({}, this.state.comments);
+        comments[e.target.name] = [e.target.value];
+        return this.setState({comments});
+    };
+
     onCancelButtonClicked = () => {
 
     }    
@@ -119,7 +157,7 @@ class Recruiter extends Component {
     }
 
     render() { 
-        const { step2, errors } = this.state;
+        const { step2, errors, comments } = this.state;
         return ( 
             <div>
                     <Form>  
@@ -207,6 +245,36 @@ class Recruiter extends Component {
                                 </Card>
                             </Col>
                         </Row>
+                        <Row>
+                            <Col>
+                                <div>
+                                    <Button type="primary" onClick={this.showModal}>
+                                    Add Comments
+                                    </Button>
+                                    <Modal
+                                    title="Additional Comments"
+                                    visible={this.state.visible}
+                                    onOk={this.handleOk}
+                                    onCancel={this.handleCancel}
+                                    >
+                                    <Form.Item error={!!errors.taskMsg}  label="Task Comments">
+                                        <TextArea id="taskMsg" type="taskMsg" name="taskMsg" value={comments.taskMsg} onChange={this.onBusinessMessageChange} placeholder= "Add Task Comments if any" />
+                                        {errors.taskMsg && <InlineError text= {errors.taskMsg}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.empMsg}  label="Employee Comments">
+                                        <TextArea id="empMsg" type="empMsg" name="empMsg" value={comments.empMsg} onChange={this.onBusinessMessageChange} placeholder= "Add Comments for Employees" />
+                                        {errors.empMsg && <InlineError text= {errors.empMsg}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.businessMsg}  label="Business Comments">
+                                        <TextArea id="businessMsg" type="businessMsg" name="businessMsg" value={comments.businessMsg} onChange={this.onBusinessMessageChange} placeholder= "Add Business Comments if any" />
+                                        {errors.businessMsg && <InlineError text= {errors.businessMsg}/>}
+                                    </Form.Item>
+                                    
+                                    </Modal>
+                                </div>
+                            </Col>
+                        </Row>
+                        <br />
                         <Row>
                             <Col>   
                                 <div>
