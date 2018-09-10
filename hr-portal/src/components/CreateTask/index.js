@@ -17,8 +17,9 @@ const options = [
   ];
 
 const h1applicationType = [
-    { label: 'type1', value: 'type1' },
-    { label: 'type2', value: 'type2' },
+    { label: 'H1b', value: 'H1b' },
+    { label: 'OPT', value: 'OPT' },
+    { label: 'H1bExt', value: 'H1bExt' }
   ];
 
 const letterStatus = [
@@ -77,24 +78,23 @@ class CreateTask extends Component {
                       },
                 },                
                 vendorInfo:{                    
-                    vendorName: '',
-                    vendorContact: '',
-                    venContName:'',
-                    venContPhone:'',
-                },
-                //moment('11/08/2017')
+                    vendorName: 'jdksnfsa',
+                    vendorContact: '12342134123',
+                    venContName:'jknlbhjbjk',
+                    venContPhone:'123412341234',
+                },                
                 recruiter:{
                       projectStartDate: '',
-                      empSignedOfferLetter:'',
+                      empSignedOfferLetter:'yes',
                       placementDate: '',
-                      urgentSituation:'',
-                      applicationType:'',
+                      urgentSituation:'djbfjaskbdfjhasd',
+                      applicationType:'H1b',
                       docsCollectingStartDate: '',
                       employerRelationDocuments: '',
                       vendorLetterStatus: '',
                       clientLetterStatus: '',
-                      empVerifiedWrkLocation:'',
-                      rectrSentPlacDet: '',
+                      empVerifiedWrkLocation:'yes',
+                      rectrSentPlacDate: '',
                       rectrSentVenAgreeSignedCopy:'',
                 },
                 taskInfo:{      
@@ -107,10 +107,8 @@ class CreateTask extends Component {
                 },
          },
          isServerRespondedSuccess: false,
-         errors: {}
-         
+         errors: {}         
     }
-
 }
 
     onChange = e => this.setState({
@@ -131,7 +129,7 @@ class CreateTask extends Component {
 
     onClientInfoChange = (e) => {
         let empDetails = Object.assign({}, this.state.empDetails);
-        empDetails.clientInfo[e.target.name] = [e.target.value];
+        empDetails.clientInfo[e.target.name] = e.target.value;
         return this.setState({empDetails});
     };
 
@@ -147,38 +145,43 @@ class CreateTask extends Component {
 
     onVendorInfoChange = (e) => {
         let empDetails = Object.assign({}, this.state.empDetails);
-        empDetails.vendorInfo[e.target.name] = [e.target.value];
+        empDetails.vendorInfo[e.target.name] = e.target.value;
         return this.setState({empDetails});
     };
 
     onProjectStartDateChange = (e, date) => {
-        this.setState({
-            ...this.state.empDetails.recruiter, projectStartDate: date,
-        });
-        // let empDetails = Object.assign({}, this.state.empDetails);
-        // empDetails.recruiter[e.target.name] = [e.target.value];
-        // return this.setState({empDetails});
+        // this.setState({
+        //     ...this.state.empDetails.recruiter, projectStartDate: date,
+        // });
+        let empDetails = Object.assign({}, this.state.empDetails);
+        empDetails.recruiter["projectStartDate"] = moment(date).valueOf();
+        return this.setState({empDetails});
     };
 
     onPlacementDateChange = (e, date) => {
-        this.setState({
-            ...this.state.empDetails.recruiter, placementDate: date,
-        });
+        // this.setState({
+        //     ...this.state.empDetails.recruiter, placementDate: date,
+        // });
+        let empDetails = Object.assign({}, this.state.empDetails);
+        empDetails.recruiter["placementDate"] = moment(date).valueOf();
+        return this.setState({empDetails});
     };
 
     onRecruiterChange = (e) => {
         let empDetails = Object.assign({}, this.state.empDetails);
-        empDetails.recruiter[e.target.name] = [e.target.value];
+        empDetails.recruiter[e.target.name] = e.target.value;
         if(e.target.name === "applicationType"){
-            empDetails.taskInfo["applicationType"] = [e.target.value];
+            empDetails.taskInfo["applicationType"] = e.target.value;
         }        
         return this.setState({empDetails});
     };
 
     onTaskInfoChange = (e) => {
         let empDetails = Object.assign({}, this.state.empDetails);
-        empDetails.taskInfo[e.target.name] = [e.target.value];
+        empDetails.taskInfo[e.target.name] = e.target.value;
         empDetails.taskInfo["isTaskCreated"] = true;
+        empDetails.taskInfo["isTaskPending"] = false;
+        empDetails.taskInfo["isTaskCompleted"] = false;
         empDetails.taskInfo["taskCreatedDate"] = moment().valueOf();
         return this.setState({empDetails});
     };
@@ -190,9 +193,12 @@ class CreateTask extends Component {
     };
 
     onRectrSentPlacDetChange = (e, date) => {
-        this.setState({
-            ...this.state.empDetails.recruiter, rectrSentPlacDet: date,
-        });
+        // this.setState({
+        //     ...this.state.empDetails.recruiter, rectrSentPlacDate: date,
+        // });
+        let empDetails = Object.assign({}, this.state.empDetails);
+        empDetails.recruiter["rectrSentPlacDate"] = moment(date).valueOf();
+        return this.setState({empDetails});
     };
 
     componentDidMount(props) {
@@ -273,7 +279,7 @@ class CreateTask extends Component {
         if(!empDetails.taskInfo.taskPrioirty) errors.taskPrioirty = "Please Select";
         if(!empDetails.recruiter.clientLetterStatus) errors.clientLetterStatus = "Please Select";
         if(!empDetails.recruiter.empVerifiedWrkLocation) errors.empVerifiedWrkLocation = "Can't be empty";
-        // if(!Validator.isISO8601(empDetails.recruiter.rectrSentPlacDet)) errors.rectrSentPlacDet = "Select a Date";
+        // if(!Validator.isISO8601(empDetails.recruiter.rectrSentPlacDate)) errors.rectrSentPlacDate = "Select a Date";
         if(!empDetails.recruiter.rectrSentVenAgreeSignedCopy) errors.rectrSentVenAgreeSignedCopy = "Please Select";
 
 
@@ -297,33 +303,33 @@ class CreateTask extends Component {
                             <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                                 <Card title="EmployeeDetails">
                                 <Form.Item error={!!errors.firstName}  label="First Name" className= "firstName">
-                                    <Input id="firstName" type="firstName" name="firstName" value= {empDetails.firstName} onChange={this.onChange} placeholder="First Name" />
+                                    <Input id="firstName" type="text" name="firstName" value= {empDetails.firstName} onChange={this.onChange} placeholder="First Name" />
                                         {errors.firstName && <InlineError text= {errors.firstName}/>}
                                 </Form.Item>
 
                                 <Form.Item error={!!errors.lastName} label="Last Name">
-                                    <Input id="lastName" type="lastName" name="lastName" value= {empDetails.lastName} onChange={this.onChange} placeholder="Last Name" />
+                                    <Input id="lastName" type="text" name="lastName" value= {empDetails.lastName} onChange={this.onChange} placeholder="Last Name" />
                                     {errors.lastName && <InlineError text= {errors.lastName}/>}
                                 </Form.Item>
 
                                 <Form.Item error={!!errors.emailId01} label="Primary Email:">
-                                    <Input id="emailId01" type="emailId01" name="emailId01" value= {empDetails.emailId01} onChange={this.onChange} placeholder="Primary Email" />
+                                    <Input id="emailId01" type="text" name="emailId01" value= {empDetails.emailId01} onChange={this.onChange} placeholder="Primary Email" />
                                     {errors.emailId01 && <InlineError text= {errors.emailId01}/>}
                                 </Form.Item>
 
                                 <Form.Item error={!!errors.emailId02} label="Secondary Email:">
-                                    <Input id="emailId02" type="emailId02" name="emailId02" value= {empDetails.emailId02}onChange={this.onChange} placeholder="Secondary Email" />
+                                    <Input id="emailId02" type="text" name="emailId02" value= {empDetails.emailId02}onChange={this.onChange} placeholder="Secondary Email" />
                                     {errors.emailId02 && <InlineError text= {errors.emailId02}/>}
                                 </Form.Item>
 
                                 <Form.Item error={!!errors.phoneNo} label="Phone Number:">
-                                    <Input id="phoneNo" type="phoneNo" name="phoneNo" value={empDetails.phoneNo}onChange={this.onChange} placeholder= "(000) 000-0000"/>
+                                    <Input id="phoneNo" type="number" max={10} name="phoneNo" value={empDetails.phoneNo}onChange={this.onChange} placeholder= "(000) 000-0000"/>
                                     {errors.phoneNo && <InlineError text= {errors.phoneNo}/>}
                                 </Form.Item>
 
                                 </Card>
                             </Col>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                                 <Card title="Contact Details">
                                     
                                     <Form.Item error={!!errors.address1}  label="Address 1">
@@ -364,23 +370,23 @@ class CreateTask extends Component {
                             <Col >
                                 <Card title="Work Location">
                                     <Form.Item error={!!errors.address1} label="Address 1">
-                                            <Input id="address1" type="address1" name="address1"value= {empDetails.workInfo.workLocation.address1} onChange={this.onWorkLocationChange} placeholder="Address 1" />
+                                            <Input id="address1" type="text" name="address1"value= {empDetails.workInfo.workLocation.address1} onChange={this.onWorkLocationChange} placeholder="Address 1" />
                                             {errors.address1 && <InlineError text= {errors.address1}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.address2}  label="Address 2">
-                                            <Input id="address2" type="address2" name="address2" value= {empDetails.workInfo.workLocation.address2} onChange={this.onWorkLocationChange} placeholder="Address 2" />
+                                            <Input id="address2" type="text" name="address2" value= {empDetails.workInfo.workLocation.address2} onChange={this.onWorkLocationChange} placeholder="Address 2" />
                                             {errors.address2 && <InlineError text= {errors.address2}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.city}  label="City">
-                                        <Input id="city" type="city" name="city" value= {empDetails.workInfo.workLocation.city} onChange={this.onWorkLocationChange}placeholder="City" />
+                                        <Input id="city" type="text" name="city" value= {empDetails.workInfo.workLocation.city} onChange={this.onWorkLocationChange}placeholder="City" />
                                         {errors.city && <InlineError text= {errors.city}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.state}  label="State">
-                                        <Input id="state" type="state" name="state" value= {empDetails.workInfo.workLocation.state} onChange={this.onWorkLocationChange} placeholder="State" />
+                                        <Input id="state" type="text" name="state" value= {empDetails.workInfo.workLocation.state} onChange={this.onWorkLocationChange} placeholder="State" />
                                         {errors.state && <InlineError text= {errors.state}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.zipCode}  label="Zip Code">
-                                        <Input id="zipCode" type="zipCode" name="zipCode" value={empDetails.workInfo.workLocation.zipCode}onChange={this.onWorkLocationChange} placeholder= "Enter Your Zipcode"/>
+                                        <Input id="zipCode" type="number" name="zipCode" value={empDetails.workInfo.workLocation.zipCode}onChange={this.onWorkLocationChange} placeholder= "Enter Your Zipcode"/>
                                         {errors.zipCode && <InlineError text= {errors.zipCode}/>}
                                     </Form.Item>
 
@@ -400,27 +406,27 @@ class CreateTask extends Component {
                                             {errors.clientName && <InlineError text= {errors.clientName}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.managerName}  label="Manager Name">
-                                            <Input id="managerName" type="managerName" name="managerName" value= {empDetails.clientInfo.managerName} onChange={this.onClientInfoChange} placeholder="Manager First Last" />
+                                            <Input id="managerName" type="text" name="managerName" value= {empDetails.clientInfo.managerName} onChange={this.onClientInfoChange} placeholder="Manager First Last" />
                                             {errors.managerName && <InlineError text= {errors.managerName}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.address1} label="Address 1">
-                                            <Input id="address1" type="address1" name="address1"value= {empDetails.clientInfo.clientAddress.address1} onChange={this.onClientAddressChange} placeholder="Address 1" />
+                                            <Input id="address1" type="text" name="address1"value= {empDetails.clientInfo.clientAddress.address1} onChange={this.onClientAddressChange} placeholder="Address 1" />
                                             {errors.address1 && <InlineError text= {errors.address1}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.address2} label="Address 2">
-                                            <Input id="address2" type="address2" name="address2" value= {empDetails.clientInfo.clientAddress.address2} onChange={this.onClientAddressChange} placeholder="Address 2" />
+                                            <Input id="address2" type="text" name="address2" value= {empDetails.clientInfo.clientAddress.address2} onChange={this.onClientAddressChange} placeholder="Address 2" />
                                             {errors.address2 && <InlineError text= {errors.address2}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.city} label="City">
-                                            <Input id="city" type="city" name="city"value= {empDetails.clientInfo.clientAddress.city} onChange={this.onClientAddressChange} placeholder="City" />
+                                            <Input id="city" type="text" name="city"value= {empDetails.clientInfo.clientAddress.city} onChange={this.onClientAddressChange} placeholder="City" />
                                             {errors.city && <InlineError text= {errors.city}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.state} label="State">
-                                            <Input id="state" type="state" name="state" value= {empDetails.clientInfo.clientAddress.state} onChange={this.onClientAddressChange} placeholder="State" />
+                                            <Input id="state" type="text" name="state" value= {empDetails.clientInfo.clientAddress.state} onChange={this.onClientAddressChange} placeholder="State" />
                                             {errors.state && <InlineError text= {errors.state}/>}
                                     </Form.Item>
                                     <Form.Item error={!!errors.zipCode} label="Zip Code">
-                                            <Input id="zipCode" type="zipCode" name="zipCode" value={empDetails.clientInfo.clientAddress.zipCode} onChange={this.onClientAddressChange} placeholder= "Enter Your Zipcode"/>
+                                            <Input id="zipCode" type="number" name="zipCode" value={empDetails.clientInfo.clientAddress.zipCode} onChange={this.onClientAddressChange} placeholder= "Enter Your Zipcode"/>
                                             {errors.zipCode && <InlineError text= {errors.zipCode}/>}
                                     </Form.Item>
 
@@ -445,15 +451,15 @@ class CreateTask extends Component {
                                             {errors.vendorName && <InlineError text= {errors.vendorName}/>}
                                         </Form.Item>
                                         <Form.Item error={!!errors.vendorContact} label="Vendor Phone">
-                                            <Input id="vendorContact" type="vendorContact" name="vendorContact" value={empDetails.vendorInfo.vendorContact} onChange={this.onVendorInfoChange} placeholder= "(000) 000-0000"/>
+                                            <Input id="vendorContact" type="number" maxLength="10" name="vendorContact" value={empDetails.vendorInfo.vendorContact} onChange={this.onVendorInfoChange} placeholder= "(000) 000-0000"/>
                                             {errors.vendorContact && <InlineError text= {errors.vendorContact}/>}
                                         </Form.Item>
                                         <Form.Item error={!!errors.venContName} label="Vendor Contact Person">
-                                            <Input id="venContName" type="venContName" name="venContName"value= {empDetails.vendorInfo.venContName} onChange={this.onVendorInfoChange} placeholder="Vendor Contact Name" />
+                                            <Input id="venContName" type="text" name="venContName"value= {empDetails.vendorInfo.venContName} onChange={this.onVendorInfoChange} placeholder="Vendor Contact Name" />
                                              {errors.venContName && <InlineError text= {errors.venContName}/>}
                                         </Form.Item>
                                         <Form.Item error={!!errors.venContPhone} label="Vendor Contact Person Phone">
-                                            <Input id="venContPhone" type="venContPhone" name="venContPhone" value={empDetails.vendorInfo.venContPhone} onChange={this.onVendorInfoChange} placeholder= "(000) 000-0000" />
+                                            <Input id="venContPhone" type="number" maxLength="10"  name="venContPhone" value={empDetails.vendorInfo.venContPhone} onChange={this.onVendorInfoChange} placeholder= "(000) 000-0000" />
                                             {errors.venContPhone && <InlineError text= {errors.venContPhone}/>}
                                         </Form.Item>
                                     </Card>
@@ -495,14 +501,14 @@ class CreateTask extends Component {
 
                                 </Card>
                             </Col>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12} >
                             <Card title=""> 
                                 <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
                                     <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={empDetails.recruiter.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
                                     {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
                                 </Form.Item>
                                 <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
-                                    <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {empDetails.recruiter.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
+                                    <RadioGroup name="empVerifiedWrkLocation" options={options} onChange={this.onRecruiterChange} />
                                     {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
                                 </Form.Item>
                                 <Form.Item error={!!errors.placementDate} label="Placement Date">
@@ -517,9 +523,9 @@ class CreateTask extends Component {
                                     <DatePicker onChange={this.onDocsCollectingStartDateChange} placeholder= "Collection Start" defaultValue ={empDetails.recruiter.docsCollectingStartDate}/>
                                     {errors.docsCollectingStartDate && <InlineError text= {errors.docsCollectingStartDate}/>}
                                 </Form.Item>
-                                <Form.Item error={!!errors.rectrSentPlacDet} label="Recruiter Sent Placement Details ">
-                                    <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={empDetails.recruiter.rectrSentPlacDet}/>
-                                    {errors.rectrSentPlacDet && <InlineError text= {errors.rectrSentPlacDet}/>}
+                                <Form.Item error={!!errors.rectrSentPlacDate} label="Recruiter Sent Placement Details ">
+                                    <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={empDetails.recruiter.rectrSentPlacDate}/>
+                                    {errors.rectrSentPlacDate && <InlineError text= {errors.rectrSentPlacDate}/>}
                                 </Form.Item>
                                 <Form.Item error={!!errors.taskPrioirty} label="Task Priority">                                        
                                     <RadioGroup name="taskPrioirty" options={taskPrioity} onChange={this.onTaskInfoChange} />

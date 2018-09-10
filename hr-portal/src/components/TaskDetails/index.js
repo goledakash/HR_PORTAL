@@ -29,6 +29,16 @@ class TaskDetails extends Component {
             taskSelected:{}            
         }
     };
+    onCommentsSubmit = (data) => { 
+        let taskSelected = this.state.taskSelected;
+        taskSelected.comments = data;
+        this.setState({taskSelected});
+    }
+    onTaskInfoSubmit = (data) => { 
+        let taskSelected = this.state.taskSelected;
+        taskSelected.taskInfo = data;
+        this.setState({taskSelected});
+    }
     onAccordionSubmit = (data, key) => { 
         let taskSelected = this.state.taskSelected;
         taskSelected.business[key] = data;
@@ -91,7 +101,8 @@ class TaskDetails extends Component {
                         <FromEmployee  {...this.props} onEmpDetailsSubmit={this.onEmpDetailsSubmit} />
                     </Panel>
                     <Panel header="From Recruiter" key="2">
-                            <Recruiter {...this.props} onAccordionSubmit={this.onAccordionSubmit} />
+                            <Recruiter {...this.props} onAccordionSubmit={this.onAccordionSubmit}
+                            onTaskInfoSubmit={this.onTaskInfoSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
                     </Panel>
                     <Panel header="LCA Documents and Application for Certification" key="3">
                             <LCA {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>

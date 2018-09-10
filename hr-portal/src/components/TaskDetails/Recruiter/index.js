@@ -90,9 +90,8 @@ class Recruiter extends Component {
 
       handleOk = (e) => {
         console.log(e);
-        this.setState({
-          visible: false,
-        });
+        this.props.onCommentsSubmit(this.state.comments);
+        this.setState({ visible: false});
       }
     
       handleCancel = (e) => {
@@ -106,10 +105,7 @@ class Recruiter extends Component {
     onProjectStartDateChange = (e, date) => {
         this.setState({
             ...this.state.step2, projectStartDate: date,
-        });
-        // let empDetails = Object.assign({}, this.state.empDetails);
-        // empDetails.recruiter[e.target.name] = [e.target.value];
-        // return this.setState({empDetails});
+        });        
     };
 
     onRecruiterChange = (e) => {
@@ -154,6 +150,7 @@ class Recruiter extends Component {
     }    
     onSubmitButtonClicked = () => {
         this.props.onAccordionSubmit(this.state.step2, "step2");
+        this.props.onTaskInfoSubmit(this.state.taskInfo);
     }
 
     render() { 
@@ -163,22 +160,15 @@ class Recruiter extends Component {
                     <Form>  
                         <Row>
                             <Col  xs={12} sm={12} md={12} lg={12} xl={12} >
-                                <Card title="Recruiter Details">
-                                    
+                                <Card title="Recruiter Details">                                    
                                     <Form.Item error={!!errors.empSignedOfferLetter}  label="Is Offer Letter Signed by Employee?">                                        
                                         <RadioGroup name="empSignedOfferLetter" options={options} onChange={this.onRecruiterChange} />
                                         {errors.empSignedOfferLetter && <InlineError text= {errors.empSignedOfferLetter}/>}
-                                    </Form.Item>
-                                    
-                                    
+                                    </Form.Item>                                                                        
                                     <Form.Item error={!!errors.applicationType} label="Applied H1 Application Type?">                                        
                                         <RadioGroup name="applicationType" options={h1applicationType} onChange={this.onRecruiterChange} />
                                         {errors.applicationType && <InlineError text= {errors.applicationType}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.docsCollectingStartDate} label="Documents Collection Start">
-                                        <DatePicker onChange={this.onDocsCollectingStartDateChange} placeholder= "Collection Start" defaultValue ={step2.docsCollectingStartDate}/>
-                                        {errors.docsCollectingStartDate && <InlineError text= {errors.docsCollectingStartDate}/>}
-                                    </Form.Item>
+                                    </Form.Item>                                    
                                     <Form.Item error={!!errors.employerRelationDocuments}  label="Are Employer-Employee relation documents needed?">                                        
                                         <RadioGroup name="employerRelationDocuments" options={options} onChange={this.onRecruiterChange} />
                                         {errors.employerRelationDocuments && <InlineError text= {errors.employerRelationDocuments}/>}
@@ -190,36 +180,14 @@ class Recruiter extends Component {
                                     <Form.Item error={!!errors.clientLetterStatus}  label="Client Letter Status?">                                        
                                         <RadioGroup name="clientLetterStatus" options={letterStatus} onChange={this.onRecruiterChange} />
                                         {errors.clientLetterStatus && <InlineError text= {errors.clientLetterStatus}/>}
-                                    </Form.Item>                                    
-                                    <Form.Item error={!!errors.rectrSentPlacDet} label="Recruiter Sent Placement Details ">
-                                        <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={step2.rectrSentPlacDet}/>
-                                        {errors.rectrSentPlacDet && <InlineError text= {errors.rectrSentPlacDet}/>}
-                                    </Form.Item>
+                                    </Form.Item>                                                                        
                                     <Form.Item error={!!errors.rectrSentVenAgreeSignedCopy} label="Agreement signed by Vendor?">                                        
                                         <RadioGroup name="rectrSentVenAgreeSignedCopy" options={options} onChange={this.onRecruiterChange}  />
                                         {errors.rectrSentVenAgreeSignedCopy && <InlineError text= {errors.rectrSentVenAgreeSignedCopy}/>}
                                     </Form.Item>
                                 </Card>
                             </Col>
-                            <Col xs={8} sm={8} md={8} lg={8} xl={8}>
-                                <Card title="">
-                                <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
-                                        <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={step2.projectStartDate}/>
-                                        {errors.projectStartDate && <InlineError text= {errors.projectStartDate}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
-                                        <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={step2.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
-                                        {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.empVerifiedWrkLocation} label="Employee Verified Work Location">
-                                        <Input id="empVerifiedWrkLocation" type="empVerifiedWrkLocation" name="empVerifiedWrkLocation" value= {step2.empVerifiedWrkLocation} onChange={this.onRecruiterChange} placeholder="Emp Verified Work Loc'n" />
-                                        {errors.empVerifiedWrkLocation && <InlineError text= {errors.empVerifiedWrkLocation}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.placementDate} label="Placement Date">
-                                        <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={step2.placementDate}/>
-                                        {errors.placementDate && <InlineError text= {errors.placementDate}/>}
-                                    </Form.Item>
-                                </Card>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12}>                                
                                 <Card title="">
                                     <Form.Item error={!!errors.projectStartDate} label="Project Start Date">
                                         <DatePicker onChange={this.onProjectStartDateChange} placeholder= "Project Start Date" defaultValue={step2.projectStartDate}/>
@@ -236,6 +204,14 @@ class Recruiter extends Component {
                                     <Form.Item error={!!errors.placementDate} label="Placement Date">
                                         <DatePicker onChange={this.onPlacementDateChange} placeholder= "Placement Date" defaultValue={step2.placementDate}/>
                                         {errors.placementDate && <InlineError text= {errors.placementDate}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.rectrSentPlacDet} label="Recruiter Sent Placement Details ">
+                                        <DatePicker onChange={this.onRectrSentPlacDetChange} placeholder= "Rec Pl'mt Date"defaultValue={step2.rectrSentPlacDet}/>
+                                        {errors.rectrSentPlacDet && <InlineError text= {errors.rectrSentPlacDet}/>}
+                                    </Form.Item>
+                                    <Form.Item error={!!errors.docsCollectingStartDate} label="Documents Collection Start">
+                                        <DatePicker onChange={this.onDocsCollectingStartDateChange} placeholder= "Collection Start" defaultValue ={step2.docsCollectingStartDate}/>
+                                        {errors.docsCollectingStartDate && <InlineError text= {errors.docsCollectingStartDate}/>}
                                     </Form.Item>
                                 </Card>
                                 <Card title="">

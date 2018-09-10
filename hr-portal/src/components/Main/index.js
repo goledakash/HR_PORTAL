@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { Menu, Icon, List, Button, Tabs, Row, Col, Layout} from 'antd';
+import { Menu, Icon, List, Button, Tabs, Row, Col, Layout, Badge} from 'antd';
 // import Header from '../Header';
 import { Link } from "react-router-dom";
 import { getEmployeeListFromFirebase } from "../../redux/actions/Main";
@@ -85,13 +85,16 @@ class Main extends Component {
                     </Header>
                     <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
                         <Tabs defaultActiveKey="1" >
-                            <TabPane tab="Pending" key="1">
+                            <TabPane tab="Created Tasks" key="1">
                                 <List bordered dataSource={taskList} renderItem={item => 
-                                    (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}>{item.empDetails.firstName} {item.empDetails.lastName}</List.Item>)
-                                    }/>
+                                    (item.empDetails.taskInfo.isTaskCreated && (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType} </List.Item>))}/>
                             </TabPane>
-                            <TabPane tab="Completed" key="2">
-                                <List bordered dataSource={this.state.dataEmployeeArray} renderItem={item => (<List.Item onClick={() => this.onTaskClick(item.empId)}>{item.firstName} {item.lastName}</List.Item>)}/>
+                            <TabPane tab="Pending Tasks" key="2">
+                                <List bordered dataSource={taskList} renderItem={item => 
+                                    (item.empDetails.taskInfo.isTaskPending ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
+                            </TabPane>
+                            <TabPane tab="Completed" key="3">
+                                <List bordered dataSource={taskList} renderItem={item =>(item.empDetails.taskInfo.isTaskCompleted ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
                             </TabPane>
                         </Tabs>
                     </Content>

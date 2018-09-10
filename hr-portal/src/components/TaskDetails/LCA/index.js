@@ -99,33 +99,8 @@ class LCA extends Component {
             <div>
                 <Form>  
                         <Row>
-                            <Col>
-                                <Card title="LCA Details">
-                                    <Form.Item error={!!errors.dependencies}  label="Any Dependencies?">                                        
-                                        <RadioGroup name="dependencies" options={options} onChange={this.onLCAChange} />
-                                        {errors.dependencies && <InlineError text= {errors.dependencies}/>}
-                                    </Form.Item>
-
-                                    <Form.Item error={!!errors.empVerWorkLocation}  label="Is Employee location Verified?">                                        
-                                        <RadioGroup name="empVerWorkLocation" options={options} onChange={this.onLCAChange} />
-                                        {errors.empVerWorkLocation && <InlineError text= {errors.empVerWorkLocation}/>}
-                                    </Form.Item>
-
-                                    <Form.Item error={!!errors.rolesRespSubmittedByEmp}  label="Roles and Responsibilities Submitted?">                                        
-                                        <RadioGroup name="rolesRespSubmittedByEmp" options={options} onChange={this.onLCAChange} />
-                                        {errors.rolesRespSubmittedByEmp && <InlineError text= {errors.rolesRespSubmittedByEmp}/>}
-                                    </Form.Item>
-
-                                    <Form.Item error={!!errors.rolesRespSubmittedByEmp}  label="Roles and Responsibilities Verified?">                                        
-                                        <RadioGroup name="rolesRespVerified" options={options} onChange={this.onLCAChange} />
-                                        {errors.rolesRespVerified && <InlineError text= {errors.rolesRespVerified}/>}
-                                    </Form.Item>
-
-                                    <Form.Item error={!!errors.infoUptdToPortalByBiz}  label="Has business updated the portal?">                                        
-                                        <RadioGroup name="infoUptdToPortalByBiz" options={options} onChange={this.onLCAChange} />
-                                        {errors.infoUptdToPortalByBiz && <InlineError text= {errors.infoUptdToPortalByBiz}/>}
-                                    </Form.Item>
-
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+                                <Card title="LCA Details">                                
                                     <Form.Item error={!!errors.reviewUnCertLCA}  label="Reviewed Uncertified LCA?">                                        
                                         <RadioGroup name="reviewUnCertLCA" options={options} onChange={this.onLCAChange} />
                                         {errors.reviewUnCertLCA && <InlineError text= {errors.reviewUnCertLCA}/>}
@@ -155,11 +130,34 @@ class LCA extends Component {
                                         <RadioGroup name="lcaSentToEmployee" options={options} onChange={this.onLCAChange} />
                                         {errors.lcaSentToEmployee && <InlineError text= {errors.lcaSentToEmployee}/>}
                                     </Form.Item>
+                                </Card>
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+                                <Card title="LCA Details">
+                                <Form.Item error={!!errors.dependencies}  label="Any Dependencies?">                                        
+                                        <RadioGroup name="dependencies" options={options} onChange={this.onLCAChange} />
+                                        {errors.dependencies && <InlineError text= {errors.dependencies}/>}
+                                    </Form.Item>
 
-                                    <Form.Item >
-                                    <Button type="primary" onClick={this.onSubmit}>Submit</Button>
-                                    </Form.Item >
+                                    <Form.Item error={!!errors.empVerWorkLocation}  label="Is Employee location Verified?">                                        
+                                        <RadioGroup name="empVerWorkLocation" options={options} onChange={this.onLCAChange} />
+                                        {errors.empVerWorkLocation && <InlineError text= {errors.empVerWorkLocation}/>}
+                                    </Form.Item>
 
+                                    <Form.Item error={!!errors.rolesRespSubmittedByEmp}  label="Roles and Responsibilities Submitted?">                                        
+                                        <RadioGroup name="rolesRespSubmittedByEmp" options={options} onChange={this.onLCAChange} />
+                                        {errors.rolesRespSubmittedByEmp && <InlineError text= {errors.rolesRespSubmittedByEmp}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.rolesRespSubmittedByEmp}  label="Roles and Responsibilities Verified?">                                        
+                                        <RadioGroup name="rolesRespVerified" options={options} onChange={this.onLCAChange} />
+                                        {errors.rolesRespVerified && <InlineError text= {errors.rolesRespVerified}/>}
+                                    </Form.Item>
+
+                                    <Form.Item error={!!errors.infoUptdToPortalByBiz}  label="Has business updated the portal?">                                        
+                                        <RadioGroup name="infoUptdToPortalByBiz" options={options} onChange={this.onLCAChange} />
+                                        {errors.infoUptdToPortalByBiz && <InlineError text= {errors.infoUptdToPortalByBiz}/>}
+                                    </Form.Item>
                                 </Card>
                             </Col>
                         </Row>
