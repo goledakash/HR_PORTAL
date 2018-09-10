@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Validator from 'validator';
 import InlineError from '../../messages/InlineError';
 import { Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
+import ModalDisplay from '../ModalDisplay';
 
 const options = [
     { label: 'yes', value: 'yes' },
@@ -27,6 +28,17 @@ class AttorneyReceivedDocs extends Component {
                 tmStAttroneyReceivedAllDocsFromBusiness:"",
                 tmEdAttroneyReceivedAllDocsFromBusiness:"",
               },
+              comments:[{
+                taskMsg:"",
+                empMsg:"",
+                businessMsg:"",
+                createdAt:"",
+                loggedInUser:"",
+                taskAssignedTo:"",
+                taskToBeCmpDueDate:"",
+                taskCmpExpDueDate:"",
+              }],
+              visible: false,
             errors: {},
          }
     }
@@ -36,6 +48,13 @@ class AttorneyReceivedDocs extends Component {
             let step6 =  this.props.taskSelected.business.step6;
             this.setState({step6})
         }
+    }
+
+
+    onModalClick = (dataFromModal) => {
+        this.setState({
+            ...this.state, comments: dataFromModal,
+        });
     }
 
     onAttorneyReceivedChange= (e) => {
@@ -74,6 +93,10 @@ class AttorneyReceivedDocs extends Component {
                                 </Card>
                             </Col>
                         </Row>
+                        <Row>
+                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                        </Row>
+                        <br />
                         <Row>
                             <Col>   
                                 <div>

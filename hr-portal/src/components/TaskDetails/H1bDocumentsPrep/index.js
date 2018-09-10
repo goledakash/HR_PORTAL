@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import  Validator from 'validator';
 import InlineError from '../../messages/InlineError';
 import { Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
+import ModalDisplay from '../ModalDisplay';
+
 
 const options = [
     { label: 'yes', value: 'yes' },
@@ -45,9 +47,21 @@ class H1bDocumentsPrep extends Component {
                 tmStRecvdAllH1bDocsFrmEmp:"",
                 tmEdRecvdAllH1bDocsFrmEmp:"",        
               },
+              comments:[{
+                taskMsg:"",
+                empMsg:"",
+                businessMsg:"",
+                createdAt:"",
+                loggedInUser:"",
+                taskAssignedTo:"",
+                taskToBeCmpDueDate:"",
+                taskCmpExpDueDate:"",
+              }],
+              visible: false,
               errors: {},
          }
     }
+
 
 
     onH1BDocPrepChange = (e) => {
@@ -61,6 +75,13 @@ class H1bDocumentsPrep extends Component {
             let step5 =  this.props.taskSelected.business.step5;
             this.setState({step5})
         }
+    }
+
+
+    onModalClick = (dataFromModal) => {
+        this.setState({
+            ...this.state, comments: dataFromModal,
+        });
     }
 
     onCancelButtonClicked = () => {
@@ -127,6 +148,11 @@ class H1bDocumentsPrep extends Component {
                                 </Card>
                             </Col>
                         </Row>
+
+                        <Row>
+                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                        </Row>
+                        <br />
                         <Row>
                             <Col>   
                                 <div>

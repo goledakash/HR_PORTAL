@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import  Validator from 'validator';
 import InlineError from '../../messages/InlineError';
 import { Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
+import ModalDisplay from '../ModalDisplay';
 
 const options = [
     { label: 'yes', value: 'yes' },
@@ -49,8 +50,26 @@ class LCA extends Component {
                 taskStartedTotalTime:"",
                 lcaSentToEmployee:true    
               },
+              comments:[{
+                taskMsg:"",
+                empMsg:"",
+                businessMsg:"",
+                createdAt:"",
+                loggedInUser:"",
+                taskAssignedTo:"",
+                taskToBeCmpDueDate:"",
+                taskCmpExpDueDate:"",
+              }],
+              visible: false,
               errors: {},
          }
+    }
+
+
+    onModalClick = (dataFromModal) => {
+        this.setState({
+            ...this.state, comments: dataFromModal,
+        });
     }
 
     onAppliedLCADateChange = (e, date) => {
@@ -164,6 +183,10 @@ class LCA extends Component {
                                 </Card>
                             </Col>
                         </Row>
+                        <Row>
+                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                        </Row>
+                        <br />
                         <Row>
                             <Col>   
                                 <div>

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import  Validator from 'validator';
 import InlineError from '../../messages/InlineError';
 import { Modal, Collapse, Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
+import ModalDisplay from '../ModalDisplay';
 import moment from 'moment';
+
 
 const options = [
     { label: 'yes', value: 'yes' },
@@ -84,25 +86,11 @@ class Recruiter extends Component {
         }
     }
 
-    showModal = () => {
+    onModalClick = (dataFromModal) => {
         this.setState({
-          visible: true,
+            ...this.state, comments: dataFromModal,
         });
-      }
-
-      handleOk = (e) => {
-        console.log(e);
-        this.props.onCommentsSubmit(this.state.comments);
-        this.setState({ visible: false});
-      }
-    
-      handleCancel = (e) => {
-        console.log(e);
-        this.setState({
-          visible: false,
-        });
-      }
-    
+    }
 
     onProjectStartDateChange = (e, date) => {
         // this.setState({
@@ -153,12 +141,6 @@ class Recruiter extends Component {
         let step2 = Object.assign({}, this.state.step2);
         step2["rectrSentPlacDet"] = moment(date).valueOf();
         return this.setState({step2});
-    };
-
-    onBusinessMessageChange = (e) => {
-        let comments = Object.assign({}, this.state.comments);
-        comments[e.target.name] = e.target.value;
-        return this.setState({comments});
     };
 
     onCancelButtonClicked = () => {
@@ -242,34 +224,9 @@ class Recruiter extends Component {
                                 </Card>
                             </Col>
                         </Row>
+
                         <Row>
-                            <Col>
-                                <div>
-                                    <Button type="primary" onClick={this.showModal}>
-                                    Add Comments
-                                    </Button>
-                                    <Modal
-                                    title="Additional Comments"
-                                    visible={this.state.visible}
-                                    onOk={this.handleOk}
-                                    onCancel={this.handleCancel}
-                                    >
-                                    <Form.Item error={!!errors.taskMsg}  label="Task Comments">
-                                        <TextArea id="taskMsg" type="taskMsg" name="taskMsg" value={comments.taskMsg} onChange={this.onBusinessMessageChange} placeholder= "Add Task Comments if any" />
-                                        {errors.taskMsg && <InlineError text= {errors.taskMsg}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.empMsg}  label="Employee Comments">
-                                        <TextArea id="empMsg" type="empMsg" name="empMsg" value={comments.empMsg} onChange={this.onBusinessMessageChange} placeholder= "Add Comments for Employees" />
-                                        {errors.empMsg && <InlineError text= {errors.empMsg}/>}
-                                    </Form.Item>
-                                    <Form.Item error={!!errors.businessMsg}  label="Business Comments">
-                                        <TextArea id="businessMsg" type="businessMsg" name="businessMsg" value={comments.businessMsg} onChange={this.onBusinessMessageChange} placeholder= "Add Business Comments if any" />
-                                        {errors.businessMsg && <InlineError text= {errors.businessMsg}/>}
-                                    </Form.Item>
-                                    
-                                    </Modal>
-                                </div>
-                            </Col>
+                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
                         </Row>
                         <br />
                         <Row>
@@ -284,6 +241,9 @@ class Recruiter extends Component {
             </div>
          );
     }
+}
+
+Recruiter.defaultProps = {
 }
  
 export default Recruiter;

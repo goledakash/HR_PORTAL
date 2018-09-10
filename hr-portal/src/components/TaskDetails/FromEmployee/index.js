@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Button, Collapse, Tabs, Input, InputNumber, Select, Upload, Icon, Row, Col, Card, Radio, Form  } from 'antd';
 import InlineError from '../../messages/InlineError';
+import ModalDisplay from '../ModalDisplay';
 
 class FromEmployee extends Component {
     constructor(props) {
@@ -48,6 +49,17 @@ class FromEmployee extends Component {
                     "venContPhone":"",
                 }, 
             },
+            comments:[{
+                taskMsg:"",
+                empMsg:"",
+                businessMsg:"",
+                createdAt:"",
+                loggedInUser:"",
+                taskAssignedTo:"",
+                taskToBeCmpDueDate:"",
+                taskCmpExpDueDate:"",
+              }],
+              visible: false,
             errors:{
                 "empId":"",
                 "firstName": "",
@@ -94,6 +106,14 @@ class FromEmployee extends Component {
             this.setState({empDetails})
         }
     }    
+
+
+    onModalClick = (dataFromModal) => {
+        this.setState({
+            ...this.state, comments: dataFromModal,
+        });
+    }
+
     static getDerivedStateFromProps(props, state){        
         return null;
     }
@@ -254,6 +274,10 @@ class FromEmployee extends Component {
                         </Card>
                     </Col>
                 </Row>
+                <Row>
+                    <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                </Row>
+                <br />
                 <Row>
                     <Col>   
                         <div>
