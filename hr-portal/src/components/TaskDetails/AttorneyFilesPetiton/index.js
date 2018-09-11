@@ -70,11 +70,21 @@ class AttorneyFilesPetiton extends Component {
 
     }    
     onSubmitButtonClicked = () => {
+        this.setState({visible: true});
+    }
+    onHandleModalOkClicked = (dataFromModal) => {
+        this.setState({visible: false});
+        this.props.onAccordionSubmit(this.state.step8, "step8");
+        this.props.onCommentsSubmit(dataFromModal);
+    }
+
+    onHandleModalCanceledClicked = () => {
+        this.setState({visible: false});
         this.props.onAccordionSubmit(this.state.step8, "step8");
     }
 
     render() { 
-        const { step8, errors } = this.state;
+        const { step8, errors, visible } = this.state;
 
         return ( 
             <div>
@@ -102,7 +112,7 @@ class AttorneyFilesPetiton extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                            <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
                         </Row>
                         <br />
                         <Row>

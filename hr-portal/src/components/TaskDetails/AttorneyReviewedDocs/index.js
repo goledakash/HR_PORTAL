@@ -52,11 +52,11 @@ class AttorneyReviewedDocs extends Component {
     }
 
 
-    onModalClick = (dataFromModal) => {
-        this.setState({
-            ...this.state, comments: dataFromModal,
-        });
-    }
+    // onModalClick = (dataFromModal) => {
+    //     this.setState({
+    //         ...this.state, comments: dataFromModal,
+    //     });
+    // }
 
     onAttorneyReviewedChange= (e) => {
         let step7 = Object.assign({}, this.state.step7);
@@ -68,11 +68,20 @@ class AttorneyReviewedDocs extends Component {
 
     }    
     onSubmitButtonClicked = () => {
+        this.setState({visible: true});
+    }
+    onHandleModalOkClicked = (dataFromModal) => {
+        this.setState({visible: false});
         this.props.onAccordionSubmit(this.state.step7, "step7");
+        this.props.onCommentsSubmit(dataFromModal);
     }
 
+    onHandleModalCanceledClicked = () => {
+        this.setState({visible: false});
+        this.props.onAccordionSubmit(this.state.step7, "step7");
+    }
     render() { 
-        const { step7, errors } = this.state;
+        const { step7, errors, visible } = this.state;
 
         return ( 
             <div>
@@ -96,9 +105,8 @@ class AttorneyReviewedDocs extends Component {
                         </Row>
 
                         <Row>
-                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
-                        </Row>
-                        <br />
+                            <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
+                        </Row>                        
                         <Row>
                             <Col>   
                                 <div>

@@ -67,11 +67,20 @@ class AttorneyReceivedDocs extends Component {
 
     }    
     onSubmitButtonClicked = () => {
+        this.setState({visible: true});
+    }
+    onHandleModalOkClicked = (dataFromModal) => {
+        this.setState({visible: false});
         this.props.onAccordionSubmit(this.state.step6, "step6");
+        this.props.onCommentsSubmit(dataFromModal);
     }
 
+    onHandleModalCanceledClicked = () => {
+        this.setState({visible: false});
+        this.props.onAccordionSubmit(this.state.step6, "step6");
+    }
     render() { 
-        const { step6, errors } = this.state;
+        const { step6, errors, visible } = this.state;
 
         return ( 
             <div>
@@ -94,7 +103,7 @@ class AttorneyReceivedDocs extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                        <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
                         </Row>
                         <br />
                         <Row>

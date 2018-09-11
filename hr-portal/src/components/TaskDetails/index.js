@@ -98,7 +98,7 @@ class TaskDetails extends Component {
                 </Button>
                 <Collapse accordion>
                     <Panel header="From Employee" key="1">
-                        <FromEmployee  {...this.props} onEmpDetailsSubmit={this.onEmpDetailsSubmit} />
+                        <FromEmployee  {...this.props} onCommentsSubmit={this.onCommentsSubmit} onEmpDetailsSubmit={this.onEmpDetailsSubmit} />
                     </Panel>
                     <Panel header="From Recruiter" key="2">
                             <Recruiter {...this.props} onAccordionSubmit={this.onAccordionSubmit}

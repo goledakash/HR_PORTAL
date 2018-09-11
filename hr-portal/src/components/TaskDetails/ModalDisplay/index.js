@@ -24,25 +24,21 @@ class ModalDisplay extends Component {
          }
     }
 
-    showModal = () => {
-        this.setState({
-          visible: true,
-        });
-      }
+    // showModal = () => {
+    //     this.setState({
+    //       visible: true,
+    //     });
+    //   }
 
     handleOk = (e) => {
-        console.log(e);
-        this.setState({
-          visible: false,
-        });
-        this.props.onModalClickParent(this.state.comments);
+        //this.setState({visible: false});
+        //this.props.onModalClickParent(this.state.comments);
+        this.props.onHandleModalOkClicked(this.state.comments);
     }
     
     handleCancel = (e) => {
-        console.log(e);
-        this.setState({
-          visible: false,
-        });
+        //this.setState({visible: false});
+        this.props.onHandleModalCanceledClicked();
       }
 
     
@@ -71,10 +67,10 @@ class ModalDisplay extends Component {
             <div>
                 <Row>
                     <Col>
-                            <Button type="primary" onClick={this.showModal}>
+                            {/* <Button type="primary" onClick={this.showModal}>
                             Add Comments
-                            </Button>
-                            <Modal title="Additional Comments" visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel}>
+                            </Button> */}
+                            <Modal title="Additional Comments" visible={this.props.isVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
                                 
                                 <Form.Item error={!!errors.taskMsg}  label="Task Comments">
                                     <TextArea id="taskMsg" type="taskMsg" name="taskMsg" value={comments.taskMsg} onChange={this.onCommentsPropertiesChange} placeholder= "Add Task Comments if any" />
@@ -101,13 +97,12 @@ class ModalDisplay extends Component {
                                     {errors.taskCmpExpDueDate && <InlineError text= {errors.taskCmpExpDueDate}/>}
                                 </Form.Item>
 
-                                <Form.Item error={!!errors.taskAssignedTo} label="Employee Verified Work Location">
-                                    <Input id="taskAssignedTo" type="taskAssignedTo" name="taskAssignedTo" value= {comments.taskAssignedTo} onChange={this.onCommentsPropertiesChange} placeholder="Emp Verified Work Loc'n" />
+                                <Form.Item error={!!errors.taskAssignedTo} label="Task Assigned To">
+                                    <Input id="taskAssignedTo" type="text" name="taskAssignedTo" value= {comments.taskAssignedTo} onChange={this.onCommentsPropertiesChange} placeholder="Task Assigned To" />
                                     {errors.taskAssignedTo && <InlineError text= {errors.taskAssignedTo}/>}
                                 </Form.Item>
                             
-                            </Modal>
-                        
+                            </Modal>                        
                     </Col>
                 </Row>
             </div>

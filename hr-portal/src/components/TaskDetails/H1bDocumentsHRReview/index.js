@@ -65,10 +65,20 @@ class H1bDocumentsHRReview extends Component {
 
     }    
     onSubmitButtonClicked = () => {
+        this.setState({visible: true});
+    }
+    onHandleModalOkClicked = (dataFromModal) => {
+        this.setState({visible: false});
+        this.props.onAccordionSubmit(this.state.step5, "step5");
+        this.props.onCommentsSubmit(dataFromModal);
+    }
+
+    onHandleModalCanceledClicked = () => {
+        this.setState({visible: false});
         this.props.onAccordionSubmit(this.state.step5, "step5");
     }
     render() { 
-        const { step5, errors } = this.state;
+        const { step5, errors, visible } = this.state;
 
         return ( 
             <div>
@@ -90,7 +100,7 @@ class H1bDocumentsHRReview extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                        <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
                         </Row>
                         <br />
                         <Row>

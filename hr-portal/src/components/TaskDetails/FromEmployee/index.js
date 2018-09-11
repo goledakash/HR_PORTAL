@@ -59,7 +59,7 @@ class FromEmployee extends Component {
                 taskToBeCmpDueDate:"",
                 taskCmpExpDueDate:"",
               }],
-              visible: false,
+            visible: false,
             errors:{
                 "empId":"",
                 "firstName": "",
@@ -96,7 +96,7 @@ class FromEmployee extends Component {
                     "venContName":"",
                     "venContPhone":"",
                 }
-            }           
+            }  
         }
     }
     
@@ -108,11 +108,11 @@ class FromEmployee extends Component {
     }    
 
 
-    onModalClick = (dataFromModal) => {
-        this.setState({
-            ...this.state, comments: dataFromModal,
-        });
-    }
+    // onModalClick = (dataFromModal) => {
+    //     this.setState({
+    //         ...this.state, comments: dataFromModal,
+    //     });
+    // }
 
     static getDerivedStateFromProps(props, state){        
         return null;
@@ -127,15 +127,25 @@ class FromEmployee extends Component {
 
     }    
     onSubmitButtonClicked = () => {
+        this.setState({visible: true});
+    }
+
+    onHandleModalOkClicked = (dataFromModal) => {
+        this.setState({visible: false});
+        this.props.onEmpDetailsSubmit(this.state.empDetails, "empDetails");
+        this.props.onCommentsSubmit(dataFromModal);
+    }
+
+    onHandleModalCanceledClicked = () => {
+        this.setState({visible: false});
         this.props.onEmpDetailsSubmit(this.state.empDetails, "empDetails");
     }
 
     render() { 
-        const { errors } = this.state;
+        const { errors, empDetails, visible } = this.state;
         const { workLocation }  = this.state.empDetails.workInfo;
         const { clientAddress} = this.state.empDetails.clientInfo;
-        const { clientInfo } = this.state.empDetails;
-        const { empDetails  } = this.state;
+        const { clientInfo } = this.state.empDetails;        
         return ( 
             <div>
                 <Row>
@@ -275,9 +285,8 @@ class FromEmployee extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
-                </Row>
-                <br />
+                    <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
+                </Row>                
                 <Row>
                     <Col>   
                         <div>

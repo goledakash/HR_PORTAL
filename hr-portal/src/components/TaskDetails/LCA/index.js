@@ -66,11 +66,11 @@ class LCA extends Component {
     }
 
 
-    onModalClick = (dataFromModal) => {
-        this.setState({
-            ...this.state, comments: dataFromModal,
-        });
-    }
+    // onModalClick = (dataFromModal) => {
+    //     this.setState({
+    //         ...this.state, comments: dataFromModal,
+    //     });
+    // }
 
     onAppliedLCADateChange = (e, date) => {
         this.setState({
@@ -101,9 +101,18 @@ class LCA extends Component {
 
     }    
     onSubmitButtonClicked = () => {
+        this.setState({visible: true});
+    }
+    onHandleModalOkClicked = (dataFromModal) => {
+        this.setState({visible: false});
         this.props.onAccordionSubmit(this.state.step3, "step3");
+        this.props.onCommentsSubmit(dataFromModal);
     }
 
+    onHandleModalCanceledClicked = () => {
+        this.setState({visible: false});
+        this.props.onAccordionSubmit(this.state.step3, "step3");
+    }
     componentDidMount() {
         if(this.props.taskSelected.business){
             let step3 =  this.props.taskSelected.business.step3;
@@ -112,7 +121,7 @@ class LCA extends Component {
     }
 
     render() { 
-        const { step3, errors } = this.state;
+        const { step3, errors, visible } = this.state;
         const expectedApprovalDate =  step3.expectedApprovalDate ?  moment(step3.expectedApprovalDate) : moment();
         const approvedDateLCA = step3.approvedDateLCA ? moment(step3.approvedDateLCA) : moment();
         const appliedDateLCA = step3.appliedDateLCA ? moment(step3.appliedDateLCA) : moment();
@@ -184,9 +193,8 @@ class LCA extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
-                        </Row>
-                        <br />
+                            <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
+                        </Row>                        
                         <Row>
                             <Col>   
                                 <div>

@@ -86,11 +86,11 @@ class Recruiter extends Component {
         }
     }
 
-    onModalClick = (dataFromModal) => {
-        this.setState({
-            ...this.state, comments: dataFromModal,
-        });
-    }
+    // onModalClick = (dataFromModal) => {
+    //     this.setState({
+    //         ...this.state, comments: dataFromModal,
+    //     });
+    // }
 
     onProjectStartDateChange = (e, date) => {
         // this.setState({
@@ -147,12 +147,24 @@ class Recruiter extends Component {
 
     }    
     onSubmitButtonClicked = () => {
+        this.setState({visible: true});
+        
+    }
+    onHandleModalOkClicked = (dataFromModal) => {
+        this.setState({visible: false});
+        this.props.onAccordionSubmit(this.state.step2, "step2");
+        this.props.onTaskInfoSubmit(this.state.taskInfo);
+        this.props.onCommentsSubmit(dataFromModal);
+    }
+
+    onHandleModalCanceledClicked = () => {
+        this.setState({visible: false});
         this.props.onAccordionSubmit(this.state.step2, "step2");
         this.props.onTaskInfoSubmit(this.state.taskInfo);
     }
 
     render() { 
-        const { step2, errors, comments } = this.state;
+        const { step2, errors, comments, visible } = this.state;
         const projectStartDate =  step2.projectStartDate ? moment(+step2.projectStartDate) : moment(); 
         const placementDate = step2.placementDate ?  moment(step2.placementDate) : moment();
         const rectrSentPlacDet = step2.rectrSentPlacDet ? moment(step2.rectrSentPlacDet) : moment();
@@ -226,7 +238,7 @@ class Recruiter extends Component {
                         </Row>
 
                         <Row>
-                            <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>                      
+                        <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
                         </Row>
                         <br />
                         <Row>
