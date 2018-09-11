@@ -134,17 +134,17 @@ class LCA extends Component {
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.appliedDateLCA} label="Applied LCA Date">
-                                        <DatePicker onChange={this.onAppliedLCADateChange} placeholder= "Applied LCA Date" defaultValue={step3.appliedDateLCA} value={appliedDateLCA}/>
+                                        <DatePicker onChange={this.onAppliedLCADateChange} placeholder= "Applied LCA Date"  value={appliedDateLCA}/>
                                         {errors.appliedDateLCA && <InlineError text= {errors.appliedDateLCA}/>}
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.approvedDateLCA} label="Approved LCA Date">
-                                        <DatePicker onChange={this.onApprovedLCADateChange} placeholder= "Approved LCA Date" defaultValue={approvedDateLCA} value={approvedDateLCA}/>
+                                        <DatePicker onChange={this.onApprovedLCADateChange} placeholder= "Approved LCA Date"  value={approvedDateLCA}/>
                                         {errors.approvedDateLCA && <InlineError text= {errors.approvedDateLCA}/>}
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.expectedApprovalDate} label="Expeacted Approval Date">
-                                        <DatePicker onChange={this.onExpectedApprovalDateChange} placeholder= "Expeacted Approval Date"  value={expectedApprovalDate} defaultValue={expectedApprovalDate}/>
+                                        <DatePicker onChange={this.onExpectedApprovalDateChange} placeholder= "Expeacted Approval Date"  value={expectedApprovalDate} />
                                         {errors.expectedApprovalDate && <InlineError text= {errors.expectedApprovalDate}/>}
                                     </Form.Item>
 
