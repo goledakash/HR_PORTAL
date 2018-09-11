@@ -6,6 +6,7 @@ import { eventChannel } from 'redux-saga';
 import {signupSaveSuccessCreateAction, signupSaveErrorCreateAction} from '../actions/Auth';
 import {employeeSaveSuccessCreateAction, employeeSaveErrorCreateAction} from '../actions/Employee';
 import {employeeInfoSaveSuccessCreateAction, employeeInfoSaveErrorCreateAction} from '../actions/CreateTask';
+import {taskDetailsSaveSuccessCreateAction, taskDetailsSaveErrorCreateAction} from '../actions/TaskDetails';
 import {getEmployeeListSuccessResponse} from '../actions/Main';
 
 const database = firebase.database();
@@ -163,5 +164,27 @@ export function*  storeEmployeeInfoRegistrationData(action) {
         yield put(employeeInfoSaveSuccessCreateAction(response, action));
     } catch (error){
         yield put (employeeInfoSaveErrorCreateAction(error));
+    }
+}
+
+
+const insertTaskDetailsData = 
+(taskSelected) => {
+    const newEmployeeRef = database.ref('taskDetails').push();
+    return newEmployeeRef.set({
+        taskSelected: taskSelected,
+    });
+}
+
+// To Save Task Details Information
+export function*  storeTaskDetailsData(action) {
+    try{
+        const response = yield call(
+            insertTaskDetailsData, 
+            action.taskSelected,);
+        console.log(response);
+        yield put(taskDetailsSaveSuccessCreateAction(response, action));
+    } catch (error){
+        yield put (taskDetailsSaveErrorCreateAction(error));
     }
 }

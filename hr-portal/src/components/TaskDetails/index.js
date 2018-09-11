@@ -15,6 +15,8 @@ import AttorneyReceivedDocs from './AttorneyReceivedDocs';
 import AttorneyReviewedDocs from './AttorneyReviewedDocs';
 import AttorneyFilesPetiton from './AttorneyFilesPetiton';
 
+import { taskDetailsSaveToFirebaseDatabase } from "../../redux/actions/TaskDetails";
+
 
 const TabPane = Tabs.TabPane;
 const Panel = Collapse.Panel;
@@ -72,9 +74,11 @@ class TaskDetails extends Component {
         }        
         return null;
     };
+    
     onSubmit = () => {
-        this.props.dispatch(logoutUser(this.props.userObject.user.uid));
+        this.props.dispatch(taskDetailsSaveToFirebaseDatabase(this.state.taskSelected));
     };
+
     onChange = (e) => { 
         // let workLocation = this.state.workLocation;
         // workLocation[e.target.name] = [e.target.value];

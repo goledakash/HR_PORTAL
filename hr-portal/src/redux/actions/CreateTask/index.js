@@ -16,6 +16,6 @@ export const employeeInfoSaveSuccessCreateAction = (response, UIAction) => ({
   })
   
   export const employeeInfoSaveErrorCreateAction = (response) => ({
-    type: Types.EMPLOYEE_INFO_SAVE_DATABASE_SERVER_RESPONSE_SUCCESS,
+    type: Types.EMPLOYEE_INFO_SAVE_DATABASE_SERVER_RESPONSE_ERROR,
     response
   })
