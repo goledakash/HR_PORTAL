@@ -6,15 +6,14 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/Auth";
 import { Row, Col, Card, Radio } from 'antd';
 import { getTaskByEmpId } from "../../redux/actions/Employee";
-import FromEmployee from './FromEmployee';
-import LCA from './LCA';
-import Recruiter from './Recruiter';
-import H1bDocumentsPrep from './H1bDocumentsPrep';
 import H1bDocumentsHRReview from './H1bDocumentsHRReview';
 import AttorneyReceivedDocs from './AttorneyReceivedDocs';
 import AttorneyReviewedDocs from './AttorneyReviewedDocs';
 import AttorneyFilesPetiton from './AttorneyFilesPetiton';
-
+import H1bDocumentsPrep from './H1bDocumentsPrep';
+import FromEmployee from './FromEmployee';
+import Recruiter from './Recruiter';
+import LCA from './LCA';
 import { taskDetailsSaveToFirebaseDatabase } from "../../redux/actions/TaskDetails";
 
 
@@ -33,7 +32,7 @@ class TaskDetails extends Component {
     };
     onCommentsSubmit = (data) => { 
         let taskSelected = this.state.taskSelected;
-        taskSelected.comments = data;
+        taskSelected.comments.push(data);
         this.setState({taskSelected});
     }
     onTaskInfoSubmit = (data) => { 
@@ -109,22 +108,22 @@ class TaskDetails extends Component {
                             onTaskInfoSubmit={this.onTaskInfoSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
                     </Panel>
                     <Panel header="LCA Documents and Application for Certification" key="3">
-                            <LCA {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
+                            <LCA {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
                     </Panel>
                     <Panel header="Upload your H1B Documents" key="4">
-                            <H1bDocumentsPrep {...this.props} onAccordionSubmit={this.onAccordionSubmit} />
+                            <H1bDocumentsPrep {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit} />
                     </Panel>
                     <Panel header="Submitted Documents Review by HR" key="5">
-                            <H1bDocumentsHRReview {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
+                            <H1bDocumentsHRReview {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
                     </Panel>
                     <Panel header="Send Reviewed Documents to Attorney" key="6">
-                            <AttorneyReceivedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
+                            <AttorneyReceivedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
                     </Panel>
                     <Panel header="Documents Reviewed by Attorney" key="7">
-                            <AttorneyReviewedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
+                            <AttorneyReviewedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
                     </Panel>
                     <Panel header="Documents accepted by Attorney" key="8">
-                            <AttorneyFilesPetiton {...this.props} onAccordionSubmit={this.onAccordionSubmit}/>
+                            <AttorneyFilesPetiton {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
                     </Panel>
                     <Panel header="Attorney files the petition with USCIS and shares the FEDEX Number" key="9">
 

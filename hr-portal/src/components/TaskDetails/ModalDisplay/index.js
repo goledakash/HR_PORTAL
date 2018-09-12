@@ -10,7 +10,7 @@ class ModalDisplay extends Component {
         super(props);
         this.state = { 
             visible: false,
-            comments:[{
+            comments:{
                 taskMsg:"",
                 empMsg:"",
                 businessMsg:"",
@@ -19,7 +19,7 @@ class ModalDisplay extends Component {
                 taskAssignedTo:"",
                 taskToBeCmpDueDate:"",
                 taskCmpExpDueDate:"",
-              }],
+              },
               errors: {},
          }
     }
@@ -44,7 +44,7 @@ class ModalDisplay extends Component {
     
     onCommentsPropertiesChange = (e) => {
         let comments = Object.assign({}, this.state.comments);
-        comments[e.target.name] = [e.target.value];
+        comments[e.target.name] = e.target.value;
         return this.setState({comments});
     };
 
