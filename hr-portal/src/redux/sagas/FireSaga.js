@@ -8,6 +8,7 @@ import {employeeSaveSuccessCreateAction, employeeSaveErrorCreateAction} from '..
 import {employeeInfoSaveSuccessCreateAction, employeeInfoSaveErrorCreateAction} from '../actions/CreateTask';
 import {taskDetailsSaveSuccessCreateAction, taskDetailsSaveErrorCreateAction} from '../actions/TaskDetails';
 import {getEmployeeListSuccessResponse} from '../actions/Main';
+import {getTaskDetailsSuccessResponse} from '../actions/TaskDetails';
 
 const database = firebase.database();
 
@@ -186,5 +187,27 @@ export function*  storeTaskDetailsData(action) {
         yield put(taskDetailsSaveSuccessCreateAction(response, action));
     } catch (error){
         yield put (taskDetailsSaveErrorCreateAction(error));
+    }
+}
+
+
+
+function createTaskEventChannelToGetData(){
+    const listener = eventChannel(
+        emit => {
+            database.ref('taskDetails')
+            .on('value', data => emit(data.val()));
+                return () => database.ref('taskDetails').off(listener);
+        }
+    );
+    return listener;
+  }
+  
+  // To retrieve data from /employee location in firebase and display in the tabs in Main component
+export  function* getTaskDetailsData(){
+    const getDataChannel = createTaskEventChannelToGetData();
+    while(true) {
+        const taskDetailsData = yield take(getDataChannel);
+        yield put(getTaskDetailsSuccessResponse(taskDetailsData));
     }
 }

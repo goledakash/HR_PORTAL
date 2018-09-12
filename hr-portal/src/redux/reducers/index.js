@@ -5,6 +5,7 @@ import Fire from "./FireReducer";
 import Employee from "./EmployeeReducer";
 import EmpData from "./EmpDataReducer";
 import TaskDetails from "./TaskDetailsReducer";
+import TaskRed from "./TaskDataReducer";
 
 export default combineReducers({
   Auth,
@@ -12,5 +13,6 @@ export default combineReducers({
   Fire,
   Employee,
   EmpData,
-  TaskDetails
+  TaskDetails,
+  TaskRed
 });

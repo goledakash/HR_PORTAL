@@ -4,10 +4,7 @@ import  Validator from 'validator';
 import InlineError from '../../messages/InlineError';
 import { Modal, Collapse, Form, Input, Row, Col, Button, DatePicker, Radio, Card} from 'antd';
 import ModalDisplay from '../ModalDisplay';
-<<<<<<< Updated upstream
 import moment from 'moment';
-=======
->>>>>>> Stashed changes
 
 
 const options = [
@@ -89,19 +86,11 @@ class Recruiter extends Component {
         }
     }
 
-<<<<<<< Updated upstream
-    // onModalClick = (dataFromModal) => {
-    //     this.setState({
-    //         ...this.state, comments: dataFromModal,
-    //     });
-    // }
-=======
     onModalClick = (dataFromModal) => {
         this.setState({
             ...this.state, comments: dataFromModal,
         });
     }
->>>>>>> Stashed changes
 
     onProjectStartDateChange = (e, date) => {
         // this.setState({
@@ -146,18 +135,9 @@ class Recruiter extends Component {
     };
 
     onRectrSentPlacDetChange = (e, date) => {
-<<<<<<< Updated upstream
-        // this.setState({
-        //     ...this.state.step2, rectrSentPlacDet: date,
-        // });
-        let step2 = Object.assign({}, this.state.step2);
-        step2["rectrSentPlacDet"] = moment(date).valueOf();
-        return this.setState({step2});
-=======
         this.setState({
             ...this.state.step2, rectrSentPlacDet: date,
         });
->>>>>>> Stashed changes
     };
 
     onCancelButtonClicked = () => {
@@ -254,14 +234,8 @@ class Recruiter extends Component {
                             </Col>
                         </Row>
 
-<<<<<<< Updated upstream
-                        <Row>
-                        <ModalDisplay {...this.props} isVisible={visible} onHandleModalOkClicked={this.onHandleModalOkClicked} onHandleModalCanceledClicked = {this.onHandleModalCanceledClicked} />                      
-                        </Row>
-=======
                         <ModalDisplay {...this.props} onModalClickParent={this.onModalClick}/>
                         
->>>>>>> Stashed changes
                         <br />
                         <Row>
                             <Col>   

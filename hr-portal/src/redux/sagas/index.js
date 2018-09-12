@@ -8,7 +8,8 @@ export default function* rootSaga(params) {
   yield all([takeLatest(Types.SIGNUP_USER, Auth.storeUser)]);
   yield all([takeLatest(Types.SIGNUP_SAVE_DATABASE, FireSaga.storeUserSignupData)]);
   yield all([takeLatest(Types.EMPLOYEE_SAVE_DATABASE, FireSaga.storeEmployeeRegistrationData)]);
-  yield all([takeLatest(Types.GET_EMPLOYEE_LIST, FireSaga.getEmployeeList)]);
+  yield all([takeLatest(Types.GET_EMPLOYEE_LIST, FireSaga.getEmployeeList)]); 
+  yield all([takeLatest(Types.GET_TASK_DETAILS, FireSaga.getTaskDetailsData)]);
   yield all([takeLatest(Types.EMPLOYEE_INFO_SAVE_DATABASE, FireSaga.storeEmployeeInfoRegistrationData)]);
   yield all([takeLatest(Types.TASK_DETAILS_SAVE_DATABASE, FireSaga.storeTaskDetailsData)]);
   yield all([takeLatest(Types.LOGOUT_USER, Auth.fetchLogoutUser)]);

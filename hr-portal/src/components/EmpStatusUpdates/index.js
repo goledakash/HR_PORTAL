@@ -1,7 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import { Steps, Timeline , Button, message, Card} from 'antd';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { getTaskDetailsFromFirebase } from "../../redux/actions/TaskDetails";
 
 const Step = Steps.Step;
 
@@ -169,6 +172,11 @@ class EmpStatusUpdates extends Component {
          }
     }
 
+    componentDidMount(){
+        this.props.dispatch(getTaskDetailsFromFirebase()); 
+        console.log("Task Data" + this.props.taskData);
+    } 
+
     next() {
         const current = this.state.current + 1;
         this.setState({ current });
@@ -298,5 +306,15 @@ class EmpStatusUpdates extends Component {
          );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        isUserLoggedIn: state.Auth.isUserLoggedIn,
+        userObject: state.Auth.userObject,
+        isEmployeeRegitered: state.Employee.isEmployeeRegitered,
+        error: state.Employee.error,
+        taskData: state.TaskRed.taskDetailsData,
+    };
+};
  
-export default EmpStatusUpdates;
+export default connect(mapStateToProps)(EmpStatusUpdates);
