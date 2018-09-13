@@ -174,7 +174,7 @@ class FromEmployee extends Component {
                         </Card>
                     </Col>
                     <Col xs={8} sm={8} md={8} lg={8} xl={8}>
-                        <Card title="Employee Conatct"> 
+                        <Card title="Employee Contact"> 
                             <Form.Item error={!!errors.contDetails.address1}  label="Address 1" className= "firstName">
                                 <Input type="text" name="address1" value= {empDetails.contDetails.address1} onChange={this.onChange} placeholder="Address 1"  /> 
                                 {errors.address1 && <InlineError text= {errors.address1}/>}
@@ -191,9 +191,9 @@ class FromEmployee extends Component {
                                 <Input type="text" name="state" value= {empDetails.contDetails.state} onChange={this.onChange} placeholder="state"  /> 
                                 {errors.state && <InlineError text= {errors.state}/>}
                             </Form.Item>
-                            <Form.Item error={!!errors.contDetails.zipcode}  label="ZipCode" className= "firstName">
-                                <Input type="text" name="zipcode" value= {empDetails.contDetails.zipcode} onChange={this.onChange} placeholder="zipcode"  /> 
-                                {errors.zipcode && <InlineError text= {errors.zipcode}/>}
+                            <Form.Item error={!!errors.contDetails.zipCode}  label="ZipCode" className= "firstName">
+                                <Input type="text" name="zipCode" value= {empDetails.contDetails.zipCode} onChange={this.onChange} placeholder="zipCode"  /> 
+                                {errors.zipCode && <InlineError text= {errors.zipCode}/>}
                             </Form.Item>
                         </Card>
                     </Col>  
@@ -229,9 +229,9 @@ class FromEmployee extends Component {
                                 <Input type="text" name="state" value= {workLocation.state} onChange={this.onChange} placeholder="state"  /> 
                                 {errors.workLocation.state && <InlineError text= {errors.workLocation.state}/>}
                             </Form.Item>
-                            <Form.Item error={!!errors.workLocation.zipcode}  label="ZipCode" className= "firstName">
-                                <Input type="text" name="zipcode" value= {workLocation.zipcode} onChange={this.onChange} placeholder="zipcode"  /> 
-                                {errors.workLocation.zipcode && <InlineError text= {errors.workLocation.zipcode}/>}
+                            <Form.Item error={!!errors.workLocation.zipCode}  label="ZipCode" className= "firstName">
+                                <Input type="text" name="zipCode" value= {workLocation.zipCode} onChange={this.onChange} placeholder="zipCode"  /> 
+                                {errors.workLocation.zipCode && <InlineError text= {errors.workLocation.zipCode}/>}
                             </Form.Item>
                         </Card>
                     </Col>
@@ -277,9 +277,9 @@ class FromEmployee extends Component {
                                 <Input type="text" name="state" value= {clientAddress.state} onChange={this.onChange} placeholder="state"  /> 
                                 {errors.clientAddress.state && <InlineError text= {errors.clientAddress.state}/>}
                             </Form.Item>
-                            <Form.Item error={!!errors.clientAddress.zipcode}  label="ZipCode" className= "firstName">
-                                <Input type="text" name="zipcode" value= {clientAddress.zipcode} onChange={this.onChange} placeholder="zipcode"  /> 
-                                {errors.clientAddress.zipcode && <InlineError text= {errors.clientAddress.zipcode}/>}
+                            <Form.Item error={!!errors.clientAddress.zipCode}  label="ZipCode" className= "firstName">
+                                <Input type="text" name="zipCode" value= {clientAddress.zipCode} onChange={this.onChange} placeholder="zipCode"  /> 
+                                {errors.clientAddress.zipCode && <InlineError text= {errors.clientAddress.zipCode}/>}
                             </Form.Item>
                         </Card>
                     </Col>

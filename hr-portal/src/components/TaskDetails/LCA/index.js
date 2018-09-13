@@ -158,7 +158,7 @@ class LCA extends Component {
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.lcaSentToEmployee}  label="Is LCA sent to Employee?">                                        
-                                        <RadioGroup name="lcaSentToEmployee" value={step3.lcaSentToEmployee} options={options} onChange={this.onLCAChange} />
+                                        <RadioGroup name="lcaSentToEmployee" options={options} onChange={this.onLCAChange} />
                                         {errors.lcaSentToEmployee && <InlineError text= {errors.lcaSentToEmployee}/>}
                                     </Form.Item>
                                 </Card>
@@ -166,27 +166,27 @@ class LCA extends Component {
                             <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                                 <Card title="LCA Details">
                                 <Form.Item error={!!errors.dependencies}  label="Any Dependencies?">                                        
-                                        <RadioGroup name="dependencies" value={step3.dependencies} options={options} onChange={this.onLCAChange} />
+                                        <RadioGroup name="dependencies"  options={options} onChange={this.onLCAChange} />
                                         {errors.dependencies && <InlineError text= {errors.dependencies}/>}
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.empVerWorkLocation}  label="Is Employee location Verified?">                                        
-                                        <RadioGroup name="empVerWorkLocation" value={step3.empVerWorkLocation} options={options} onChange={this.onLCAChange} />
+                                        <RadioGroup name="empVerWorkLocation"  options={options} onChange={this.onLCAChange} />
                                         {errors.empVerWorkLocation && <InlineError text= {errors.empVerWorkLocation}/>}
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.rolesRespSubmittedByEmp}  label="Roles and Responsibilities Submitted?">                                        
-                                        <RadioGroup name="rolesRespSubmittedByEmp" value={step3.rolesRespSubmittedByEmp} options={options} onChange={this.onLCAChange} />
+                                        <RadioGroup name="rolesRespSubmittedByEmp"  options={options} onChange={this.onLCAChange} />
                                         {errors.rolesRespSubmittedByEmp && <InlineError text= {errors.rolesRespSubmittedByEmp}/>}
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.rolesRespSubmittedByEmp}  label="Roles and Responsibilities Verified?">                                        
-                                        <RadioGroup name="rolesRespVerified" value={step3.rolesRespVerified}  options={options} onChange={this.onLCAChange} />
+                                        <RadioGroup name="rolesRespVerified"  options={options} onChange={this.onLCAChange} />
                                         {errors.rolesRespVerified && <InlineError text= {errors.rolesRespVerified}/>}
                                     </Form.Item>
 
                                     <Form.Item error={!!errors.infoUptdToPortalByBiz}  label="Has business updated the portal?">                                        
-                                        <RadioGroup name="infoUptdToPortalByBiz" value={step3.infoUptdToPortalByBiz} options={options} onChange={this.onLCAChange} />
+                                        <RadioGroup name="infoUptdToPortalByBiz" options={options} onChange={this.onLCAChange} />
                                         {errors.infoUptdToPortalByBiz && <InlineError text= {errors.infoUptdToPortalByBiz}/>}
                                     </Form.Item>
                                 </Card>
