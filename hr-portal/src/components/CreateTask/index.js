@@ -98,12 +98,12 @@ class CreateTask extends Component {
                       rectrSentVenAgreeSignedCopy:'',
                 },
                 taskInfo:{      
-                    "taskPrioirty":"1",
-                    "applicationType":"",
-                    "taskCreatedDate":"",  
-                    "isTaskCreated":"",
-                    "isTaskPending":"",
-                    "isTaskCompleted":"",            
+                    taskPrioirty:"1",
+                    applicationType:"H1b",
+                    taskCreatedDate:moment().valueOf(),  
+                    isTaskCreated:true,
+                    isTaskPending:false,
+                    isTaskCompleted:false,            
                 },
          },
          isServerRespondedSuccess: false,
@@ -502,7 +502,7 @@ class CreateTask extends Component {
                                 </Card>
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12} xl={12} >
-                            <Card title=""> 
+                                <Card title=""> 
                                 <Form.Item error={!!errors.urgentSituation}  label="Any Urgent Situation">
                                     <TextArea id="urgentSituation" type="urgentSituation" name="urgentSituation" value={empDetails.recruiter.urgentSituation} onChange={this.onRecruiterChange} placeholder= "Any Urgent Situation? Please Explain." />
                                     {errors.urgentSituation && <InlineError text= {errors.urgentSituation}/>}

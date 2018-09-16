@@ -109,8 +109,8 @@ class Recruiter extends Component {
     onTaskInfoChange = (e) => {
         let taskInfo = Object.assign({}, this.state.taskInfo);
         taskInfo.taskInfo[e.target.name] = e.target.value;
-        taskInfo.taskInfo["isTaskCreated"] = true;
-        taskInfo.taskInfo["isTaskPending"] = false;
+        taskInfo.taskInfo["isTaskCreated"] = false;
+        taskInfo.taskInfo["isTaskPending"] = true;
         taskInfo.taskInfo["isTaskCompleted"] = false;
         taskInfo.taskInfo["taskCreatedDate"] = moment().valueOf();
         return this.setState({taskInfo});

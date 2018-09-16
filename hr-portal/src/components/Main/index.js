@@ -87,14 +87,14 @@ class Main extends Component {
                         <Tabs defaultActiveKey="1" >
                             <TabPane tab="Created Tasks" key="1">
                                 <List bordered dataSource={taskList} renderItem={item => 
-                                    (item.empDetails.taskInfo.isTaskCreated && (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType} </List.Item>))}/>
+                                    ((item.empDetails.taskInfo.isTaskCreated || true) && (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType} </List.Item>))}/>
                             </TabPane>
                             <TabPane tab="Pending Tasks" key="2">
                                 <List bordered dataSource={taskList} renderItem={item => 
-                                    (item.empDetails.taskInfo.isTaskPending ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
+                                    ((item.empDetails.taskInfo.isTaskPending || true) ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
                             </TabPane>
                             <TabPane tab="Completed" key="3">
-                                <List bordered dataSource={taskList} renderItem={item =>(item.empDetails.taskInfo.isTaskCompleted ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
+                                <List bordered dataSource={taskList} renderItem={item =>((item.empDetails.taskInfo.isTaskCompleted || true) ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
                             </TabPane>
                         </Tabs>
                     </Content>

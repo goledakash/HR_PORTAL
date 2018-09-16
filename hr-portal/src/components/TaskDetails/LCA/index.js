@@ -23,7 +23,7 @@ class LCA extends Component {
             step3:{
                 taskName:"LCA",
                 taskActive: true,
-                actionAssignedTo:"Akash",
+                actionAssignedTo:"",
                 dependencies:"",
                 empVerWorkLocation:"",
                 tmStEmpVerWorkLocation:"",
@@ -43,8 +43,8 @@ class LCA extends Component {
                 lcaFiledForCert:"",
                 tmStLcaFiledForCert:"",
                 tmEdLcaFiledForCert:"",
-                appliedDateLCA: moment('11/08/2017'),
-                approvedDateLCA: moment('11/08/2017'),
+                appliedDateLCA: "",
+                approvedDateLCA: "",
                 expectedApprovalDate:"", 
                 taskCompletedTotalTime:"",
                 taskStartedTotalTime:"",
@@ -74,25 +74,25 @@ class LCA extends Component {
 
     onAppliedLCADateChange = (e, date) => {
         this.setState({
-            ...this.state.step3, appliedDateLCA: date,
+            ...this.state.step3, appliedDateLCA: moment(date).valueOf(),
         });
     };
 
     onApprovedLCADateChange = (e, date) => {
         this.setState({
-            ...this.state.step3, approvedDateLCA: date,
+            ...this.state.step3, approvedDateLCA: moment(date).valueOf(),
         });
     };
 
     onExpectedApprovalDateChange = (e, date) => {
         this.setState({
-            ...this.state.step3, expectedApprovalDate: date,
+            ...this.state.step3, expectedApprovalDate: moment(date).valueOf(),
         });
     };
 
     onLCAChange = (e) => {
         let step3 = Object.assign({}, this.state.step3);
-        step3[e.target.name] = [e.target.value];
+        step3[e.target.name] = e.target.value;
         return this.setState({step3});
     };
 

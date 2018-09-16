@@ -1,6 +1,5 @@
 import { put, call, take } from "redux-saga/effects";
 import * as Types from "../actions/ActionTypes";
-
 import firebase from '../../firebase';
 import { eventChannel } from 'redux-saga';
 import {signupSaveSuccessCreateAction, signupSaveErrorCreateAction} from '../actions/Auth';

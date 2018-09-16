@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 
 class CommentsDisplay extends Component {
     constructor(props) {
-        super(props);
-        this.state = { 
-         }
+        super(props);        
     }
     render() { 
         return (

@@ -25,7 +25,15 @@ import firebase from 'firebase';
     projectId: "hr-portal-firebase",
     storageBucket: "hr-portal-firebase.appspot.com",
     messagingSenderId: "115754548607"
-};
+  };
+/*const devConfig = {
+    apiKey: "AIzaSyAzFE2PUqupVMsH_TIMqQoHTq0IjOVS3Xg",
+    authDomain: "hrmanager-8f146.firebaseapp.com",
+    databaseURL: "https://hrmanager-8f146.firebaseio.com",
+    projectId: "hrmanager-8f146",
+    storageBucket: "",
+    messagingSenderId: "752182474971"
+};*/
 
 firebase.initializeApp(devConfig);
 export default firebase;
