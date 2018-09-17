@@ -1,12 +1,12 @@
 import * as Type from "../actions/ActionTypes";
 const initialState = {
-    isEmployeeRegitered : false,
+    isTaskDtsSubmitted : false,
     error:''
 };
 
 const handleTaskDetailsServerResponseSuccess= (state, action) => {
     let newState = {};
-    newState = Object.assign({}, state, {isEmployeeRegitered : true} );
+    newState = Object.assign({}, state, {isTaskDtsSubmitted : true} );
     return {
         ...newState
     };
@@ -14,7 +14,7 @@ const handleTaskDetailsServerResponseSuccess= (state, action) => {
 
 const handleTaskDetailsServerResponseError= (state, action) => {
     let newState = {};
-    newState = Object.assign({}, state, {isEmployeeRegitered : false, error: 'Error Occurred : ' + action.error} );
+    newState = Object.assign({}, state, {isTaskDtsSubmitted : false, error: 'Error Occurred : ' + action.error} );
     return {
         ...newState
     };
@@ -25,7 +25,7 @@ export default(state = initialState, action) => {
     switch(action.type){
         
     case Type.TASK_DETAILS_SAVE_DATABASE :
-        return { ...state};
+        return Object.assign({}, state, {isTaskDtsSubmitted : false, error: ' ' });
     case Type.TASK_DETAILS_SAVE_DATABASE_SERVER_RESPONSE_SUCCESS :
         return handleTaskDetailsServerResponseSuccess(state, action);    
     case Type.TASK_DETAILS_SAVE_DATABASE_SERVER_RESPONSE_ERROR :

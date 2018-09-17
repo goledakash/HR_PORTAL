@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import  Validator from 'validator';
 
-import { Form, Input, Button, Radio } from 'antd';
+import { Form, Input, Button, Card, Radio } from 'antd';
 import InlineError from '../messages/InlineError';
 import { signupUser } from "../../redux/actions";
 import { signupSaveToFirebaseDatabase } from "../../redux/actions/Auth/"
@@ -77,17 +77,13 @@ class Signup extends Component {
         return errors;
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        console.log("History props ", this.nextProps.history);
-        console.log("next user Object", nextProps.userObject);
-      }
-
     
     render() { 
         const { data, errors } = this.state
         return (
-            <Form > 
-                <h3>Signup</h3>
+            <div>
+                <Card title="Signup">
+            <Form>                 
                 <Form.Item error={!!errors.firstName}>
                         <Input 
                         id="firstName" 
@@ -145,7 +141,8 @@ class Signup extends Component {
                 <br />
                     <Button type="primary" onClick={this.onSubmit}>Submit</Button>
             </Form> 
-         );
+            </Card>
+            </div>);
     }
 }
 

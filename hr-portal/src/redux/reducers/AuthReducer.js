@@ -4,7 +4,16 @@ const initialState = {
   email: "",
   password: "",
   userObject: "",
-  isUserLoggedIn: false
+  isUserLoggedIn: false,
+  displayName: "",
+  registered: true,
+  refreshToken: "",
+  expiresIn: "3600",
+  emailVerified: false,
+  validSince: "1522016916",
+  disabled: false,
+  lastLoginAt: "1522383844000",
+  createdAt: "1522016916000"
 };
 
 

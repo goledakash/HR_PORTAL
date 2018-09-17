@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { Button, Collapse, Tabs, Input, InputNumber, Select, Upload, Icon } from 'antd';
+import {  Layout, Row, Col, Card, Radio, Button, Collapse, Tabs, Input, InputNumber, Select, Upload, Icon } from 'antd';
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/Auth";
-import { Row, Col, Card, Radio } from 'antd';
 import { getTaskByEmpId } from "../../redux/actions/Employee";
 import H1bDocumentsHRReview from './H1bDocumentsHRReview';
 import AttorneyReceivedDocs from './AttorneyReceivedDocs';
@@ -16,7 +15,7 @@ import Recruiter from './Recruiter';
 import LCA from './LCA';
 import { taskDetailsSaveToFirebaseDatabase } from "../../redux/actions/TaskDetails";
 
-
+const { Header, Footer, Sider, Content } = Layout;
 const TabPane = Tabs.TabPane;
 const Panel = Collapse.Panel;
 const { TextArea } = Input;
@@ -59,23 +58,27 @@ class TaskDetails extends Component {
             [e.target.name]: e.target.value,
         });
     }
-    componentDidUpdate(prevProps, prevState, snapshot){
-        console.log("pevprops");
+    componentDidUpdate(prevProps, prevState, snapshot){        
     };
     componentDidMount() {
         this.props.dispatch(getTaskByEmpId(this.props.match.params.id));
     };
     static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.taskSelected){
-            if(Object.keys(nextProps.taskSelected).length > 0){
-                return { taskSelected :  nextProps.taskSelected };
-            }        
-        }        
+        if(nextProps.isUserLoggedIn){
+            if(nextProps.taskSelected){
+                if(Object.keys(nextProps.taskSelected).length > 0){
+                    return { taskSelected :  nextProps.taskSelected };
+                }        
+            }
+        } else{
+            nextProps.history.push("/login");
+        }               
         return null;
     };
     
     onSubmit = () => {
         this.props.dispatch(taskDetailsSaveToFirebaseDatabase(this.state.taskSelected));
+        this.props.history.push("/main");
     };
 
     onChange = (e) => { 
@@ -94,45 +97,65 @@ class TaskDetails extends Component {
         } else{
         const { workLocation } =  this.state.taskSelected.empDetails.workInfo; 
         return (
-            <div>
-                <h3>HOME COMPONENT</h3>
-                <Button type="primary">
-                    <Link to={{ pathname: "/main" }}>Back to Main</Link>
-                </Button>
-                <Collapse accordion>
-                    <Panel header="From Employee" key="1">
-                        <FromEmployee  {...this.props} onCommentsSubmit={this.onCommentsSubmit} onEmpDetailsSubmit={this.onEmpDetailsSubmit} />
-                    </Panel>
-                    <Panel header="From Recruiter" key="2">
-                            <Recruiter {...this.props} onAccordionSubmit={this.onAccordionSubmit}
-                            onTaskInfoSubmit={this.onTaskInfoSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
-                    </Panel>
-                    <Panel header="LCA Documents and Application for Certification" key="3">
-                            <LCA {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
-                    </Panel>
-                    <Panel header="Upload your H1B Documents" key="4">
-                            <H1bDocumentsPrep {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit} />
-                    </Panel>
-                    <Panel header="Submitted Documents Review by HR" key="5">
-                            <H1bDocumentsHRReview {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
-                    </Panel>
-                    <Panel header="Send Reviewed Documents to Attorney" key="6">
-                            <AttorneyReceivedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
-                    </Panel>
-                    <Panel header="Documents Reviewed by Attorney" key="7">
-                            <AttorneyReviewedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
-                    </Panel>
-                    <Panel header="Documents accepted by Attorney" key="8">
-                            <AttorneyFilesPetiton {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
-                    </Panel>
-                    <Panel header="Attorney files the petition with USCIS and shares the FEDEX Number" key="9">
+            <div>             
+                <Layout>
+                <Header className="zero-padding">
+                    <Row>
+                        <Col xs={6} sm={6} md={6} lg={6} xl={6}>   
+                            <Button type="primary">
+                                <Link to={{ pathname: "/main" }}>Back</Link>
+                            </Button>
+                        </Col>
+                        <Col xs={14} sm={14} md={14} lg={14} xl={14}>   
+                            <h3 className="color-white">Task Details</h3>
+                        </Col>
+                        <Col xs={4} sm={4} md={4} lg={4} xl={4}>   
+                            <Link to={{ pathname: "/commentsDisplay" }}>Comments</Link>
+                        </Col>
+                    </Row>                                        
+                </Header>
+                <Content>       
+                    <Card>             
+                       <Collapse accordion>
+                        <Panel header="From Employee" key="1">
+                            <FromEmployee  {...this.props} onCommentsSubmit={this.onCommentsSubmit} onEmpDetailsSubmit={this.onEmpDetailsSubmit} />
+                        </Panel>
+                        <Panel header="From Recruiter" key="2">
+                                <Recruiter {...this.props} onAccordionSubmit={this.onAccordionSubmit}
+                                onTaskInfoSubmit={this.onTaskInfoSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
+                        </Panel>
+                        <Panel header="LCA Documents and Application for Certification" key="3">
+                                <LCA {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
+                        </Panel>
+                        <Panel header="Upload your H1B Documents" key="4">
+                                <H1bDocumentsPrep {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit} />
+                        </Panel>
+                        <Panel header="Submitted Documents Review by HR" key="5">
+                                <H1bDocumentsHRReview {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
+                        </Panel>
+                        <Panel header="Send Reviewed Documents to Attorney" key="6">
+                                <AttorneyReceivedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
+                        </Panel>
+                        <Panel header="Documents Reviewed by Attorney" key="7">
+                                <AttorneyReviewedDocs {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
+                        </Panel>
+                        <Panel header="Documents accepted by Attorney" key="8">
+                                <AttorneyFilesPetiton {...this.props} onAccordionSubmit={this.onAccordionSubmit} onCommentsSubmit={this.onCommentsSubmit}/>
+                        </Panel>
+                        <Panel header="Attorney files the petition with USCIS and shares the FEDEX Number" key="9">
 
-                    </Panel>
-                    <Panel header="User receives the FEDEX number for the petition filed" key="10">
+                        </Panel>
+                        <Panel header="User receives the FEDEX number for the petition filed" key="10">
 
-                    </Panel>
-                </Collapse>
-                <Button type="primary" onClick={this.onSubmit}>Submit</Button>
+                        </Panel>
+                    </Collapse>
+                    </Card>
+                    <Card>
+                        <Button type="primary" onClick={this.onSubmit}>Submit</Button>
+                    </Card>
+                </Content>
+                <Footer></Footer>
+                </Layout>
             </div>
         );
     }

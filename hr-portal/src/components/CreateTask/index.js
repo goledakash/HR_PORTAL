@@ -139,7 +139,10 @@ class CreateTask extends Component {
         return this.setState({empDetails});
     };
 
-    static getDerivedStateFromProps(props, state) {
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.isTaskCreated){
+            nextProps.history.push("/main");
+        }
         return null;
       }
 
@@ -219,73 +222,73 @@ class CreateTask extends Component {
         }
     };
 
-      onSubmit = () => {
-        //const errors = this.validate(this.state.empDetails);
-       // if(Object.keys(errors).length===0){
-            // this.props.submit(this.state.data);             
-            this.props.dispatch(employeeInfoSaveToFirebaseDatabase(this.state.empDetails));
-        //}
-      };
+    onSubmit = () => {
+    //const errors = this.validate(this.state.empDetails);
+    // if(Object.keys(errors).length===0){
+        // this.props.submit(this.state.data);             
+        this.props.dispatch(employeeInfoSaveToFirebaseDatabase(this.state.empDetails));
+    //}
+    };
 
-      validate = empDetails => {
-        const errors = {};
-        if(!empDetails.firstName) errors.firstName = "Can't be empty";
-        if(!empDetails.lastName) errors.lastName = "Can't be empty";
-        if(!Validator.isEmail(empDetails.emailId01)) errors.emailId01 = "Invalid Email";
-        if(!Validator.isEmail(empDetails.emailId02)) errors.emailId02 = "Invalid Email";
-        if(!Validator.isNumeric(empDetails.phoneNo)) errors.phoneNo = "Enter Phone Number";
-        
-        //ContDetails
-        if(!empDetails.contDetails.address1) errors.address1 = "Can't be empty";
-        if(!empDetails.contDetails.address2) errors.address2 = "Can't be empty";
-        if(!empDetails.contDetails.city) errors.city = "Can't be empty";
-        if(!empDetails.contDetails.state) errors.state = "Can't be empty";
-        if(!Validator.isNumeric(empDetails.contDetails.zipCode)) errors.zipCode = "Enter Zipcode";
-        
-        //WorkInfo
-        if(!empDetails.workInfo.workLocation.address1) errors.address1 = "Can't be empty";
-        if(!empDetails.workInfo.workLocation.address2) errors.address2 = "Can't be empty";
-        if(!empDetails.workInfo.workLocation.city) errors.city = "Can't be empty";
-        if(!empDetails.workInfo.workLocation.state) errors.state = "Can't be empty";
-        if(!Validator.isNumeric(empDetails.workInfo.workLocation.zipCode)) errors.zipCode = "Enter Zipcode";
-        
-        //ClientInfo
-        if(!empDetails.clientInfo.clientName) errors.clientName = "Can't be empty";
-        if(!empDetails.clientInfo.managerName) errors.managerName = "Can't be empty";
-        if(!empDetails.lastName) errors.lastName = "Can't be empty";
-        if(!empDetails.clientInfo.clientAddress.address1) errors.address1 = "Can't be empty";
-        if(!empDetails.clientInfo.clientAddress.address2) errors.address2 = "Can't be empty";
-        if(!empDetails.clientInfo.clientAddress.city) errors.city = "Can't be empty";
-        if(!empDetails.clientInfo.clientAddress.state) errors.state = "Can't be empty";
-        if(!Validator.isNumeric(empDetails.clientInfo.clientAddress.zipCode)) errors.zipCode = "Enter Zipcode";
-        
-        //VendorInfo
-        if(!empDetails.vendorInfo.vendorAgreement) errors.vendorAgreement = "Please Select";
-        if(!empDetails.vendorInfo.vendorName) errors.vendorName = "Can't be empty";
-        //if(!Validator.isNumeric(empDetails.vendorInfo.vendorContact)) errors.vendorContact = "Enter Phone Number";
-        if(!empDetails.vendorInfo.venContName) errors.venContName = "Can't be empty";
-        //if(!Validator.isNumeric(empDetails.vendorInfo.venContPhone)) errors.venContPhone = "Enter Phone Number";  
-        // isNumeric is not validating for vendorInfo - check why
-        
-        //Recruiter
-        // if(!Validator.isISO8601(empDetails.recruiter.projectStartDate)) errors.projectStartDate = "Select a Date";
-        if(!empDetails.recruiter.empSignedOfferLetter) errors.empSignedOfferLetter = "Please Select";
-        // if(!Validator.isISO8601(empDetails.recruiter.placementDate)) errors.placementDate = "Select a Date";
-        if(!empDetails.recruiter.urgentSituation) errors.urgentSituation = "Enter N/A if no such thing";
-        if(!empDetails.recruiter.applicationType) errors.applicationType = "Please Select";
-        // if(!Validator.isISO8601(empDetails.recruiter.docsCollectingStartDate)) errors.docsCollectingStartDate = "Select a Date";
-        if(!empDetails.recruiter.employerRelationDocuments) errors.employerRelationDocuments = "Please Select";
-        if(!empDetails.recruiter.vendorLetterStatus) errors.vendorLetterStatus = "Please Select";
-        if(!empDetails.taskInfo.taskPrioirty) errors.taskPrioirty = "Please Select";
-        if(!empDetails.recruiter.clientLetterStatus) errors.clientLetterStatus = "Please Select";
-        if(!empDetails.recruiter.empVerifiedWrkLocation) errors.empVerifiedWrkLocation = "Can't be empty";
-        // if(!Validator.isISO8601(empDetails.recruiter.rectrSentPlacDate)) errors.rectrSentPlacDate = "Select a Date";
-        if(!empDetails.recruiter.rectrSentVenAgreeSignedCopy) errors.rectrSentVenAgreeSignedCopy = "Please Select";
+    validate = empDetails => {
+    const errors = {};
+    if(!empDetails.firstName) errors.firstName = "Can't be empty";
+    if(!empDetails.lastName) errors.lastName = "Can't be empty";
+    if(!Validator.isEmail(empDetails.emailId01)) errors.emailId01 = "Invalid Email";
+    if(!Validator.isEmail(empDetails.emailId02)) errors.emailId02 = "Invalid Email";
+    if(!Validator.isNumeric(empDetails.phoneNo)) errors.phoneNo = "Enter Phone Number";
+    
+    //ContDetails
+    if(!empDetails.contDetails.address1) errors.address1 = "Can't be empty";
+    if(!empDetails.contDetails.address2) errors.address2 = "Can't be empty";
+    if(!empDetails.contDetails.city) errors.city = "Can't be empty";
+    if(!empDetails.contDetails.state) errors.state = "Can't be empty";
+    if(!Validator.isNumeric(empDetails.contDetails.zipCode)) errors.zipCode = "Enter Zipcode";
+    
+    //WorkInfo
+    if(!empDetails.workInfo.workLocation.address1) errors.address1 = "Can't be empty";
+    if(!empDetails.workInfo.workLocation.address2) errors.address2 = "Can't be empty";
+    if(!empDetails.workInfo.workLocation.city) errors.city = "Can't be empty";
+    if(!empDetails.workInfo.workLocation.state) errors.state = "Can't be empty";
+    if(!Validator.isNumeric(empDetails.workInfo.workLocation.zipCode)) errors.zipCode = "Enter Zipcode";
+    
+    //ClientInfo
+    if(!empDetails.clientInfo.clientName) errors.clientName = "Can't be empty";
+    if(!empDetails.clientInfo.managerName) errors.managerName = "Can't be empty";
+    if(!empDetails.lastName) errors.lastName = "Can't be empty";
+    if(!empDetails.clientInfo.clientAddress.address1) errors.address1 = "Can't be empty";
+    if(!empDetails.clientInfo.clientAddress.address2) errors.address2 = "Can't be empty";
+    if(!empDetails.clientInfo.clientAddress.city) errors.city = "Can't be empty";
+    if(!empDetails.clientInfo.clientAddress.state) errors.state = "Can't be empty";
+    if(!Validator.isNumeric(empDetails.clientInfo.clientAddress.zipCode)) errors.zipCode = "Enter Zipcode";
+    
+    //VendorInfo
+    if(!empDetails.vendorInfo.vendorAgreement) errors.vendorAgreement = "Please Select";
+    if(!empDetails.vendorInfo.vendorName) errors.vendorName = "Can't be empty";
+    //if(!Validator.isNumeric(empDetails.vendorInfo.vendorContact)) errors.vendorContact = "Enter Phone Number";
+    if(!empDetails.vendorInfo.venContName) errors.venContName = "Can't be empty";
+    //if(!Validator.isNumeric(empDetails.vendorInfo.venContPhone)) errors.venContPhone = "Enter Phone Number";  
+    // isNumeric is not validating for vendorInfo - check why
+    
+    //Recruiter
+    // if(!Validator.isISO8601(empDetails.recruiter.projectStartDate)) errors.projectStartDate = "Select a Date";
+    if(!empDetails.recruiter.empSignedOfferLetter) errors.empSignedOfferLetter = "Please Select";
+    // if(!Validator.isISO8601(empDetails.recruiter.placementDate)) errors.placementDate = "Select a Date";
+    if(!empDetails.recruiter.urgentSituation) errors.urgentSituation = "Enter N/A if no such thing";
+    if(!empDetails.recruiter.applicationType) errors.applicationType = "Please Select";
+    // if(!Validator.isISO8601(empDetails.recruiter.docsCollectingStartDate)) errors.docsCollectingStartDate = "Select a Date";
+    if(!empDetails.recruiter.employerRelationDocuments) errors.employerRelationDocuments = "Please Select";
+    if(!empDetails.recruiter.vendorLetterStatus) errors.vendorLetterStatus = "Please Select";
+    if(!empDetails.taskInfo.taskPrioirty) errors.taskPrioirty = "Please Select";
+    if(!empDetails.recruiter.clientLetterStatus) errors.clientLetterStatus = "Please Select";
+    if(!empDetails.recruiter.empVerifiedWrkLocation) errors.empVerifiedWrkLocation = "Can't be empty";
+    // if(!Validator.isISO8601(empDetails.recruiter.rectrSentPlacDate)) errors.rectrSentPlacDate = "Select a Date";
+    if(!empDetails.recruiter.rectrSentVenAgreeSignedCopy) errors.rectrSentVenAgreeSignedCopy = "Please Select";
 
 
-        //Errors
-        return errors;
-      };
+    //Errors
+    return errors;
+    };
 
     render() { 
         const { empDetails, errors } = this.state;
@@ -554,6 +557,7 @@ const mapStateToProps = state => {
         userObject: state.Auth.userObject,
         isEmpDataReceived: state.EmpData.isEmpDataReceived,
         taskList: state.EmpData.employeeData,
+        isTaskCreated : state.EmpInfoData.isTaskCreated
     };
 };
  

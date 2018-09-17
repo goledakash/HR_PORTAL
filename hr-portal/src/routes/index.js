@@ -9,6 +9,7 @@ import Employee from "./../components/Employee";
 import Main from "./../components/Main";
 import CreateTask from "./../components/CreateTask";
 import EmpStatusUpdates from "./../components/EmpStatusUpdates";
+import CommentsDisplay from "./../components/CommentsDisplay";
 
 export default () => {
   return (
@@ -22,6 +23,7 @@ export default () => {
         <Route exact path="/main" render={props => <Main {...props} />} />
         <Route exact path="/createTask" render={props => <CreateTask {...props} />} />
         <Route exact path="/empStatusUpdates" render={props => <EmpStatusUpdates {...props} />} />
+        <Route exact path="/commentsDisplay" render={props => <CommentsDisplay {...props} />} />
         <Redirect to="/login" />
       </Switch>
     </BrowserRouter>

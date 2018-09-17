@@ -1,21 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { Menu, Icon, List, Button, Tabs, Row, Col, Layout, Badge} from 'antd';
-// import Header from '../Header';
+import { Menu, Icon, Card, List, Button, Tabs, Row, Col, Layout, Badge} from 'antd';
 import { Link } from "react-router-dom";
 import { getEmployeeListFromFirebase } from "../../redux/actions/Main";
 
 const { Header, Sider, Content } = Layout;
-
 const TabPane = Tabs.TabPane;
-
-// const data = [
-//     'TASK 1',
-//     'TASK 2',
-//     'TASK 3',
-//   ];
-
 const SubMenu = Menu.SubMenu;
 
 
@@ -57,8 +48,9 @@ class Main extends Component {
     render() { 
         const { taskList } = this.props;
         return ( 
+            <div>
             <Layout>
-            <Sider
+            {/*<Sider
               trigger={null}
               collapsible
               collapsed={this.state.collapsed}>
@@ -78,28 +70,33 @@ class Main extends Component {
                                         </Menu.Item>
                                 </Menu>
                             </div>
-            </Sider>
-            <Layout>
-                    <Header style={{ background: '#fff', padding: 0 }}>
-                        <Icon className="trigger" type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggleCollapsed}/>
+            </Sider>*/}            
+                    <Header >
+                        {/* <Icon className="trigger" type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggleCollapsed}/> */}
+                        <Row>
+                            <Col xs={14} sm={14} md={14} lg={14} xl={14}>   
+                                <h3 className="color-white">Home</h3>
+                            </Col>
+                        </Row>
                     </Header>
                     <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-                        <Tabs defaultActiveKey="1" >
-                            <TabPane tab="Created Tasks" key="1">
-                                <List bordered dataSource={taskList} renderItem={item => 
-                                    ((item.empDetails.taskInfo.isTaskCreated || true) && (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType} </List.Item>))}/>
-                            </TabPane>
-                            <TabPane tab="Pending Tasks" key="2">
-                                <List bordered dataSource={taskList} renderItem={item => 
-                                    ((item.empDetails.taskInfo.isTaskPending || true) ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
-                            </TabPane>
-                            <TabPane tab="Completed" key="3">
-                                <List bordered dataSource={taskList} renderItem={item =>((item.empDetails.taskInfo.isTaskCompleted || true) ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
-                            </TabPane>
-                        </Tabs>
-                    </Content>
-            </Layout>
-            </Layout>);
+                        <Card>
+                            <Tabs defaultActiveKey="1" >
+                                <TabPane tab="Created Tasks" key="1">
+                                    <List bordered dataSource={taskList} renderItem={item => 
+                                        ((item.empDetails.taskInfo.isTaskCreated || true) && (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType} </List.Item>))}/>
+                                </TabPane>
+                                <TabPane tab="Pending Tasks" key="2">
+                                    <List bordered dataSource={taskList} renderItem={item => 
+                                        ((item.empDetails.taskInfo.isTaskPending || true) ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
+                                </TabPane>
+                                <TabPane tab="Completed" key="3">
+                                    <List bordered dataSource={taskList} renderItem={item =>((item.empDetails.taskInfo.isTaskCompleted || true) ? (<List.Item onClick={() => this.onTaskClick(item.empDetails.empId)}><Badge count={"P:"+item.empDetails.taskInfo.taskPrioirty} />{item.empDetails.firstName} {item.empDetails.lastName} {item.empDetails.taskInfo.applicationType}</List.Item>) : (<List.Item></List.Item>))}/>
+                                </TabPane>
+                            </Tabs>
+                        </Card>
+                    </Content>            
+            </Layout></div>);
     }
 }
 

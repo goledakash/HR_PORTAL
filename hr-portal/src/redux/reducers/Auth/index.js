@@ -5,10 +5,10 @@ const initialUserObj = {
   "logged": (window.localStorage.userLoginToken !== undefined ? true : false),
   "isValidToken": (window.localStorage.userLoginToken !== undefined ? true : false),
   "user":{
-           "email": "sandeepperkariappdev@gmail.com",
+           "email": "",
            "displayName": "",
            "registered": true,
-           "refreshToken": "APyOXy2TBvKK-u8Ba89ezmxCLipDb3oJTrPdUUb388aDIhBiwJKS0RdOvAZDPRyj_RczXm7P9LpolWb_Er4CW4wGW9DWQ9OYBS0vfdQsIcTDnrWaeTqC3MHPc22L6xZWTOK2gn6m8lY6cx14N8dqIpkMfTOqCRXA23BvPMGA7P1WGcyjV0kVDPX9Ni25vWt3brubOMTCu8KrhI1-t7JpOuob6Ij8TrPo8jGyT5W14U8PkPuCgWV42l0SV8Zg-a3eb9mM_HVYqPUF",
+           "refreshToken": "",
            "expiresIn": "3600",
            "emailVerified": false,
            "validSince": "1522016916",

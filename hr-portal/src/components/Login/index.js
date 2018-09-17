@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import  Validator from 'validator';
-
+import { Link } from "react-router-dom";
 import { Form, Input, Button, Card, Checkbox } from 'antd';
 import InlineError from '../messages/InlineError';
 import { loginUser } from "../../redux/actions";
@@ -86,6 +86,7 @@ class Login extends Component {
                 </Form.Item>
                 <Checkbox name="isBusiness" checked={data.isBusiness} onChange={this.onChange}>Business</Checkbox>,
                 <Button type="primary" onClick={this.onSubmit}>Submit</Button>   
+                <p><Link to={{pathname: "/signup"}}>SignUp</Link></p>
             </Form></Card>
             </div>
          );
